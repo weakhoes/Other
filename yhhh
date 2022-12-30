@@ -1,0 +1,91 @@
+--// Created By Nosssa & Atman Supports mostly, all hood games!
+ 
+--// Roblox Group ( TeamNosss! ): https://www.roblox.com/groups/16003304/TeamNosss#!/about
+
+--// This script is packed with comments so you guys can understand better
+
+
+getgenv().ToggleKey =  (  "c"  )  -- [ Toggles LOCK On And Off ]
+
+getgenv().ResolverToggleKey =  (  "v"  )  -- [ Toggles RESOLVER LOCK On And Off ]
+
+getgenv().HideAllWhenAskedToScreenShareKey =  (  "y"  )  -- [ When asked to screenshare, you should click this button, it hides everything! ]
+
+
+getgenv().FOV =  (  250  )   -- [ Increases Or Decreases FOV Radius ]
+
+
+getgenv().RAGEMode = false -- [ Whoever enters the circle gets shot | This MAY OR MAY NOT NOT break resolver ]
+
+
+getgenv().Auto_Prediction = true
+getgenv().Prediction =  (  .20  )   -- [ Lower Prediction: Lower Ping | Higher Prediction: Higher Ping | If you ask me "what pred is best" I will actually bite you! ]
+
+getgenv().Streaming_Mode = false -- [ On "true", it removes all evidences that point to silent aim automatically. ]
+
+
+getgenv().FOV_Visible = false -- [ "true" or "false", same for below ]
+getgenv().Show_Dot = true -- [ Shows The Dot Or Disables It ]
+
+
+getgenv().IgnoreWalls = true -- [ "true" or "false" | TURN THIS TO "true" FOR "HOOD MODDED" IT WILL FIX THE STUPID NOT TOGGLING ISSUES ]
+
+
+getgenv().DontShootMyFriends = false -- [ "true" or "false" | If this is on "true", when you toggle on to your friends it won't work ]
+getgenv().DontShootThesePeople = {  -- [ List Of Who Not To Target like this. "Quotations with their name and then a comma afterwards for each line"; ]
+
+	"Player1";
+	"Player2";
+	"Noob3";
+	"Roblox";
+	"You can go on and on forever";
+
+};
+
+
+getgenv().HitParts = false  -- [ Default is false but if you are streaming or want to look legit make this "true" ]
+getgenv().Randomized_HitParts = {  -- [ Lock will target the following parts | MORE HITPARTS ALLOWED = SLOWER LOCK ]
+
+	"Head";
+	--"HumanoidRootPart"; -- This is kinda extra and slows lock down
+	"UpperTorso";
+	"LowerTorso";
+	--"RightHand"; -- This is kinda extra and slows lock down
+	"RightLowerArm";
+	"RightUpperArm";
+	"LeftUpperArm";
+	"LeftLowerArm";
+	--"LeftHand"; -- This is kinda extra and slows lock down
+	"LeftUpperLeg";
+	"LeftLowerLeg";
+	--"LeftFoot"; -- This is kinda extra and slows lock down
+	"RightUpperLeg";
+	"RightLowerLeg";
+	--"RightFoot"; -- This is kinda extra and slows lock down
+
+};
+
+--[[
+
+	Example of how to use!
+		
+	HitPart TARGETS head: "Head";
+	HitPart IGNORES head: --"Head";
+
+	The "--" before the text is there so it can be ignored!
+
+--]]
+
+
+--[[
+
+	Some of these options contain basic; "true or false" statements
+
+	Spell your "true" and "false" options correctly in all lowercase or it will error!
+
+	You may delete all the comments (grey text in your executor)
+
+--]]
+
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nosssa/NossLock/main/ReZero", true))();
