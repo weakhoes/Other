@@ -19,7 +19,7 @@ getgenv().RAGEMode = false -- [ Whoever enters the circle gets shot | This MAY O
 
 
 getgenv().Auto_Prediction = true
-getgenv().Prediction =  (  .20  )   -- [ Lower Prediction: Lower Ping | Higher Prediction: Higher Ping | If you ask me "what pred is best" I will actually bite you! ]
+getgenv().Prediction =  (  .92757  )   -- [ Lower Prediction: Lower Ping | Higher Prediction: Higher Ping | If you ask me "what pred is best" I will actually bite you! ]
 
 getgenv().Streaming_Mode = false -- [ On "true", it removes all evidences that point to silent aim automatically. ]
 
