@@ -1,0 +1,12 @@
+local nobulletdelay = game:GetService("CorePackages").Packages
+local flashhasacrushonloris = game:GetService("CorePackages").Packages
+local ReplicatedStorage = game.ReplicatedStorage
+local Network = game.Network
+local Delay = ReplicatedStorage.BulletHole.Delay
+
+nobulletdelay:Destroy()
+
+Delay.Position:Destroy()
+Delay.Position = 0
+
+flashhasacrushonloris:Destroy()
