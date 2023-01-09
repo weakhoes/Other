@@ -98,3 +98,7 @@ function DevCheck()
     	end
 	end)
 end
+
+StarsCheck()
+ModsCheck()
+DevCheck()
