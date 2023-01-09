@@ -5,6 +5,5 @@ Notification.Notify("Error!", "Staff Check Hasn't Yet Been Added To This Game!",
         Duration = 5,       
         Main = {
         Rounding = true,
-        }
-    });
-end
+    }
+});
