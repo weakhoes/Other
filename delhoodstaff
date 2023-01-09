@@ -1,0 +1,100 @@
+local Notification = loadstring(game:HttpGet("https://api.irisapp.ca/Scripts/IrisBetterNotifications.lua"))()
+getgenv()["IrisAd"]=true
+local Players = game:GetService("Players")
+
+local StarPlayers = {
+	-- Currently 3 Stars --
+	"shadowboy774633", -- star Trxpz
+    "wjidnaopwisdj", -- star quaz
+    "nex890poi", -- star therealwolf
+}
+
+local ModsPlayers = {
+	-- Currently 7 Mods --
+	"WOF_ELPERRO", -- mod WOF
+    "Xxsagueartifac305xX", -- mod Sague_Hub
+    "Erika_065", -- mod erikita
+    "01_iiRxtoli", -- mod KartellRatoli
+    "XDXDDX235677", -- mod Kazchimn
+    "SteppaPhantom", -- mod Sippy
+    "qwkiV", -- mod KartellGabriel
+}
+
+local DevsUp = {
+	-- Currently 2 Devs 1 Owner --
+	"loboasul1424", -- dev 路西法尔
+	"vyekho", -- dev Vyekho
+    "einsamDev", -- owner -- einsam
+}
+
+function StarsCheck()
+	for _, v in pairs(Players:GetPlayers()) do 
+  	  if table.find(StarPlayers, v.Name) then 
+      	  Notification.Notify(v.Name, "A Star Is In Your Game!", "rbxasset://textures/ui/GuiImagePlaceholder.png", {
+        	    Duration = 5,       
+         	   Main = {
+              	  Rounding = true,
+         	   }
+        	});
+    	end
+	end
+
+	Players.PlayerAdded:Connect(function(v)
+    	if table.find(StarPlayers, v.Name) then 
+        	Notification.Notify(v.Name, "A Star Has Joined Your Game!", "rbxasset://textures/ui/GuiImagePlaceholder.png", {
+            	Duration = 5,       
+            	Main = {
+                	Rounding = true,
+            	}
+        	});
+    	end
+	end)
+end
+
+function ModsCheck()
+	for _, v in pairs(Players:GetPlayers()) do 
+  	  if table.find(ModsPlayers, v.Name) then 
+      	  Notification.Notify(v.Name, "A Mod Is In Your Game!", "rbxasset://textures/ui/GuiImagePlaceholder.png", {
+        	    Duration = 5,       
+         	   Main = {
+              	  Rounding = true,
+         	   }
+        	});
+    	end
+	end
+
+	Players.PlayerAdded:Connect(function(v)
+    	if table.find(ModsPlayers, v.Name) then 
+        	Notification.Notify(v.Name, "A Mod Has Joined Your Game!", "rbxasset://textures/ui/GuiImagePlaceholder.png", {
+            	Duration = 5,       
+            	Main = {
+                	Rounding = true,
+            	}
+        	});
+    	end
+	end)
+end
+
+function DevCheck()
+	for _, v in pairs(Players:GetPlayers()) do 
+  	  if table.find(DevsUp, v.Name) then 
+      	  Notification.Notify(v.Name, "A Dev/Owner Is In Your Game!", "rbxasset://textures/ui/GuiImagePlaceholder.png", {
+        	    Duration = 5,       
+         	   Main = {
+              	  Rounding = true,
+         	   }
+        	});
+    	end
+	end
+
+	Players.PlayerAdded:Connect(function(v)
+    	if table.find(DevsUp, v.Name) then 
+        	Notification.Notify(v.Name, "A Dev/owner Has Joined Your Game!", "rbxasset://textures/ui/GuiImagePlaceholder.png", {
+            	Duration = 5,       
+            	Main = {
+                	Rounding = true,
+            	}
+        	});
+    	end
+	end)
+end
