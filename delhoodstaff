@@ -13,7 +13,6 @@ local StarPlayers = {
     "shadowboy774633", -- star Trxpz
     "wjidnaopwisdj", -- star quaz
     "nex890poi", -- star therealwolf
-    "Amereii",
 }
 
 local ModsPlayers = {
@@ -25,6 +24,7 @@ local ModsPlayers = {
     "XDXDDX235677", -- mod Kazchimn
     "SteppaPhantom", -- mod Sippy
     "qwkiV", -- mod KartellGabriel
+    "Amereii",
 }
 
 local DevsUp = {
