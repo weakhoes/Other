@@ -1,0 +1,10 @@
+local Notification = loadstring(game:HttpGet("https://api.irisapp.ca/Scripts/IrisBetterNotifications.lua"))()
+getgenv()["IrisAd"]=true
+
+Notification.Notify("Error!", "Staff Check Hasn't Yet Been Added To This Game!", "rbxasset://textures/ui/GuiImagePlaceholder.png", {
+        Duration = 5,       
+        Main = {
+        Rounding = true,
+        }
+    });
+end
