@@ -1,6 +1,5 @@
 if game.PlaceId == 9369376609 then -- delhood
     loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/delhoodstaff"))()
-end
 else
     loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/notsupported"))()
 end
