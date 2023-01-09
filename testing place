@@ -1,0 +1,50 @@
+local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+
+local Players = game:GetService("Players")
+
+local Testbool = nil;
+
+local TestUser = {
+	"Amereii",
+}
+
+function UserCheck()
+    for _, v in pairs(Players:GetPlayers()) do 
+  	  if table.find(StarPlayers, v.Name) then 
+		Notification:Notify(
+			{Title = v.Name, Description = "A Star Is Currently In-Game!"},
+			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+		)
+	else
+		Testbool return false;
+    	end
+	end
+
+	Players.PlayerAdded:Connect(function(v)
+    	if table.find(StarPlayers, v.Name) then 
+			Notification:Notify(
+				{Title = v.Name, Description = "A Star Has Joined!"},
+				{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+				{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+			)
+		else
+			Testbool return false;
+    	end
+	end)
+end
+
+function NoneFound()
+    if Testbool == false then
+        Notification:Notify(
+			{Title = "Info", Description = "No Staff Found In-Game!"},
+			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 255, 255)}
+		)
+    end
+end
+
+UserCheck()
+
+NoneFound()
