@@ -3,10 +3,6 @@ local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/
 
 local Players = game:GetService("Players")
 
-local Starbool = nil
-local Modsbool = nil
-local Devsbool = nil
-
 -- 3 Stars
 -- 7 Mods
 -- 2 Devs
@@ -45,8 +41,6 @@ function StarsCheck()
 			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
 			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
 		)
-	else
-		Starbool = false
     	end
 	end
 
@@ -58,19 +52,8 @@ function StarsCheck()
 				{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
 			)
 		else
-			Starbool = false
     	end
 	end)
-end
-
-function NoneGame()
-	if Starbool == false then
-		Notification:Notify(
-			{Title = v.Name, Description = "There Are No Staff In Game!"},
-			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
-			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
-		)
-	end
 end
 
 function ModsCheck()
@@ -122,5 +105,3 @@ StarsCheck()
 ModsCheck()
 
 DevCheck()
-
-NoneGame()
