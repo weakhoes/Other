@@ -3,9 +3,9 @@ local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/
 
 local Players = game:GetService("Players")
 
-local Starbool = nil;
-local Modsbool = nil;
-local Devsbool = nil;
+local Starbool = nil
+local Modsbool = nil
+local Devsbool = nil
 
 -- 3 Stars
 -- 7 Mods
@@ -46,7 +46,7 @@ function StarsCheck()
 			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
 		)
 	else
-		Starbool = false;
+		Starbool = false
     	end
 	end
 
@@ -58,7 +58,7 @@ function StarsCheck()
 				{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
 			)
 		else
-			Starbool = false;
+			Starbool = false
     	end
 	end)
 end
