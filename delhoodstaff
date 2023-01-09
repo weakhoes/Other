@@ -1,6 +1,12 @@
-local Notification = loadstring(game:HttpGet("https://api.irisapp.ca/Scripts/IrisBetterNotifications.lua"))()
-getgenv()["IrisAd"]=true
+local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+
 local Players = game:GetService("Players")
+
+-- 3 Stars
+-- 7 Mods
+-- 2 Devs
+-- 1 Owner
 
 local StarPlayers = {
     -- Currently 3 Stars --
@@ -30,23 +36,21 @@ local DevsUp = {
 function StarsCheck()
 	for _, v in pairs(Players:GetPlayers()) do 
   	  if table.find(StarPlayers, v.Name) then 
-      	  Notification.Notify(v.Name, "A Star Is In Your Game!", "rbxasset://textures/ui/GuiImagePlaceholder.png", {
-        	    Duration = 5,       
-         	   Main = {
-              	  Rounding = true,
-         	   }
-        	});
+		Notification:Notify(
+			{Title = v.Name, Description = "A Star Is Currently In-Game!"},
+			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+		)
     	end
 	end
 
 	Players.PlayerAdded:Connect(function(v)
     	if table.find(StarPlayers, v.Name) then 
-        	Notification.Notify(v.Name, "A Star Has Joined Your Game!", "rbxasset://textures/ui/GuiImagePlaceholder.png", {
-            	Duration = 5,       
-            	Main = {
-                	Rounding = true,
-            	}
-        	});
+			Notification:Notify(
+				{Title = v.Name, Description = "A Star Has Joined!"},
+				{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+				{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+			)
     	end
 	end)
 end
@@ -54,23 +58,21 @@ end
 function ModsCheck()
 	for _, v in pairs(Players:GetPlayers()) do 
   	  if table.find(ModsPlayers, v.Name) then 
-      	  Notification.Notify(v.Name, "A Mod Is In Your Game!", "rbxasset://textures/ui/GuiImagePlaceholder.png", {
-        	    Duration = 5,       
-         	   Main = {
-              	  Rounding = true,
-         	   }
-        	});
+		Notification:Notify(
+			{Title = v.Name, Description = "A Mod Is Currently In-Game!"},
+			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+		)
     	end
 	end
 
 	Players.PlayerAdded:Connect(function(v)
     	if table.find(ModsPlayers, v.Name) then 
-        	Notification.Notify(v.Name, "A Mod Has Joined Your Game!", "rbxasset://textures/ui/GuiImagePlaceholder.png", {
-            	Duration = 5,       
-            	Main = {
-                	Rounding = true,
-            	}
-        	});
+			Notification:Notify(
+				{Title = v.Name, Description = "A Mod Has Joined!"},
+				{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+				{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+			)
     	end
 	end)
 end
@@ -78,27 +80,27 @@ end
 function DevCheck()
 	for _, v in pairs(Players:GetPlayers()) do 
   	  if table.find(DevsUp, v.Name) then 
-      	  Notification.Notify(v.Name, "A Dev/Owner Is In Your Game!", "rbxasset://textures/ui/GuiImagePlaceholder.png", {
-        	    Duration = 5,       
-         	   Main = {
-              	  Rounding = true,
-         	   }
-        	});
+		Notification:Notify(
+			{Title = v.Name, Description = "A Dev/Owner Is Currently In-Game!"},
+			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+		)
     	end
 	end
 
 	Players.PlayerAdded:Connect(function(v)
     	if table.find(DevsUp, v.Name) then 
-        	Notification.Notify(v.Name, "A Dev/owner Has Joined Your Game!", "rbxasset://textures/ui/GuiImagePlaceholder.png", {
-            	Duration = 5,       
-            	Main = {
-                	Rounding = true,
-            	}
-        	});
+			Notification:Notify(
+				{Title = v.Name, Description = "A Dev/Owner Has Joined!"},
+				{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+				{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+			)
     	end
 	end)
 end
 
 StarsCheck()
+
 ModsCheck()
+
 DevCheck()
