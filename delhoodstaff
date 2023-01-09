@@ -9,28 +9,27 @@ local Players = game:GetService("Players")
 -- 1 Owner
 
 local StarPlayers = {
-    -- Currently 3 Stars --
-    "shadowboy774633", -- star Trxpz
+	-- Currently 3 Stars --
+	"shadowboy774633", -- star Trxpz
     "wjidnaopwisdj", -- star quaz
     "nex890poi", -- star therealwolf
 }
 
 local ModsPlayers = {
-    -- Currently 7 Mods --
-    "WOF_ELPERRO", -- mod WOF
+	-- Currently 7 Mods --
+	"WOF_ELPERRO", -- mod WOF
     "Xxsagueartifac305xX", -- mod Sague_Hub
     "Erika_065", -- mod erikita
     "01_iiRxtoli", -- mod KartellRatoli
     "XDXDDX235677", -- mod Kazchimn
     "SteppaPhantom", -- mod Sippy
     "qwkiV", -- mod KartellGabriel
-    "Amereii",
 }
 
 local DevsUp = {
-    -- Currently 2 Devs 1 Owner --
-    "loboasul1424", -- dev 路西法尔
-    "vyekho", -- dev Vyekho
+	-- Currently 2 Devs 1 Owner --
+	"loboasul1424", -- dev 路西法尔
+	"vyekho", -- dev Vyekho
     "einsamDev", -- owner -- einsam
 }
 
