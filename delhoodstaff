@@ -2,6 +2,11 @@ local NotificationHolder = loadstring(game:HttpGet("https://raw.githubuserconten
 local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
 
 local Players = game:GetService("Players")
+local GetPlayers = Players:GetPlayers()
+
+local Starbool = nil;
+local Modsbool = nil;
+local Devsbool = nil;
 
 -- 3 Stars
 -- 7 Mods
@@ -33,75 +38,102 @@ local DevsUp = {
     "einsamDev", -- owner -- einsam
 }
 
-function StarsCheck()
-	for _, v in pairs(Players:GetPlayers()) do 
-  	  if table.find(StarPlayers, v.Name) then 
+for _, v in pairs(Players:GetPlayers()) do
+	if table.find(StarPlayers, v.Name) then
 		Notification:Notify(
-			{Title = v.Name, Description = "A Star Is Currently In-Game!"},
+			{Title = v.Name, Description = "A Star Is In Your Current Game!"},
 			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
 			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
 		)
-    	end
+	else
+		Starbool = false
 	end
-
-	Players.PlayerAdded:Connect(function(v)
-    	if table.find(StarPlayers, v.Name) then 
-			Notification:Notify(
-				{Title = v.Name, Description = "A Star Has Joined!"},
-				{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
-				{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
-			)
-		else
-    	end
-	end)
 end
 
-function ModsCheck()
-	for _, v in pairs(Players:GetPlayers()) do 
-  	  if table.find(ModsPlayers, v.Name) then 
+for _, v in pairs(Players:GetPlayers()) do
+	if table.find(ModsPlayers, v.Name) then
 		Notification:Notify(
-			{Title = v.Name, Description = "A Mod Is Currently In-Game!"},
+			{Title = v.Name, Description = "A Mod Is In Your Current Game!"},
 			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
 			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
 		)
-    	end
+	else
+		Modsbool = false
 	end
-
-	Players.PlayerAdded:Connect(function(v)
-    	if table.find(ModsPlayers, v.Name) then 
-			Notification:Notify(
-				{Title = v.Name, Description = "A Mod Has Joined!"},
-				{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
-				{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
-			)
-    	end
-	end)
 end
 
-function DevCheck()
-	for _, v in pairs(Players:GetPlayers()) do 
-  	  if table.find(DevsUp, v.Name) then 
+for _, v in pairs(Players:GetPlayers()) do
+	if table.find(DevsUp, v.Name) then
 		Notification:Notify(
-			{Title = v.Name, Description = "A Dev/Owner Is Currently In-Game!"},
+			{Title = v.Name, Description = "A Owner/Dev Is In Your Current Game!"},
 			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
 			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
 		)
-    	end
+	else
+		Devsbool = false
 	end
-
-	Players.PlayerAdded:Connect(function(v)
-    	if table.find(DevsUp, v.Name) then 
-			Notification:Notify(
-				{Title = v.Name, Description = "A Dev/Owner Has Joined!"},
-				{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
-				{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
-			)
-    	end
-	end)
 end
 
-StarsCheck()
+Players.PlayerAdded:Connect(function(v)
+    if table.find(StarPlayers or ModsPlayers or DevsUp, v.Name) then 
+		Notification:Notify(
+			{Title = v.Name, Description = "A Star Has Joined Your Current Game!"},
+			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+		)
+    end
+end)
 
-ModsCheck()
+Players.PlayerRemoving:Connect(function(plr)
+	if table.find(StarPlayers, plr.Name) then 
+		Notification:Notify(
+			{Title = plr.Name, Description = "A Star Has Left Your Current Game!"},
+			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(51, 49, 49)}
+		)
+	end
+end)
 
-DevCheck()
+Players.PlayerRemoving:Connect(function(plr)
+	if table.find(ModsPlayers, plr.Name) then 
+		Notification:Notify(
+			{Title = plr.Name, Description = "A Mod Has Left Your Current Game!"},
+			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(51, 49, 49)}
+		)
+	end
+end)
+
+Players.PlayerRemoving:Connect(function(plr)
+	if table.find(DevsUp, plr.Name) then 
+		Notification:Notify(
+			{Title = plr.Name, Description = "A Dev/Owner Has Left Your Current Game!"},
+			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(51, 49, 49)}
+		)
+	end
+end)
+
+if Starbool == false then
+	Notification:Notify(
+		{Title = "Info!", Description = "No Stars Found In Your Current Game!"},
+		{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+		{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(51, 49, 49)}
+	)
+end
+
+if Modsbool == false then
+	Notification:Notify(
+		{Title = "Info!", Description = "No Mods Found In Your Current Game!"},
+		{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+		{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(51, 49, 49)}
+	)
+end
+
+if Devsbool == false then
+	Notification:Notify(
+		{Title = "Info!", Description = "No Owners/Devs Found In Your Current Game!"},
+		{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+		{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(51, 49, 49)}
+	)
+end
