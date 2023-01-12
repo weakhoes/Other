@@ -76,9 +76,29 @@ for _, v in pairs(Players:GetPlayers()) do
 end
 
 Players.PlayerAdded:Connect(function(v)
-    if table.find(StarPlayers or ModsPlayers or DevsUp, v.Name) then 
+    if table.find(StarPlayers, v.Name) then 
 		Notification:Notify(
 			{Title = v.Name, Description = "A Star Has Joined Your Current Game!"},
+			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+		)
+    end
+end)
+
+Players.PlayerAdded:Connect(function(v)
+    if table.find(ModsPlayers, v.Name) then 
+		Notification:Notify(
+			{Title = v.Name, Description = "A Mod Has Joined Your Current Game!"},
+			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+		)
+    end
+end)
+
+Players.PlayerAdded:Connect(function(v)
+    if table.find(DevsUp, v.Name) then 
+		Notification:Notify(
+			{Title = v.Name, Description = "A Owner/Dev Has Joined Your Current Game!"},
 			{OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
 			{Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
 		)
