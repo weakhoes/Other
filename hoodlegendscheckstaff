@@ -7,7 +7,7 @@ local GetPlayers = Players:GetPlayers()
 local Starbool = nil;
 local Modsbool = nil;
 local Adminbool = nil;
-local Managerbool = nil
+local Managerbool = nil;
 local Devsbool = nil;
 
 -- 3 Stars
@@ -22,6 +22,7 @@ local StarPlayers = {
     "Wind_Ninja4539", -- star kenji
     "dtblaggy", -- star dtblaggy
     "WTRFALL", -- star WTRFALL
+	"F4nnyChan", -- star lostmemories
 }
 
 local ModsPlayers = {
