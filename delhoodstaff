@@ -14,14 +14,18 @@ local Devsbool = nil;
 -- 1 Owner
 
 local StarPlayers = {
-	-- Currently 3 Stars --
+	-- Currently 6 Stars --
 	"shadowboy774633", -- star Trxpz
-    "wjidnaopwisdj", -- star quaz
-    "nex890poi", -- star therealwolf
+    "wjidnaopwisdj", -- star 28Kquaz
+    "stvrlocking", -- star StvrIsBlantant
+    "MacosX2020", -- star Veins
+    "nex890poi", -- star creator donpollokingofohio
+    "Akislz", -- star creator Akis
+     "andidary", -- friend Zatanna
 }
 
 local ModsPlayers = {
-	-- Currently 7 Mods --
+	-- Currently 8 Mods --
 	"WOF_ELPERRO", -- mod WOF
     "Xxsagueartifac305xX", -- mod Sague_Hub
     "Erika_065", -- mod erikita
@@ -29,6 +33,8 @@ local ModsPlayers = {
     "XDXDDX235677", -- mod Kazchimn
     "SteppaPhantom", -- mod Sippy
     "qwkiV", -- mod KartellGabriel
+    "humanabled", -- mod ETH
+    "elaaavx", -- mod diorz
 }
 
 local DevsUp = {
