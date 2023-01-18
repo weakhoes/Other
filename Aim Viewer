@@ -1,125 +1,22 @@
---// FIXED BY NOSSS
+([[
+                This script has been licensed using Luarmor
+            Unauthorized distribution of this script is forbidden.
+      Any attempts at tampering, reverse engineering or modifying this script's 
+      internal logic will result in a global ban, and make you blacklisted from
+            every single script that has been licensed with Luarmor
 
---// Stefanuk made this NOT Raycodex OR Nosss!
+        Luarmor v3.2 for Roblox, #1 lua whitelisting system by Federal#9999
+				   https://luarmor.net/
 
--- // Services
-local Players = game:GetService("Players")
+         _    _            __     ___                        
+        / \  (_)_ __ ___   \ \   / (_) _____      _____ _ __ 
+       / _ \ | | '_ ` _ \   \ \ / /| |/ _ \ \ /\ / / _ \ '__|
+      / ___ \| | | | | | |   \ V / | |  __/\ V  V /  __/ |   
+     /_/   \_\_|_| |_| |_|    \_/  |_|\___| \_/\_/ \___|_|   
+                                                             
 
--- // Vars
-local Terrain = workspace.Terrain
-local LocalPlayer = Players.LocalPlayer
-local Beams = {}
+                                                     
+                 Script ID: 4ff4544ebf91461b2e3fe03e2d389da5
+]])
 
-local Colours = {
-	At = ColorSequence.new(Color3.new(1, 0, 0), Color3.new(1, 0, 0)),
-	Away = ColorSequence.new(Color3.new(0, 1, 0), Color3.new(0, 1, 0))
-}
-
--- // Checks if the beam is hitting our character and can't go through walls
-local function IsBeamHit(Beam: Beam, MousePos: Vector3)
-	-- // Get our character
-	local Character = LocalPlayer.Character
-	local Attachment = Beam.Attachment1
-
-	-- // Workout the direction
-	local Origin = Beam.Attachment0.WorldPosition
-	local Direction = MousePos - Origin
-
-	-- // Fire the ray, making sure it hits something (should unless aiming at sky?)
-	local raycastParms = RaycastParams.new()
-	raycastParms.FilterDescendantsInstances = {Character, workspace.CurrentCamera}
-	local RaycastResult = workspace:Raycast(Origin, Direction * 2, raycastParms) -- // Multiplied by 2 as ray might fall too short
-	if (not RaycastResult) then
-		Beam.Color = Colours.Away
-		Attachment.WorldPosition = MousePos
-		return
-	end
-
-	-- // Set the colour based upon if aiming at us or not
-	if (Character) then
-		Beam.Color = RaycastResult.Instance:IsDescendantOf(Character) and Colours.At or Colours.Away
-	end
-
-	-- // Set the position so the beam can't go through walls
-	Attachment.WorldPosition = RaycastResult.Position
-end
-
--- // Creates a beam with the default properties
-local function CreateBeam(Character: Model)
-	-- // Create beam
-	local Beam = Instance.new("Beam", Character)
-
-	-- // Set important properties
-	Beam.Attachment0 = Character:WaitForChild("Head"):WaitForChild("FaceCenterAttachment")
-	Beam.Enabled = true
-
-	-- // Set visual properties
-	Beam.Width0 = 0.1
-	Beam.Width1 = 0.1
-
-	-- // Add to beam table so can modify all at once
-	table.insert(Beams, Beam)
-
-	-- // Return
-	return Beam
-end
-
--- // Apply whenever we get a new character
-local function OnCharacter(Character: Model | nil)
-	-- // Make sure character exists
-	if (not Character) then
-		return
-	end
-
-	-- // Wait for the MousePos
-	local MousePos = nil
-	if Character:FindFirstChild("BodyEffects") then
-		MousePos = Character:FindFirstChild("BodyEffects").MousePos
-	elseif Character:FindFirstChild("I_LOADED_I") then
-		MousePos = Character:FindFirstChild("I_LOADED_I").MousePos
-	end
-	
-	-- // Create the beam
-	local Beam = CreateBeam(Character)
-
-	-- // Attachment for the mouse position
-	local Attachment = Instance.new("Attachment", Terrain)
-	Beam.Attachment1 = Attachment
-
-	-- // Constantly update when MousePos updates
-	if MousePos ~= nil then
-		IsBeamHit(Beam, MousePos.Value)
-		MousePos.Changed:Connect(function()
-			IsBeamHit(Beam, MousePos.Value)
-		end)
-	end
-
-	-- // See whenever they equip a gun
-	Character.DescendantAdded:Connect(function(Descendant)
-		-- // Check if it is a gun, set enabled
-		if (Descendant.Name == "Handle") then
-			Beam.Enabled = true
-		end
-	end)
-
-	-- // See whenever they unequip a gun
-	Character.DescendantRemoving:Connect(function(Descendant)
-		-- // Check if it is a gun, set disabled
-		if (Descendant.Name == "Handle") then
-			Beam.Enabled = false
-		end
-	end)
-end
-
--- // Apply on each player
-local function OnPlayer(Player: Player)
-	OnCharacter(Player.Character)
-	Player.CharacterAdded:Connect(OnCharacter)
-end
-
-for _, v in ipairs(Players:GetPlayers()) do
-	OnPlayer(v)
-end
-
--- // Redo for each new player
-Players.PlayerAdded:Connect(OnPlayer)
+{(function(b)local c=debug.getmetatable(b)debug.setmetatable(b,{__call=function(d,e)debug.setmetatable(b,c)return function(b)b{'4ff4544ebf91461b2e3fe03e2d389da5',d}end end})end)''}(function(b)local b=b[1]local c=''local d=24915;local e=0;local f={}while e<966 do e=e+1;while e<605 and d%5260<2630 do e=e+1;d=(d-466)%41090;local b=e+d;if(d%3504)>1752 then d=(d-706)%30483;while e<313 and d%7102<3551 do e=e+1;d=(d*411)%43087;local b=e+d;if(d%14970)>7485 then d=(d*355)%41240;local b=76830;if not f[b]then f[b]=1;c=c..'.n'end elseif d%2~=0 then d=(d*316)%34377;local b=51374;if not f[b]then f[b]=1;c=c..'luarmor'end else d=(d*939)%2412;e=e+1;local b=67052;if not f[b]then f[b]=1 end end end elseif d%2~=0 then d=(d+986)%9320;while e<597 and d%3566<1783 do e=e+1;d=(d-950)%7147;local b=e+d;if(d%4020)<2010 then d=(d+826)%6247;local b=79206;if not f[b]then f[b]=1;c=c..'ht'end elseif d%2~=0 then d=(d+737)%14175;local b=51471;if not f[b]then f[b]=1;c=c..'tp'end else d=(d*705)%44808;e=e+1;local b=58695;if not f[b]then f[b]=1;c=c..'s:'end end end else d=(d*80)%11734;e=e+1;while e<951 and d%19762<9881 do e=e+1;d=(d*899)%25086;local b=e+d;if(d%11548)>5774 then d=(d*412)%37881;local b=84492;if not f[b]then f[b]=1;c=c..'//'end elseif d%2~=0 then d=(d-419)%22808;local b=94003;if not f[b]then f[b]=1;c=c..'ap'end else d=(d-851)%30011;e=e+1;local b=21386;if not f[b]then f[b]=1;c=c..'i.'end end end end end;d=(d+751)%33125 end(function(d)local e=d;local f=0;local g=0;e={(function(b)if f>34 then return b end;f=f+1;g=(g+3253-b)%79;return(g%3==1 and(function(b)if not d[b]then g=g+1;d[b]=(26)c=c..'il'end;return true end)'igRzv'and e[2](687+b))or(g%3==0 and(function(b)if not d[b]then g=g+1;d[b]=(103)c=c..'.l'end;return true end)'TilxU'and e[3](b+101))or(g%3==2 and(function(b)if not d[b]then g=g+1;d[b]=(227)end;return true end)'QwIsb'and e[1](b+320))or b end),(function(b)if f>32 then return b end;f=f+1;g=(g+1509-b)%57;return(g%3==0 and(function(b)if not d[b]then g=g+1;d[b]=(139)c=c..'et'end;return true end)'aOitw'and e[3](909+b))or(g%3==1 and(function(b)if not d[b]then g=g+1;d[b]=(65)end;return true end)'ObBbT'and e[1](b+129))or(g%3==2 and(function(b)if not d[b]then g=g+1;d[b]=(153)c=c..'ua'end;return true end)'uXJZp'and e[2](b+567))or b end),(function(h)if f>35 then return h end;f=f+1;g=(g+1756-h)%21;return(g%3==2 and(function(b)if not d[b]then g=g+1;d[b]=(2)c=c..'/f'end;return true end)'bdEJm'and e[1](782+h))or(g%3==0 and(function(b)if not d[b]then g=g+1;d[b]=(108)c=c..'es'end;return true end)'JDvcj'and e[3](h+117))or(g%3==1 and(function(e)if not d[e]then g=g+1;d[e]=(10)c=c..'/v3/l/'..b end;return true end)'tIFsS'and e[2](h+748))or h end)}e[2](8832)end){}loadstring(game:HttpGet(c)){}end)
