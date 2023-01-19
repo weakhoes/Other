@@ -1,4 +1,4 @@
-if game.PlaceId == 9369376609 then -- delhood
+if game.PlaceId == 9369376609 or 9469232811 then -- delhood
     loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/delhoodstaff"))()
 else if game.PlaceId == 10433018628 then -- hoodlegends
     loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/hoodlegendscheckstaff"))()
