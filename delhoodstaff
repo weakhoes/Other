@@ -178,4 +178,4 @@ CheckNone()
 
 CheckJoin()
 
-CheckLeft
+CheckLeft()
