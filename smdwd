@@ -547,6 +547,40 @@ VisualsRB:AddSlider('MoveSlide', {
     Compact = false,
 })
 
+VisualsRB:AddDivider()
+
+VisualsRB:AddLabel('More')
+
+local AutoArmor = VisualsRB:AddButton("Auto-Armor", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/AutoArmor"))()
+end)
+
+local FPSBooster = VisualsRB:AddButton("FPS Booster", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/fps%20booster"))()
+end)
+
+local ChatSpy = VisualsRB:AddButton("Chat-Spy", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/ChatSpy"))()
+end)
+
+local Emotes = VisualsRB:AddButton("Emotes", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/emotes"))()
+end)
+
+local AntiFling = VisualsRB:AddButton("Anti-Fling", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/Anti-Fling"))()
+end)
+
+local Rejoin = VisualsRB:AddButton("Rejoin Server", function()
+    game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
+local CheckIf = VisualsRB:AddButton("Staff In-Game?", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/checkstaffhood"))()
+end)
+
+MiscRB:AddLabel("           Staff Check\n          Supports Only\n             Del Hood\n           Hood Legends", true)
+
 Toggles.AimTog:OnChanged(function()
     _G.Streamable.AntiAimViewer.Toggle = Toggles.AimTog.Value
 end)
