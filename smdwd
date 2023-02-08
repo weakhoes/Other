@@ -1,0 +1,806 @@
+_G.Streamable = {
+    Key = "c",
+    Mode = "Toggle", -- "Toggle" or "Hold"
+    Parts = {"HumanoidRootPart","UpperTorso","LowerTorso"},
+    ["Face-Target"] = false,
+    Notifs = false,
+    Chat = false,
+    View = false,
+    SilentAim = {
+        Toggle = false,
+        OnlyWhenInFov = false,
+        FOV = {
+            Toggle = false,
+            Color = Color3.fromRGB(119,0,255),
+            Size = 100,
+            Thickness = 2,
+            Filled = false,
+            Transparency = 1,
+        },
+        Prediction = 0.12643,
+        AutoPred = false,
+        ["Jump-Function"] = true,
+        ["Jump-Pred"] = 0.12431,
+    },
+    Tracing = {
+        Enabled = false,
+        Smoothness = 0.025,
+        Method = "New", -- "New" or "Classic" or "Off" <- Off IS THE MOST BLATANT
+        Style = "Elastic", -- Enum.EasingStyle
+        Direction = "InOut", -- Enum.EasingDirection
+        Prediction = 0.12643,
+        AutoPred = false,
+        ["Jump-Function"] = true,
+        ["Jump-Pred"] = 0.12431,
+    },
+    Resolvers = {
+        V1 = false,
+        ["V1-Delay"] = 0.085,
+        V2 = false,
+        ["V2-Smoothing"] = 20,
+        Aimpart = "HumanoidRootPart",
+        AntiSky = false,
+        AntiUnderGround = false,
+        Reverse = false,
+    },
+    Onshot = {
+        Visuals = {
+            Toggle = false,
+            Color = Color3.fromRGB(119,0,255),
+            Material = "ForceField",
+            Life = 1,
+        },
+        Sound = {
+            Toggle = false,
+            ID = 12413331,
+        },
+    },
+    Selection = {
+        ["Check-For-Part"] = "HumanoidRootPart",
+        FOV = {
+            Toggle = false,
+            Color = Color3.fromRGB(119,0,255),
+            Size = 100,
+            Thickness = 2,
+            Filled = false,
+            Transparency = 1,
+        },
+        VisibilityCheck = false,
+        DownCheck = false,
+        Unlocks = {
+            OOFOV = false,
+            Down = false,
+        },
+    },
+    Visuals = {
+        Dot = {
+            Toggle = false,
+            Color = Color3.fromRGB(119,0,255),
+        },
+        Tracer = {
+            Toggle = false,
+            Color = Color3.fromRGB(119,0,255),
+        },
+        Highlight = {
+            Toggle = false,
+            Color = Color3.fromRGB(119,0,255),
+        },
+        TargetInfo = false,
+    },
+    Orbit = {
+        Toggle = false,
+        DistanceLimiter = false, -- true for hood modded
+        DistanceLimit = 40, -- 30-50 for Hood Modded
+        Speed = 8,
+        Size = 8,
+        Height = 0,
+        VVT = false, -- VV = Vertical Velocity
+        VVS = 0,
+        HVT = false, -- HV = Horizontal Velocity
+        HVS = 0,
+    },
+    AntiAimViewer = { -- Kinda ass, its based on your position and where you're going (MovementOffset)
+        Toggle = false,
+        BackwardsOffset = 35,
+        MovementOffset = 0,
+    },
+    HoodDuels = false,
+    Randomization = {
+        Toggle = false,
+        XVal = 23,
+        YVal = 23,
+        ZVal = 23,
+    },
+}
+loadstring(game:HttpGet("https://raw.githubusercontent.com/nyulachan/nyula/main/Standalones/Streamable", true))()
+
+
+local repo = 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/'
+
+local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
+local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
+local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
+
+local Window = Library:CreateWindow({
+    Title = 'Ameres Nyula Streamable GUI',
+    Center = true, 
+    AutoShow = true,
+})
+
+local Tabs = {
+    ['Combat'] = Window:AddTab("Combat"),  
+    ['Visuals'] = Window:AddTab("Visuals"), 
+    ['UI Settings'] = Window:AddTab('UI Settings'),
+}
+
+local CombatLB = Tabs.Combat:AddLeftGroupbox('Tracing-Lock')
+local CombatRB = Tabs.Combat:AddRightGroupbox('Silent-Lock')
+local MiscRB = Tabs.Combat:AddRightGroupbox('Misc')
+local ResolveLB = Tabs.Combat:AddLeftGroupbox('Resolvers')
+
+local VisualsRB = Tabs.Visuals:AddRightGroupbox('Visuals Misc')
+local VisualsLB = Tabs.Visuals:AddLeftGroupbox('Visuals Other')
+
+-- Tracer-Lock Group Start --
+
+CombatLB:AddToggle('TracerEnb', {
+    Text = 'Tracing-Lock',
+    Default = false,
+    Tooltip = 'Enables Tracing Lock',
+})
+
+CombatLB:AddInput('SmoothTrac', {
+    Default = '0.025',
+    Numeric = true,
+    Finished = true,
+
+    Text = 'Smoothness',
+    Tooltip = 'Changes The Smoothness Of The Lock!',
+
+    Placeholder = '0.025',
+})
+
+CombatLB:AddInput('PredIn', {
+    Default = '0.12643',
+    Numeric = true,
+    Finished = true,
+
+    Text = 'Prediction',
+    Tooltip = 'Lock Prediction',
+
+    Placeholder = '0.12643',
+})
+
+CombatLB:AddToggle('AutoPre', {
+    Text = 'Auto-Prediction',
+    Default = false,
+    Tooltip = 'Auto Puts Prediction For You',
+})
+
+CombatLB:AddDropdown('MethodSelec', {
+    Values = { 'New', 'Classic', 'Off',},
+    Default = 1,
+    Multi = false,
+
+    Text = 'Tracing Method',
+    Tooltip = 'New, Classic, OFF <-- (BLATANT ASF)',
+})
+
+CombatLB:AddDropdown('TraceStyl', {
+    Values = { 'Elastic', 'Linear', 'Sine', "Back", "Quad", "Quart", "Quint", "Bounce", "Exponential", "Circular", "Cubic",},
+    Default = 1,
+    Multi = false,
+
+    Text = 'Tracing Style',
+    Tooltip = 'Tracing Styles Some Legit Some Blatant Looking.',
+})
+
+CombatLB:AddDropdown('TraceDire', {
+    Values = { 'In', 'Out', 'InOut',},
+    Default = 1,
+    Multi = false,
+
+    Text = 'Tracing Direction',
+    Tooltip = 'Tracing Direction,'
+})
+
+Toggles.TracerEnb:OnChanged(function()
+    _G.Streamable.Tracing.Enabled = Toggles.TracerEnb.Value
+end)
+
+Options.SmoothTrac:OnChanged(function()
+    _G.Streamable.Tracing.Smoothness = Options.SmoothTrac.Value
+end)
+
+Options.PredIn:OnChanged(function()
+    _G.Streamable.Tracing.Prediction = Options.PredIn.Value
+end)
+
+Toggles.AutoPre:OnChanged(function()
+    _G.Streamable.Tracing.AutoPred = Toggles.AutoPre.Value
+end)
+
+Options.MethodSelec:OnChanged(function()
+    _G.Streamable.Tracing.Method = Options.MethodSelec.Value
+end)
+
+Options.TraceStyl:OnChanged(function()
+    _G.Streamable.Tracing.Style = Options.TraceStyl.Value
+end)
+
+Options.TraceDire:OnChanged(function()
+    _G.Streamable.Tracing.Direction = Options.TraceDire.Value
+end)
+
+-- Tracer-Lock Group End --
+
+-- Silent-Lock Group Start --
+
+CombatRB:AddToggle('SilentEnb', {
+    Text = 'Silent-Lock',
+    Default = false,
+    Tooltip = 'Enables Silent Lock',
+})
+
+CombatRB:AddInput('SilentPred', {
+    Default = '0.12643',
+    Numeric = true,
+    Finished = true,
+
+    Text = 'Prediction',
+    Tooltip = 'Lock Prediction',
+
+    Placeholder = '0.12643',
+})
+
+CombatRB:AddToggle('SilentAuto', {
+    Text = 'Auto-Prediction',
+    Default = false,
+    Tooltip = 'Auto Puts Prediction For You',
+})
+
+CombatRB:AddDivider()
+
+CombatRB:AddLabel('Misc Silent Options')
+
+CombatRB:AddToggle('FOVOnly', {
+    Text = 'Enable Only If In FOV',
+    Default = false,
+    Tooltip = 'Enables Silent Lock Only When Person Is In FOV',
+})
+
+CombatRB:AddToggle('SilentFOVEnb', {
+    Text = 'FOV',
+    Default = false,
+    Tooltip = 'Enables Silent FOV',
+})
+
+CombatRB:AddToggle('SilentFOVFill', {
+    Text = 'FOV Filled',
+    Default = false,
+    Tooltip = 'Fills FOV Circle (Ugly)',
+})
+
+CombatRB:AddSlider('SilentFOVSize', {
+    Text = 'FOV Size',
+    Default = 100,
+    Min = 0,
+    Max = 360,
+    Rounding = 1,
+    Compact = false,
+})
+
+CombatRB:AddSlider('SilentFOVThick', {
+    Text = 'FOV Thickness',
+    Default = 2,
+    Min = 1,
+    Max = 5,
+    Rounding = 1,
+    Compact = false,
+})
+
+CombatRB:AddSlider('SilentFOVTrans', {
+    Text = 'FOV Transparency',
+    Default = 1,
+    Min = 0,
+    Max = 1,
+    Rounding = 1,
+    Compact = false,
+})
+
+CombatRB:AddLabel('FOVColor'):AddColorPicker('ColorFOV', {
+    Default = Color3.new(0,0,0),
+    Title = 'Changes FOV Color',
+})
+
+Toggles.SilentEnb:OnChanged(function()
+    _G.Streamable.SilentAim.Toggle = Toggles.SilentEnb.Value
+end)
+
+Options.SilentPred:OnChanged(function()
+    _G.Streamable.SilentAim.Prediction = Options.SilentPred.Value
+end)
+
+Toggles.SilentAuto:OnChanged(function()
+    _G.Streamable.SilentAim.AutoPred = Toggles.SilentAuto.Value
+end)
+
+Toggles.FOVOnly:OnChanged(function()
+    _G.Streamable.SilentAim.OnlyWhenInFov = Toggles.FOVOnly.Value
+end)
+
+Toggles.SilentFOVEnb:OnChanged(function()
+    _G.Streamable.SilentAim.FOV.Toggle = Toggles.SilentFOVEnb.Value
+end)
+
+Toggles.SilentFOVFill:OnChanged(function()
+    _G.Streamable.SilentAim.FOV.Filled = Toggles.SilentFOVFill.Value
+end)
+
+Options.ColorFOV:OnChanged(function()
+    _G.Streamable.SilentAim.FOV.Color = Options.ColorFOV.Value
+end)
+
+local Number = Options.SilentFOVSize.Value
+Options.SilentFOVSize:OnChanged(function()
+    _G.Streamable.SilentAim.FOV.Size = Options.SilentFOVSize.Value
+end)
+
+local Number = Options.SilentFOVThick.Value
+Options.SilentFOVThick:OnChanged(function()
+    _G.Streamable.SilentAim.FOV.Thickness = Options.SilentFOVThick.Value
+end)
+
+local Number = Options.SilentFOVTrans.Value
+Options.SilentFOVTrans:OnChanged(function()
+    _G.Streamable.SilentAim.FOV.Transparency = Options.SilentFOVTrans.Value
+end)
+
+-- Silent-Lock Group End --
+
+-- Misc Group Start --
+
+MiscRB:AddDropdown('HitP', {
+    Values = { 'HumanoidRootPart', 'UpperTorso', 'LowerTorso', "Head",},
+    Default = 1,
+    Multi = true,
+
+    Text = 'Hit-Parts',
+    Tooltip = 'Hits Whatever Selected parts'
+})
+
+MiscRB:AddToggle('AllowNotifs', {
+    Text = 'Allow-Notifcations',
+    Default = false,
+    Tooltip = 'Enables Notifcations',
+})
+
+MiscRB:AddToggle('ChatEnb', {
+    Text = 'Chat-Message',
+    Default = false,
+    Tooltip = 'Sends A Message In Chat Of Who Your Locked Onto!',
+})
+
+MiscRB:AddToggle('ViewEnb', {
+    Text = 'View-Toggle',
+    Default = false,
+    Tooltip = 'Spectates Player Who Your Locked Onto!',
+})
+
+
+
+
+Toggles.AllowNotifs:OnChanged(function()
+    _G.Streamable.Notifs = Toggles.AllowNotifs.Value
+end)
+
+Toggles.ChatEnb:OnChanged(function()
+    _G.Streamable.Chat = Toggles.ChatEnb.Value
+end)
+
+Toggles.ViewEnb:OnChanged(function()
+    _G.Streamable.View = Toggles.ViewEnb.Value
+end)
+
+-- Misc Group End --
+
+-- Resolvers Group Start --
+
+ResolveLB:AddToggle('Resolver1Enb', {
+    Text = 'ResolverV1',
+    Default = false,
+    Tooltip = 'Enables ResolverV1 (Delay)',
+})
+
+ResolveLB:AddToggle('Resolver2Enb', {
+    Text = 'ResolverV2',
+    Default = false,
+    Tooltip = 'Enables ResolverV2 (Smooth)',
+})
+
+ResolveLB:AddDropdown('HitP2', {
+    Values = { 'HumanoidRootPart', 'Head',},
+    Default = 1,
+    Multi = false,
+
+    Text = 'Hit-Parts',
+    Tooltip = 'Resolves Whatever Selected parts'
+})
+
+ResolveLB:AddToggle('AntiSkyEnb', {
+    Text = 'Anti-Sky Resolver',
+    Default = false,
+    Tooltip = 'Resolves Anti-Sky',
+})
+
+ResolveLB:AddToggle('AntiUndEnb', {
+    Text = 'Anti-Underground Resolver',
+    Default = false,
+    Tooltip = 'Resolves Anti-Underground',
+})
+
+ResolveLB:AddToggle('AntiReverEnb', {
+    Text = 'Anti-Reverse Resolver',
+    Default = false,
+    Tooltip = 'Resolves Anti-Reverse',
+})
+
+Toggles.Resolver1Enb:OnChanged(function()
+    _G.Streamable.Resolvers.V1 = Toggles.Resolver1Enb.Value
+end)
+
+Toggles.Resolver2Enb:OnChanged(function()
+    _G.Streamable.Resolvers.V2 = Toggles.Resolver2Enb.Value
+end)
+
+Options.HitP2:OnChanged(function()
+    _G.Streamable.Resolvers.Aimpart = Options.HitP2.Value
+end)
+
+Toggles.AntiSkyEnb:OnChanged(function()
+    _G.Streamable.Resolvers.AntiSky = Toggles.AntiSkyEnb.Value
+end)
+
+Toggles.AntiUndEnb:OnChanged(function()
+    _G.Streamable.Resolvers.AntiUnderGround = Toggles.AntiUndEnb.Value
+end)
+
+Toggles.AntiReverEnb:OnChanged(function()
+    _G.Streamable.Resolvers.Reverse = Toggles.AntiReverEnb.Value
+end)
+
+-- Visuals Tab Start --
+
+-- Visuals RB Misc Start --
+
+VisualsRB:AddToggle('VisualTog', {
+    Text = 'Visual-Material',
+    Default = false,
+    Tooltip = 'Whenever You Hit Somebody A Material Will Show On Them!',
+})
+
+VisualsRB:AddDropdown('MaterialSelc', {
+    Values = { 'ForceField', 'Neon',},
+    Default = 1,
+    Multi = false,
+
+    Text = 'Material',
+    Tooltip = 'Changes Material'
+})
+
+VisualsRB:AddSlider('MaterialLife', {
+    Text = 'Life',
+    Default = 1,
+    Min = 1,
+    Max = 10,
+    Rounding = 1,
+    Compact = false,
+})
+
+VisualsRB:AddLabel('Material-Color'):AddColorPicker('MaterialCol', {
+    Default = Color3.new(0,0,0),
+    Title = 'Changes Material Color',
+})
+
+VisualsRB:AddToggle('VisualSound', {
+    Text = 'Sound',
+    Default = false,
+    Tooltip = 'Whenever You Hit Somebody A Sound Will Play!',
+})
+
+VisualsRB:AddInput('SoundPlay', {
+    Default = '12413331',
+    Numeric = true,
+    Finished = true,
+
+    Text = 'Sound ID',
+    Tooltip = 'Changes The Sound ID Of Hit Sound!',
+
+    Placeholder = '12413331',
+})
+
+VisualsRB:AddDivider()
+
+VisualsRB:AddLabel('Misc Options')
+
+VisualsRB:AddToggle('AimTog', {
+    Text = 'Anti-Aimviewer',
+    Default = false,
+    Tooltip = 'Anti-Aimviewer!',
+})
+
+VisualsRB:AddSlider('BackSlide', {
+    Text = 'Movement-Offset',
+    Default = 35,
+    Min = 0,
+    Max = 200,
+    Rounding = 1,
+    Compact = false,
+})
+
+VisualsRB:AddSlider('MoveSlide', {
+    Text = 'Movement-Offset',
+    Default = 0,
+    Min = 0,
+    Max = 200,
+    Rounding = 1,
+    Compact = false,
+})
+
+Toggles.AimTog:OnChanged(function()
+    _G.Streamable.AntiAimViewer.Toggle = Toggles.AimTog.Value
+end)
+
+local Number = Options.BackSlide.Value
+Options.MaterialLife:OnChanged(function()
+    _G.Streamable.AntiAimViewer.BackwardsOffset = Options.BackSlide.Value
+end)
+
+local Number = Options.MoveSlide.Value
+Options.MaterialLife:OnChanged(function()
+    _G.Streamable.AntiAimViewer.MovementOffset = Options.MoveSlide.Value
+end)
+
+Toggles.VisualTog:OnChanged(function()
+    _G.Streamable.Onshot.Visuals.Toggle = Toggles.VisualTog.Value
+end)
+
+Options.MaterialSelc:OnChanged(function()
+    _G.Streamable.Onshot.Visuals.Material = Options.MaterialSelc.Value
+end)
+
+local Number = Options.MaterialLife.Value
+Options.MaterialLife:OnChanged(function()
+    _G.Streamable.Onshot.Visuals.Life = Options.MaterialLife.Value
+end)
+
+Options.MaterialCol:OnChanged(function()
+    _G.Streamable.Onshot.Visuals.Material = Options.MaterialCol.Value
+end)
+
+Toggles.VisualSound:OnChanged(function()
+    _G.Streamable.Onshot.Sound.Toggle = Toggles.VisualSound.Value
+end)
+
+Options.SoundPlay:OnChanged(function()
+    _G.Streamable.Onshot.Sound.ID = Options.SoundPlay.Value
+end)
+
+-- Visuals RB Misc End --
+
+-- Visuals LB Other Start --
+
+VisualsLB:AddToggle('VisualCheck', {
+    Text = 'Visibility-Check',
+    Default = false,
+    Tooltip = 'Checks To See If Target Is Not Behind A Wall And Visible!',
+})
+
+VisualsLB:AddToggle('DownCheck', {
+    Text = 'Down-Check',
+    Default = false,
+    Tooltip = 'Checks To See If Target Is Down',
+})
+
+VisualsLB:AddToggle('DownCheck2', {
+    Text = 'Down2-Check',
+    Default = false,
+    Tooltip = 'Checks To See If Target Is Down',
+})
+
+VisualsLB:AddToggle('OOFOVCheck', {
+    Text = 'Out Of FOV-Check',
+    Default = false,
+    Tooltip = 'Checks To See If Target Is Out Of FOV',
+})
+
+VisualsLB:AddDivider()
+
+VisualsLB:AddLabel('Misc Visuals Options')
+
+VisualsLB:AddToggle('DotTog', {
+    Text = 'Dot',
+    Default = false,
+    Tooltip = 'Enables Dot',
+})
+
+VisualsLB:AddLabel('Dot Color'):AddColorPicker('DotColor', {
+    Default = Color3.new(0,0,0),
+    Title = 'Changes Dot Color',
+})
+
+VisualsLB:AddToggle('TracerTog', {
+    Text = 'Tracer',
+    Default = false,
+    Tooltip = 'Enables Tracer',
+})
+
+VisualsLB:AddLabel('Tracer Color'):AddColorPicker('TraceColor', {
+    Default = Color3.new(0,0,0),
+    Title = 'Changes Tracer Color',
+})
+
+VisualsLB:AddToggle('HighTog', {
+    Text = 'Hightlight',
+    Default = false,
+    Tooltip = 'Enables Hightlight',
+})
+
+VisualsLB:AddLabel('Hightlight Color'):AddColorPicker('HighColor', {
+    Default = Color3.new(0,0,0),
+    Title = 'Changes Hightlight Color',
+})
+
+VisualsLB:AddToggle('TargetTog', {
+    Text = 'Target Info',
+    Default = false,
+    Tooltip = 'Enables Target Info',
+})
+
+Toggles.DotTog:OnChanged(function()
+    _G.Streamable.Visuals.Dot.Toggle = Toggles.DotTog.Value
+end)
+
+Options.DotColor:OnChanged(function()
+    _G.Streamable.Visuals.Dot.Color = Options.DotColor.Value
+end)
+
+Toggles.TracerTog:OnChanged(function()
+    _G.Streamable.Visuals.Tracer.Toggle = Toggles.TracerTog.Value
+end)
+
+Options.TraceColor:OnChanged(function()
+    _G.Streamable.Visuals.Tracer.Color = Options.TraceColor.Value
+end)
+
+Toggles.HighTog:OnChanged(function()
+    _G.Streamable.Visuals.Highlight.Toggle = Toggles.HighTog.Value
+end)
+
+Options.HighColor:OnChanged(function()
+    _G.Streamable.Visuals.Highlight.Color = Options.HighColor.Value
+end)
+
+Toggles.TargetTog:OnChanged(function()
+    _G.Streamable.Visuals.TargetInfo = Toggles.TargetTog.Value
+end)
+
+VisualsLB:AddDivider()
+
+VisualsLB:AddLabel('Other Visuals Options')
+
+
+VisualsLB:AddToggle('GenFOVEnb', {
+    Text = 'FOV',
+    Default = false,
+    Tooltip = 'Enables FOV',
+})
+
+VisualsLB:AddToggle('GenFOVFill', {
+    Text = 'FOV Filled',
+    Default = false,
+    Tooltip = 'Fills FOV Circle (Ugly)',
+})
+
+VisualsLB:AddSlider('GenFOVSize', {
+    Text = 'FOV Size',
+    Default = 100,
+    Min = 0,
+    Max = 360,
+    Rounding = 1,
+    Compact = false,
+})
+
+VisualsLB:AddSlider('GenFOVThick', {
+    Text = 'FOV Thickness',
+    Default = 2,
+    Min = 1,
+    Max = 5,
+    Rounding = 1,
+    Compact = false,
+})
+
+VisualsLB:AddSlider('GenFOVTrans', {
+    Text = 'FOV Transparency',
+    Default = 1,
+    Min = 0,
+    Max = 1,
+    Rounding = 1,
+    Compact = false,
+})
+
+VisualsLB:AddLabel('FOVColor'):AddColorPicker('GenFOV', {
+    Default = Color3.new(0,0,0),
+    Title = 'Changes FOV Color',
+})
+
+Toggles.GenFOVEnb:OnChanged(function()
+    _G.Streamable.Selection.FOV.Toggle = Toggles.GenFOVEnb.Value
+end)
+
+Toggles.GenFOVFill:OnChanged(function()
+    _G.Streamable.Selection.FOV.Filled = Toggles.GenFOVFill.Value
+end)
+
+Options.GenFOV:OnChanged(function()
+    _G.Streamable.Selection.FOV.Color = Options.GenFOV.Value
+end)
+
+local Number = Options.GenFOVSize.Value
+Options.GenFOVSize:OnChanged(function()
+    _G.Streamable.Selection.FOV.Size = Options.GenFOVSize.Value
+end)
+
+local Number = Options.GenFOVThick.Value
+Options.GenFOVThick:OnChanged(function()
+    _G.Streamable.Selection.FOV.Thickness = Options.GenFOVThick.Value
+end)
+
+local Number = Options.GenFOVTrans.Value
+Options.GenFOVTrans:OnChanged(function()
+    _G.Streamable.Selection.FOV.Transparency = Options.GenFOVTrans.Value
+end)
+
+Toggles.VisualCheck:OnChanged(function()
+    _G.Streamable.Selection.VisibilityCheck = Toggles.VisualCheck.Value
+end)
+
+Toggles.DownCheck:OnChanged(function()
+    _G.Streamable.Selection.DownCheck = Toggles.DownCheck.Value
+end)
+
+Toggles.DownCheck2:OnChanged(function()
+    _G.Streamable.Selection.Unlocks.Down = Toggles.DownCheck2.Value
+end)
+
+Toggles.OOFOVCheck:OnChanged(function()
+    _G.Streamable.Selection.Unlocks.OOFOV = Toggles.OOFOVCheck.Value
+end)
+
+-- Visuals LB Other End --
+
+-- Visuals Tab End --
+
+
+Library:SetWatermarkVisibility(true)
+Library:SetWatermark('Ameres Streamable GUI V1')
+Library.KeybindFrame.Visible = false;
+Library:OnUnload(function()
+    print('Unloaded!')
+    Library.Unloaded = true
+end)
+
+local MenuGroup = Tabs['UI Settings']:AddLeftGroupbox('Menu')
+
+MenuGroup:AddButton('Unload', function() Library:Unload() end) 
+MenuGroup:AddLabel('Menu bind'):AddKeyPicker('MenuKeybind', { Default = 'V', NoUI = true, Text = 'Menu keybind' }) 
+
+Library.ToggleKeybind = Options.MenuKeybind
+ThemeManager:SetLibrary(Library)
+SaveManager:SetLibrary(Library)
+SaveManager:IgnoreThemeSettings() 
+SaveManager:SetIgnoreIndexes({ 'MenuKeybind' }) 
+ThemeManager:SetFolder('MyScriptHub')
+SaveManager:SetFolder('MyScriptHub/specific-game')
+SaveManager:BuildConfigSection(Tabs['UI Settings']) 
+ThemeManager:ApplyToTab(Tabs['UI Settings'])
