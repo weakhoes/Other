@@ -260,6 +260,64 @@ CombatRB:AddToggle('SilentAuto', {
     Tooltip = 'Auto Puts Prediction For You',
 })
 
+CombatRB:AddToggle('RandomizeTog', {
+    Text = 'Randomize-Shots (Legit)',
+    Default = false,
+    Tooltip = 'Randomizes Shots To Make You Look Legit',
+})
+
+CombatRB:AddInput('XValue', {
+    Default = '23',
+    Numeric = true,
+    Finished = true,
+
+    Text = 'Randomize XValue',
+    Tooltip = 'Randomizes X Value Shots',
+
+    Placeholder = '23',
+})
+
+CombatRB:AddInput('YValue', {
+    Default = '23',
+    Numeric = true,
+    Finished = true,
+
+    Text = 'Randomize YValue',
+    Tooltip = 'Randomizes Y Value Shots',
+
+    Placeholder = '23',
+})
+
+CombatRB:AddInput('ZValue', {
+    Default = '23',
+    Numeric = true,
+    Finished = true,
+
+    Text = 'Randomize ZValue',
+    Tooltip = 'Randomizes Z Value Shots',
+
+    Placeholder = '23',
+})
+
+Toggles.RandomizeTog:OnChanged(function()
+    _G.Streamable.Randomization.Toggle = Toggles.RandomizeTog.Value
+end)
+
+local Number = Options.XValue.Value
+Options.XValue:OnChanged(function()
+    _G.Streamable.Randomization.XVal = Options.XValue.Value
+end)
+
+local Number = Options.YValue.Value
+Options.YValue:OnChanged(function()
+    _G.Streamable.Randomization.YVal = Options.YValue.Value
+end)
+
+local Number = Options.ZValue.Value
+Options.ZValue:OnChanged(function()
+    _G.Streamable.Randomization.ZVal = Options.ZValue.Value
+end)
+
 CombatRB:AddDivider()
 
 CombatRB:AddLabel('Misc Silent Options')
