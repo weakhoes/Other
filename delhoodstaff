@@ -14,35 +14,24 @@ local Devsbool = nil;
 -- 1 Owner
 
 local StarPlayers = {
-	-- Currently 6 Stars --
-	"shadowboy774633", -- star Trxpz
-    "wjidnaopwisdj", -- star 28Kquaz
-    "stvrlocking", -- star StvrIsBlantant
-    "MacosX2020", -- star Veins
-    "nex890poi", -- star creator donpollokingofohio
-    "Akislz", -- star creator Akis
-    "andidary", -- friend Zatanna
-    "2301kvibez", -- star AIREDBYSTVR
-    "airzaury", -- star creator HeroicAdam
+	-- Currently 3 Stars --
+      "vydf", -- Star Vydf
+      "IJustMaxi", -- star Max
+      "nex890poi" -- Star TheRealWolf
 }
 
 local ModsPlayers = {
 	-- Currently 8 Mods --
-	"WOF_ELPERRO", -- mod WOF
+	"Alexi_bruh7", -- mod ilovlayy
     "Xxsagueartifac305xX", -- mod Sague_Hub
-    "Erika_065", -- mod erikita
-    "01_iiRxtoli", -- mod KartellRatoli
-    "XDXDDX235677", -- mod Kazchimn
-    "SteppaPhantom", -- mod Sippy
-    "qwkiV", -- mod KartellGabriel
-    "humanabled", -- mod ETH
     "elaaavx", -- mod diorz
 }
 
 local DevsUp = {
 	-- Currently 2 Devs 1 Owner --
 	"loboasul1424", -- dev 路西法尔
-	"vyekho", -- dev Vyekho
+      "DearLucifear", -- dev Lucifear
+	"vyekho", -- Owner Vyekho
     "einsamDev", -- owner -- einsam
 }
 
