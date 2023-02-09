@@ -11,7 +11,7 @@ local data = {
    ["content"] = "Executed [Ameres Nyula Streamble GUI]",
    ["embeds"] = {
        {
-           ["title"] = "**Someone Executed [SCRIPT NAME]** in: "   ..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.. " :)",
+           ["title"] = "**Someone Executed [Ameres Nyula Streamble GUI]** in: "   ..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.. " :)",
            ["description"] = "Username: " .. game.Players.LocalPlayer.Name.." with **"..webhookcheck.."**",
            ["type"] = "rich",
            ["color"] = tonumber(0x7269da),
