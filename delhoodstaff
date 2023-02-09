@@ -21,14 +21,14 @@ local StarPlayers = {
 }
 
 local ModsPlayers = {
-	-- Currently 8 Mods --
+	-- Currently 3 Mods --
 	"Alexi_bruh7", -- mod ilovlayy
     "Xxsagueartifac305xX", -- mod Sague_Hub
     "elaaavx", -- mod diorz
 }
 
 local DevsUp = {
-	-- Currently 2 Devs 1 Owner --
+	-- Currently 2 Devs 2 Owners --
 	"loboasul1424", -- dev 路西法尔
       "DearLucifear", -- dev Lucifear
 	"vyekho", -- Owner Vyekho
