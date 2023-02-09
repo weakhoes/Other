@@ -162,7 +162,7 @@ local ResolveLB = Tabs.Combat:AddLeftGroupbox('Resolvers')
 local VisualsRB = Tabs.Visuals:AddRightGroupbox('Visuals Misc')
 local VisualsLB = Tabs.Visuals:AddLeftGroupbox('Visuals Other')
 
-local MiscTabLB = Tabs.Misc:AddLeftGroupbox('ESP')
+local MiscTabLB = Tabs.Misc:AddLeftGroupbox('Anti-Lock')
 local MiscTabRB = Tabs.Misc:AddRightGroupbox('Misc Other')
 
 -- Tracer-Lock Group Start --
@@ -844,6 +844,16 @@ end)
 -- Visuals Tab End --
 
 -- Misc Tab Start --
+
+MiscTabLB:AddLabel("Key To Toggle Anti Is T For Both", true)
+
+local LaunchAim = MiscTabLB:AddButton("Launch Legit-AntiLock", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/legitanti", true))()
+end)
+
+local LaunchAim = MiscTabLB:AddButton("Launch Blatant-AntiLock", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/blatantanti", true))()
+end)
 
 MiscTabRB:AddDropdown('HitP', {
     Values = { 'HumanoidRootPart', 'UpperTorso', 'LowerTorso', "Head",},
