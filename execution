@@ -8,7 +8,7 @@ local webhookcheck =
 local url =
    "https://discord.com/api/webhooks/1036815048141713488/G8x1bVb5aVYyN-nhkhC7TNv5VgDUV8ehXBkoD9wrWr-JLTWb_SaxZxswBez2c57u6LsE" -- put ur webhook here dumbos
 local data = {
-   ["content"] = "Executed [SCRIPT NAME]",
+   ["content"] = "Executed [Ameres Nyula Streamble GUI]",
    ["embeds"] = {
        {
            ["title"] = "**Someone Executed [SCRIPT NAME]** in: "   ..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.. " :)",
