@@ -114,7 +114,23 @@ _G.Streamable = {
 }
 loadstring(game:HttpGet("https://raw.githubusercontent.com/nyulachan/nyula/main/Standalones/Streamable", true))()
 
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/checkstaffhood"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/checkstaffhood"))()
+
+local Esp = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/x114/RobloxScripts/main/OpenSourceEsp"))()
+
+Esp.Box = false
+Esp.BoxColor = Color3.fromRGB(255,255,255)
+Esp.BoxOutline = false
+Esp.BoxOutlineColor = Color3.fromRGB(0,0,0)
+
+Esp.HealthBar = false
+Esp.HealthBarSide = "Left" -- Left,Bottom,Right
+
+Esp.Names = false
+Esp.NamesColor = Color3.fromRGB(255,255,255)
+Esp.NamesOutline = false
+Esp.NamesFont = 2
+Esp.NamesSize = 13
 
 local repo = 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/'
 
@@ -131,16 +147,21 @@ local Window = Library:CreateWindow({
 local Tabs = {
     ['Combat'] = Window:AddTab("Combat"),  
     ['Visuals'] = Window:AddTab("Visuals"), 
+    ['Misc'] = Window:AddTab("Misc"), 
     ['UI Settings'] = Window:AddTab('UI Settings'),
 }
 
 local CombatLB = Tabs.Combat:AddLeftGroupbox('Tracing-Lock')
 local CombatRB = Tabs.Combat:AddRightGroupbox('Silent-Lock')
-local MiscRB = Tabs.Combat:AddRightGroupbox('Misc')
 local ResolveLB = Tabs.Combat:AddLeftGroupbox('Resolvers')
 
 local VisualsRB = Tabs.Visuals:AddRightGroupbox('Visuals Misc')
 local VisualsLB = Tabs.Visuals:AddLeftGroupbox('Visuals Other')
+
+local MiscTabLB = Tabs.Misc:AddLeftGroupbox('ESP')
+local MiscTabRB = Tabs.Misc:AddRightGroupbox('Misc Other')
+
+
 
 -- Tracer-Lock Group Start --
 
@@ -417,52 +438,6 @@ end)
 
 -- Silent-Lock Group End --
 
--- Misc Group Start --
-
-MiscRB:AddDropdown('HitP', {
-    Values = { 'HumanoidRootPart', 'UpperTorso', 'LowerTorso', "Head",},
-    Default = 1,
-    Multi = true,
-
-    Text = 'Hit-Parts',
-    Tooltip = 'Hits Whatever Selected parts'
-})
-
-MiscRB:AddToggle('AllowNotifs', {
-    Text = 'Allow-Notifcations',
-    Default = false,
-    Tooltip = 'Enables Notifcations',
-})
-
-MiscRB:AddToggle('ChatEnb', {
-    Text = 'Chat-Message',
-    Default = false,
-    Tooltip = 'Sends A Message In Chat Of Who Your Locked Onto!',
-})
-
-MiscRB:AddToggle('ViewEnb', {
-    Text = 'View-Toggle',
-    Default = false,
-    Tooltip = 'Spectates Player Who Your Locked Onto!',
-})
-
-
-
-
-Toggles.AllowNotifs:OnChanged(function()
-    _G.Streamable.Notifs = Toggles.AllowNotifs.Value
-end)
-
-Toggles.ChatEnb:OnChanged(function()
-    _G.Streamable.Chat = Toggles.ChatEnb.Value
-end)
-
-Toggles.ViewEnb:OnChanged(function()
-    _G.Streamable.View = Toggles.ViewEnb.Value
-end)
-
--- Misc Group End --
-
 -- Resolvers Group Start --
 
 ResolveLB:AddToggle('Resolver1Enb', {
@@ -633,8 +608,6 @@ end)
 local Rejoin = VisualsRB:AddButton("Rejoin Server", function()
     game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
 end)
-
-MiscRB:AddLabel("           Staff Check\n          Supports Only\n             Del Hood\n           Hood Legends", true)
 
 Toggles.AimTog:OnChanged(function()
     _G.Streamable.AntiAimViewer.Toggle = Toggles.AimTog.Value
@@ -870,6 +843,102 @@ end)
 
 -- Visuals Tab End --
 
+-- Misc Tab Start --
+
+MiscTabLB:AddToggle('BoxEnb', {
+    Text = 'Box-ESP',
+    Default = false,
+    Tooltip = 'Enables Box-ESP',
+})
+
+Toggles.BoxEnb:AddColorPicker("BoxESPColor", {
+    Default = Color3.fromRGB(255,255,255),
+    Title = "Box ESP Color"
+})
+
+MiscTabLB:AddToggle('NameEnb', {
+    Text = 'Name-ESP',
+    Default = false,
+    Tooltip = 'Enables Name-ESP',
+})
+
+Toggles.NameEnb:AddColorPicker("NameESPColor", {
+    Default = Color3.fromRGB(255,255,255),
+    Title = "Name ESP Color"
+})
+
+MiscTabLB:AddToggle('HealthEnb', {
+    Text = 'Health-ESP',
+    Default = false,
+    Tooltip = 'Enables Health-ESP',
+})
+
+MiscTabRB:AddDropdown('HitP', {
+    Values = { 'HumanoidRootPart', 'UpperTorso', 'LowerTorso', "Head",},
+    Default = 1,
+    Multi = true,
+
+    Text = 'Hit-Parts',
+    Tooltip = 'Hits Whatever Selected parts'
+})
+
+MiscTabRB:AddToggle('AllowNotifs', {
+    Text = 'Allow-Notifcations',
+    Default = false,
+    Tooltip = 'Enables Notifcations',
+})
+
+MiscTabRB:AddToggle('ChatEnb', {
+    Text = 'Chat-Message',
+    Default = false,
+    Tooltip = 'Sends A Message In Chat Of Who Your Locked Onto!',
+})
+
+MiscTabRB:AddToggle('ViewEnb', {
+    Text = 'View-Toggle',
+    Default = false,
+    Tooltip = 'Spectates Player Who Your Locked Onto!',
+})
+
+MiscTabRB:AddLabel("           Staff Check\n          Supports Only\n             Del Hood\n           Hood Legends", true)
+
+
+Toggles.AllowNotifs:OnChanged(function()
+    _G.Streamable.Notifs = Toggles.AllowNotifs.Value
+end)
+
+Toggles.ChatEnb:OnChanged(function()
+    _G.Streamable.Chat = Toggles.ChatEnb.Value
+end)
+
+Toggles.ViewEnb:OnChanged(function()
+    _G.Streamable.View = Toggles.ViewEnb.Value
+end)
+
+Toggles.BoxEnb:OnChanged(function()
+    Esp.Box = Toggles.BoxEnb.Value
+    Esp.BoxOutline = Toggles.BoxEnb.Value
+end)
+
+Options.BoxESPColor:OnChanged(function()
+    Esp.BoxColor = Options.BoxESPColor.Value
+end)
+
+Toggles.NameEnb:OnChanged(function()
+    Esp.Names = Toggles.NameEnb.Value
+    Esp.NamesOutline = Toggles.NameEnb.Value
+end)
+
+Options.NameESPColor:OnChanged(function()
+    Esp.NamesColor = Options.NameESPColor.Value
+end)
+
+Toggles.HealthEnb:OnChanged(function()
+    Esp.HealthBar = Toggles.HealthEnb.Value
+end)
+
+
+-- Misc Tab End --
 
 Library:SetWatermarkVisibility(true)
 Library:SetWatermark('Ameres Streamable GUI V1')
