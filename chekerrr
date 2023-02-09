@@ -1,0 +1,65 @@
+local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+
+local Players = game:GetService("Players")
+local GetPlayers = Players:GetPlayers()
+
+local Whitelistbool = nil;
+local NonWhitelistbool = nil;
+
+local Whitelisted = {
+	-- Currently 3 Whitelisted --
+      "Amereii", -- Owner ameredropemoff
+      "MyHeartHurtsBad", -- Whitelisted Iloveemoneyy
+      "sheluvtai059", -- Whitelisted HeStoleMyFood
+      "TAIONO59t", -- Whitelisted TAIONO59t
+      "whyimbamedrobloxwaa", -- Whitelisted fakejordanzz
+}
+
+function Checking()
+Notification:Notify(
+                {Title = "Checking...", Description = "Checking Whitelist..."},
+                {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+                {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+)
+
+for _, v in pairs(Players:GetPlayers()) do
+        if table.find(Whitelisted, v.Name) then
+            wait(3)
+            Notification:Notify(
+                {Title = "Success", Description = "User Is Whitelisted!"},
+                {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+                {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+            )
+            Whitelistbool = true
+            else
+                NonWhitelistbool = false
+        end
+end
+end
+
+function WhitelistCheck()
+    if Whitelistbool == true then
+            wait(3)
+            Notification:Notify(
+                {Title = "Success!", Description = "Executing Script! Please Wait..."},
+                {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+                {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+            )
+            wait(5)
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/smdwd", true))();
+    else if NonWhitelistbool == false then
+            wait(3)
+            Notification:Notify(
+                {Title = "Failed...", Description = "Invalid Whitelist!"},
+                {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+                {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+            )
+        wait(5)
+        game.Players.LocalPlayer:Kick("You Are Not Whitelisted!")
+    end
+    end
+end
+
+Checking()
+WhitelistCheck()
