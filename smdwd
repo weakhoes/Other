@@ -136,7 +136,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/mai
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/execution"))()
 
-local repo = 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/'
+repo = 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/'
 
 local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
 local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
@@ -860,7 +860,7 @@ MiscTabRB:AddLabel("           Staff Check\n          Supports Only\n           
 -- Misc Tab End --
 
 Library:SetWatermarkVisibility(true)
-Library:SetWatermark('Ameres Streamable GUI V1')
+Library:SetWatermark("Ameres Streamable GUI V1 | User | ".. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
 Library.KeybindFrame.Visible = false;
 Library:OnUnload(function()
     print('Unloaded!')
@@ -885,6 +885,6 @@ ThemeManager:ApplyToTab(Tabs['UI Settings'])
 if game.PlaceId == 5100950559 then -- hoodlegends
     Toggles.AutoPre:SetValue(false)
     Options.PredIn:SetValue("0")
-    Toggles.SilentPred:SetValue(false)
-    Options.SilentAuto:SetValue("0")
+    Toggles.SilentAuto:SetValue(false)
+    Options.SilentPred:SetValue("0")
 end
