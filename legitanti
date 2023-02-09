@@ -1,0 +1,19 @@
+--// Created By Nosssa supports mostly, all hood games!
+ 
+--// Roblox Group ( TeamNosss! ): https://www.roblox.com/groups/16003304/TeamNosss#!/about
+ 
+
+getgenv().X_Axis_Offset = -20 -- [ Left & Right | Horizontal (X) ] --
+
+getgenv().Y_Axis_Offset = -20 -- [ Up & Down | Vertical (X) ] --
+
+getgenv().Z_Axis_Offset = -20 -- [ Forward & Backward | Depth (X) ] --
+
+getgenv().Show_Self_Velocity = true -- [ Shows your own Offset / Velocity represented with a "dot" ] --
+
+getgenv().AntiLockKeybind = (  "t"  )
+
+getgenv().Notifications = true
+
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nosssa/NossLock/main/GooberOffsetsYOU", true))();
