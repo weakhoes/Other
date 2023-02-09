@@ -112,25 +112,29 @@ _G.Streamable = {
         ZVal = 23,
     },
 }
+
+_G.AimViewer = {
+    Key = "h",
+    FromEnemyPart = "HumanoidRootPart",
+    VisualColor = Color3.fromRGB(119,0,255),
+    VisualRainbow = false,
+    VisibleCheck = false,
+    DownCheck = false,
+    FOVCheck = false,
+    FOVSize = 100,
+    FOVColor = Color3.fromRGB(119,0,255),
+    FOVRainbow = false,
+    FOVThickness = 2,
+    FOVFilled = false,
+    FOVTransparency = 1,
+    NotificationToggle = true,
+}
+
 loadstring(game:HttpGet("https://raw.githubusercontent.com/nyulachan/nyula/main/Standalones/Streamable", true))()
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/checkstaffhood"))()
 
-local Esp = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/x114/RobloxScripts/main/OpenSourceEsp"))()
-
-Esp.Box = false
-Esp.BoxColor = Color3.fromRGB(255,255,255)
-Esp.BoxOutline = false
-Esp.BoxOutlineColor = Color3.fromRGB(0,0,0)
-
-Esp.HealthBar = false
-Esp.HealthBarSide = "Left" -- Left,Bottom,Right
-
-Esp.Names = false
-Esp.NamesColor = Color3.fromRGB(255,255,255)
-Esp.NamesOutline = false
-Esp.NamesFont = 2
-Esp.NamesSize = 13
+loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/execution"))()
 
 local repo = 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/'
 
@@ -160,8 +164,6 @@ local VisualsLB = Tabs.Visuals:AddLeftGroupbox('Visuals Other')
 
 local MiscTabLB = Tabs.Misc:AddLeftGroupbox('ESP')
 local MiscTabRB = Tabs.Misc:AddRightGroupbox('Misc Other')
-
-
 
 -- Tracer-Lock Group Start --
 
@@ -195,6 +197,7 @@ CombatLB:AddInput('PredIn', {
 
 CombatLB:AddToggle('AutoPre', {
     Text = 'Auto-Prediction',
+    Locked = true,
     Default = false,
     Tooltip = 'Auto Puts Prediction For You',
 })
@@ -339,29 +342,41 @@ Options.ZValue:OnChanged(function()
     _G.Streamable.Randomization.ZVal = Options.ZValue.Value
 end)
 
-CombatRB:AddDivider()
+CombatRB:AddLabel('Misc Options')
 
-CombatRB:AddLabel('Misc Silent Options')
-
-CombatRB:AddToggle('FOVOnly', {
-    Text = 'Enable Only If In FOV',
+CombatRB:AddToggle('AllowNotifs', {
+    Text = 'Allow-Notifcations',
     Default = false,
-    Tooltip = 'Enables Silent Lock Only When Person Is In FOV',
+    Tooltip = 'Enables Notifcations',
 })
 
-CombatRB:AddToggle('SilentFOVEnb', {
+CombatRB:AddToggle('ChatEnb', {
+    Text = 'Chat-Message',
+    Default = false,
+    Tooltip = 'Sends A Message In Chat Of Who Your Locked Onto!',
+})
+
+CombatRB:AddToggle('ViewEnb', {
+    Text = 'View-Toggle',
+    Default = false,
+    Tooltip = 'Spectates Player Who Your Locked Onto!',
+})
+
+CombatRB:AddLabel('FOV Options')
+
+CombatRB:AddToggle('GenFOVEnb', {
     Text = 'FOV',
     Default = false,
-    Tooltip = 'Enables Silent FOV',
+    Tooltip = 'Enables FOV',
 })
 
-CombatRB:AddToggle('SilentFOVFill', {
+CombatRB:AddToggle('GenFOVFill', {
     Text = 'FOV Filled',
     Default = false,
     Tooltip = 'Fills FOV Circle (Ugly)',
 })
 
-CombatRB:AddSlider('SilentFOVSize', {
+CombatRB:AddSlider('GenFOVSize', {
     Text = 'FOV Size',
     Default = 100,
     Min = 0,
@@ -370,7 +385,7 @@ CombatRB:AddSlider('SilentFOVSize', {
     Compact = false,
 })
 
-CombatRB:AddSlider('SilentFOVThick', {
+CombatRB:AddSlider('GenFOVThick', {
     Text = 'FOV Thickness',
     Default = 2,
     Min = 1,
@@ -379,7 +394,7 @@ CombatRB:AddSlider('SilentFOVThick', {
     Compact = false,
 })
 
-CombatRB:AddSlider('SilentFOVTrans', {
+CombatRB:AddSlider('GenFOVTrans', {
     Text = 'FOV Transparency',
     Default = 1,
     Min = 0,
@@ -388,7 +403,7 @@ CombatRB:AddSlider('SilentFOVTrans', {
     Compact = false,
 })
 
-CombatRB:AddLabel('FOVColor'):AddColorPicker('ColorFOV', {
+CombatRB:AddLabel('FOVColor'):AddColorPicker('GenFOV', {
     Default = Color3.new(0,0,0),
     Title = 'Changes FOV Color',
 })
@@ -405,40 +420,57 @@ Toggles.SilentAuto:OnChanged(function()
     _G.Streamable.SilentAim.AutoPred = Toggles.SilentAuto.Value
 end)
 
-Toggles.FOVOnly:OnChanged(function()
-    _G.Streamable.SilentAim.OnlyWhenInFov = Toggles.FOVOnly.Value
+Toggles.AllowNotifs:OnChanged(function()
+    _G.Streamable.Notifs = Toggles.AllowNotifs.Value
 end)
 
-Toggles.SilentFOVEnb:OnChanged(function()
-    _G.Streamable.SilentAim.FOV.Toggle = Toggles.SilentFOVEnb.Value
+Toggles.ChatEnb:OnChanged(function()
+    _G.Streamable.Chat = Toggles.ChatEnb.Value
 end)
 
-Toggles.SilentFOVFill:OnChanged(function()
-    _G.Streamable.SilentAim.FOV.Filled = Toggles.SilentFOVFill.Value
+Toggles.ViewEnb:OnChanged(function()
+    _G.Streamable.View = Toggles.ViewEnb.Value
 end)
 
-Options.ColorFOV:OnChanged(function()
-    _G.Streamable.SilentAim.FOV.Color = Options.ColorFOV.Value
+Toggles.GenFOVEnb:OnChanged(function()
+    _G.Streamable.Selection.FOV.Toggle = Toggles.GenFOVEnb.Value
 end)
 
-local Number = Options.SilentFOVSize.Value
-Options.SilentFOVSize:OnChanged(function()
-    _G.Streamable.SilentAim.FOV.Size = Options.SilentFOVSize.Value
+Toggles.GenFOVFill:OnChanged(function()
+    _G.Streamable.Selection.FOV.Filled = Toggles.GenFOVFill.Value
 end)
 
-local Number = Options.SilentFOVThick.Value
-Options.SilentFOVThick:OnChanged(function()
-    _G.Streamable.SilentAim.FOV.Thickness = Options.SilentFOVThick.Value
+Options.GenFOV:OnChanged(function()
+    _G.Streamable.Selection.FOV.Color = Options.GenFOV.Value
 end)
 
-local Number = Options.SilentFOVTrans.Value
-Options.SilentFOVTrans:OnChanged(function()
-    _G.Streamable.SilentAim.FOV.Transparency = Options.SilentFOVTrans.Value
+local Number = Options.GenFOVSize.Value
+Options.GenFOVSize:OnChanged(function()
+    _G.Streamable.Selection.FOV.Size = Options.GenFOVSize.Value
+end)
+
+local Number = Options.GenFOVThick.Value
+Options.GenFOVThick:OnChanged(function()
+    _G.Streamable.Selection.FOV.Thickness = Options.GenFOVThick.Value
+end)
+
+local Number = Options.GenFOVTrans.Value
+Options.GenFOVTrans:OnChanged(function()
+    _G.Streamable.Selection.FOV.Transparency = Options.GenFOVTrans.Value
 end)
 
 -- Silent-Lock Group End --
 
 -- Resolvers Group Start --
+
+ResolveLB:AddDropdown('HitP2', {
+    Values = { 'HumanoidRootPart', 'Head',},
+    Default = 1,
+    Multi = false,
+
+    Text = 'Hit-Parts',
+    Tooltip = 'Resolves Whatever Selected parts'
+})
 
 ResolveLB:AddToggle('Resolver1Enb', {
     Text = 'ResolverV1',
@@ -450,15 +482,6 @@ ResolveLB:AddToggle('Resolver2Enb', {
     Text = 'ResolverV2',
     Default = false,
     Tooltip = 'Enables ResolverV2 (Smooth)',
-})
-
-ResolveLB:AddDropdown('HitP2', {
-    Values = { 'HumanoidRootPart', 'Head',},
-    Default = 1,
-    Multi = false,
-
-    Text = 'Hit-Parts',
-    Tooltip = 'Resolves Whatever Selected parts'
 })
 
 ResolveLB:AddToggle('AntiSkyEnb', {
@@ -564,7 +587,7 @@ VisualsRB:AddToggle('AimTog', {
 })
 
 VisualsRB:AddSlider('BackSlide', {
-    Text = 'Movement-Offset',
+    Text = 'Backwards-Offset',
     Default = 35,
     Min = 0,
     Max = 200,
@@ -676,6 +699,22 @@ VisualsLB:AddToggle('OOFOVCheck', {
     Tooltip = 'Checks To See If Target Is Out Of FOV',
 })
 
+Toggles.VisualCheck:OnChanged(function()
+    _G.Streamable.Selection.VisibilityCheck = Toggles.VisualCheck.Value
+end)
+
+Toggles.DownCheck:OnChanged(function()
+    _G.Streamable.Selection.DownCheck = Toggles.DownCheck.Value
+end)
+
+Toggles.DownCheck2:OnChanged(function()
+    _G.Streamable.Selection.Unlocks.Down = Toggles.DownCheck2.Value
+end)
+
+Toggles.OOFOVCheck:OnChanged(function()
+    _G.Streamable.Selection.Unlocks.OOFOV = Toggles.OOFOVCheck.Value
+end)
+
 VisualsLB:AddDivider()
 
 VisualsLB:AddLabel('Misc Visuals Options')
@@ -751,127 +790,60 @@ VisualsLB:AddDivider()
 
 VisualsLB:AddLabel('Other Visuals Options')
 
+VisualsLB:AddLabel('To Toggle Press H On A Player\nTo View Their Aim', true)
 
-VisualsLB:AddToggle('GenFOVEnb', {
-    Text = 'FOV',
+local LaunchAim = VisualsLB:AddButton("Launch Aim-Viewer", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/nyulachan/nyula/main/Standalones/AimViewer", true))()
+end)
+
+VisualsLB:AddToggle('AllowAimNotifs', {
+    Text = 'Allow-Notifications',
     Default = false,
-    Tooltip = 'Enables FOV',
+    Tooltip = 'Enables Notifications',
 })
 
-VisualsLB:AddToggle('GenFOVFill', {
-    Text = 'FOV Filled',
-    Default = false,
-    Tooltip = 'Fills FOV Circle (Ugly)',
-})
-
-VisualsLB:AddSlider('GenFOVSize', {
-    Text = 'FOV Size',
-    Default = 100,
-    Min = 0,
-    Max = 360,
-    Rounding = 1,
-    Compact = false,
-})
-
-VisualsLB:AddSlider('GenFOVThick', {
-    Text = 'FOV Thickness',
-    Default = 2,
-    Min = 1,
-    Max = 5,
-    Rounding = 1,
-    Compact = false,
-})
-
-VisualsLB:AddSlider('GenFOVTrans', {
-    Text = 'FOV Transparency',
+VisualsLB:AddDropdown('HitAim', {
+    Values = { 'HumanoidRootPart', 'Head', "UpperTorso",},
     Default = 1,
-    Min = 0,
-    Max = 1,
-    Rounding = 1,
-    Compact = false,
+    Multi = false,
+
+    Text = 'Hit-Parts',
+    Tooltip = 'Beam Comes From Selected Part'
 })
 
-VisualsLB:AddLabel('FOVColor'):AddColorPicker('GenFOV', {
+VisualsLB:AddLabel('Beam Color'):AddColorPicker('BeamCol', {
     Default = Color3.new(0,0,0),
-    Title = 'Changes FOV Color',
+    Title = 'Changes Beam Color',
 })
 
-Toggles.GenFOVEnb:OnChanged(function()
-    _G.Streamable.Selection.FOV.Toggle = Toggles.GenFOVEnb.Value
+VisualsLB:AddToggle('RainBowTog', {
+    Text = 'Rainbow Beam',
+    Default = false,
+    Tooltip = 'Turns The Beam Rainbow!',
+})
+
+Toggles.AllowAimNotifs:OnChanged(function()
+    _G.AimViewer.NotificationToggle = Toggles.AllowAimNotifs.Value
 end)
 
-Toggles.GenFOVFill:OnChanged(function()
-    _G.Streamable.Selection.FOV.Filled = Toggles.GenFOVFill.Value
+Options.HitAim:OnChanged(function()
+    _G.AimViewer.FromEnemyPart = Options.HitAim.Value
 end)
 
-Options.GenFOV:OnChanged(function()
-    _G.Streamable.Selection.FOV.Color = Options.GenFOV.Value
+Options.BeamCol:OnChanged(function()
+    _G.AimViewer.VisualColor = Options.BeamCol.Value
 end)
 
-local Number = Options.GenFOVSize.Value
-Options.GenFOVSize:OnChanged(function()
-    _G.Streamable.Selection.FOV.Size = Options.GenFOVSize.Value
+Toggles.RainBowTog:OnChanged(function()
+    _G.AimViewer.VisualRainbow = Toggles.RainBowTog.Value
 end)
 
-local Number = Options.GenFOVThick.Value
-Options.GenFOVThick:OnChanged(function()
-    _G.Streamable.Selection.FOV.Thickness = Options.GenFOVThick.Value
-end)
-
-local Number = Options.GenFOVTrans.Value
-Options.GenFOVTrans:OnChanged(function()
-    _G.Streamable.Selection.FOV.Transparency = Options.GenFOVTrans.Value
-end)
-
-Toggles.VisualCheck:OnChanged(function()
-    _G.Streamable.Selection.VisibilityCheck = Toggles.VisualCheck.Value
-end)
-
-Toggles.DownCheck:OnChanged(function()
-    _G.Streamable.Selection.DownCheck = Toggles.DownCheck.Value
-end)
-
-Toggles.DownCheck2:OnChanged(function()
-    _G.Streamable.Selection.Unlocks.Down = Toggles.DownCheck2.Value
-end)
-
-Toggles.OOFOVCheck:OnChanged(function()
-    _G.Streamable.Selection.Unlocks.OOFOV = Toggles.OOFOVCheck.Value
-end)
 
 -- Visuals LB Other End --
 
 -- Visuals Tab End --
 
 -- Misc Tab Start --
-
-MiscTabLB:AddToggle('BoxEnb', {
-    Text = 'Box-ESP',
-    Default = false,
-    Tooltip = 'Enables Box-ESP',
-})
-
-Toggles.BoxEnb:AddColorPicker("BoxESPColor", {
-    Default = Color3.fromRGB(255,255,255),
-    Title = "Box ESP Color"
-})
-
-MiscTabLB:AddToggle('NameEnb', {
-    Text = 'Name-ESP',
-    Default = false,
-    Tooltip = 'Enables Name-ESP',
-})
-
-Toggles.NameEnb:AddColorPicker("NameESPColor", {
-    Default = Color3.fromRGB(255,255,255),
-    Title = "Name ESP Color"
-})
-
-MiscTabLB:AddToggle('HealthEnb', {
-    Text = 'Health-ESP',
-    Default = false,
-    Tooltip = 'Enables Health-ESP',
-})
 
 MiscTabRB:AddDropdown('HitP', {
     Values = { 'HumanoidRootPart', 'UpperTorso', 'LowerTorso', "Head",},
@@ -882,60 +854,7 @@ MiscTabRB:AddDropdown('HitP', {
     Tooltip = 'Hits Whatever Selected parts'
 })
 
-MiscTabRB:AddToggle('AllowNotifs', {
-    Text = 'Allow-Notifcations',
-    Default = false,
-    Tooltip = 'Enables Notifcations',
-})
-
-MiscTabRB:AddToggle('ChatEnb', {
-    Text = 'Chat-Message',
-    Default = false,
-    Tooltip = 'Sends A Message In Chat Of Who Your Locked Onto!',
-})
-
-MiscTabRB:AddToggle('ViewEnb', {
-    Text = 'View-Toggle',
-    Default = false,
-    Tooltip = 'Spectates Player Who Your Locked Onto!',
-})
-
 MiscTabRB:AddLabel("           Staff Check\n          Supports Only\n             Del Hood\n           Hood Legends", true)
-
-
-Toggles.AllowNotifs:OnChanged(function()
-    _G.Streamable.Notifs = Toggles.AllowNotifs.Value
-end)
-
-Toggles.ChatEnb:OnChanged(function()
-    _G.Streamable.Chat = Toggles.ChatEnb.Value
-end)
-
-Toggles.ViewEnb:OnChanged(function()
-    _G.Streamable.View = Toggles.ViewEnb.Value
-end)
-
-Toggles.BoxEnb:OnChanged(function()
-    Esp.Box = Toggles.BoxEnb.Value
-    Esp.BoxOutline = Toggles.BoxEnb.Value
-end)
-
-Options.BoxESPColor:OnChanged(function()
-    Esp.BoxColor = Options.BoxESPColor.Value
-end)
-
-Toggles.NameEnb:OnChanged(function()
-    Esp.Names = Toggles.NameEnb.Value
-    Esp.NamesOutline = Toggles.NameEnb.Value
-end)
-
-Options.NameESPColor:OnChanged(function()
-    Esp.NamesColor = Options.NameESPColor.Value
-end)
-
-Toggles.HealthEnb:OnChanged(function()
-    Esp.HealthBar = Toggles.HealthEnb.Value
-end)
 
 
 -- Misc Tab End --
@@ -962,3 +881,10 @@ ThemeManager:SetFolder('MyScriptHub')
 SaveManager:SetFolder('MyScriptHub/specific-game')
 SaveManager:BuildConfigSection(Tabs['UI Settings']) 
 ThemeManager:ApplyToTab(Tabs['UI Settings'])
+
+if game.PlaceId == 5100950559 then -- hoodlegends
+    Toggles.AutoPre:SetValue(false)
+    Options.PredIn:SetValue("0")
+    Toggles.SilentPred:SetValue(false)
+    Options.SilentAuto:SetValue("0")
+end
