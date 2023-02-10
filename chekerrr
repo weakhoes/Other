@@ -14,6 +14,7 @@ local Whitelisted = {
       "sheluvtai059", -- Whitelisted HeStoleMyFood
       "TAIONO59t", -- Whitelisted TAIONO59t
       "whyimbamedrobloxwaa", -- Whitelisted fakejordanzz
+      "Droprackssss" -- Whitelisted off_me
 }
 
 function Checking()
