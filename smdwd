@@ -229,34 +229,6 @@ CombatLB:AddDropdown('TraceDire', {
     Tooltip = 'Tracing Direction,'
 })
 
-Toggles.TracerEnb:OnChanged(function()
-    _G.Streamable.Tracing.Enabled = Toggles.TracerEnb.Value
-end)
-
-Options.SmoothTrac:OnChanged(function()
-    _G.Streamable.Tracing.Smoothness = Options.SmoothTrac.Value
-end)
-
-Options.PredIn:OnChanged(function()
-    _G.Streamable.Tracing.Prediction = Options.PredIn.Value
-end)
-
-Toggles.AutoPre:OnChanged(function()
-    _G.Streamable.Tracing.AutoPred = Toggles.AutoPre.Value
-end)
-
-Options.MethodSelec:OnChanged(function()
-    _G.Streamable.Tracing.Method = Options.MethodSelec.Value
-end)
-
-Options.TraceStyl:OnChanged(function()
-    _G.Streamable.Tracing.Style = Options.TraceStyl.Value
-end)
-
-Options.TraceDire:OnChanged(function()
-    _G.Streamable.Tracing.Direction = Options.TraceDire.Value
-end)
-
 -- Tracer-Lock Group End --
 
 -- Silent-Lock Group Start --
@@ -322,25 +294,6 @@ CombatRB:AddInput('ZValue', {
 
     Placeholder = '23',
 })
-
-Toggles.RandomizeTog:OnChanged(function()
-    _G.Streamable.Randomization.Toggle = Toggles.RandomizeTog.Value
-end)
-
-local Number = Options.XValue.Value
-Options.XValue:OnChanged(function()
-    _G.Streamable.Randomization.XVal = Options.XValue.Value
-end)
-
-local Number = Options.YValue.Value
-Options.YValue:OnChanged(function()
-    _G.Streamable.Randomization.YVal = Options.YValue.Value
-end)
-
-local Number = Options.ZValue.Value
-Options.ZValue:OnChanged(function()
-    _G.Streamable.Randomization.ZVal = Options.ZValue.Value
-end)
 
 CombatRB:AddLabel('Misc Options')
 
@@ -408,57 +361,6 @@ CombatRB:AddLabel('FOVColor'):AddColorPicker('GenFOV', {
     Title = 'Changes FOV Color',
 })
 
-Toggles.SilentEnb:OnChanged(function()
-    _G.Streamable.SilentAim.Toggle = Toggles.SilentEnb.Value
-end)
-
-Options.SilentPred:OnChanged(function()
-    _G.Streamable.SilentAim.Prediction = Options.SilentPred.Value
-end)
-
-Toggles.SilentAuto:OnChanged(function()
-    _G.Streamable.SilentAim.AutoPred = Toggles.SilentAuto.Value
-end)
-
-Toggles.AllowNotifs:OnChanged(function()
-    _G.Streamable.Notifs = Toggles.AllowNotifs.Value
-end)
-
-Toggles.ChatEnb:OnChanged(function()
-    _G.Streamable.Chat = Toggles.ChatEnb.Value
-end)
-
-Toggles.ViewEnb:OnChanged(function()
-    _G.Streamable.View = Toggles.ViewEnb.Value
-end)
-
-Toggles.GenFOVEnb:OnChanged(function()
-    _G.Streamable.Selection.FOV.Toggle = Toggles.GenFOVEnb.Value
-end)
-
-Toggles.GenFOVFill:OnChanged(function()
-    _G.Streamable.Selection.FOV.Filled = Toggles.GenFOVFill.Value
-end)
-
-Options.GenFOV:OnChanged(function()
-    _G.Streamable.Selection.FOV.Color = Options.GenFOV.Value
-end)
-
-local Number = Options.GenFOVSize.Value
-Options.GenFOVSize:OnChanged(function()
-    _G.Streamable.Selection.FOV.Size = Options.GenFOVSize.Value
-end)
-
-local Number = Options.GenFOVThick.Value
-Options.GenFOVThick:OnChanged(function()
-    _G.Streamable.Selection.FOV.Thickness = Options.GenFOVThick.Value
-end)
-
-local Number = Options.GenFOVTrans.Value
-Options.GenFOVTrans:OnChanged(function()
-    _G.Streamable.Selection.FOV.Transparency = Options.GenFOVTrans.Value
-end)
-
 -- Silent-Lock Group End --
 
 -- Resolvers Group Start --
@@ -501,30 +403,6 @@ ResolveLB:AddToggle('AntiReverEnb', {
     Default = false,
     Tooltip = 'Resolves Anti-Reverse',
 })
-
-Toggles.Resolver1Enb:OnChanged(function()
-    _G.Streamable.Resolvers.V1 = Toggles.Resolver1Enb.Value
-end)
-
-Toggles.Resolver2Enb:OnChanged(function()
-    _G.Streamable.Resolvers.V2 = Toggles.Resolver2Enb.Value
-end)
-
-Options.HitP2:OnChanged(function()
-    _G.Streamable.Resolvers.Aimpart = Options.HitP2.Value
-end)
-
-Toggles.AntiSkyEnb:OnChanged(function()
-    _G.Streamable.Resolvers.AntiSky = Toggles.AntiSkyEnb.Value
-end)
-
-Toggles.AntiUndEnb:OnChanged(function()
-    _G.Streamable.Resolvers.AntiUnderGround = Toggles.AntiUndEnb.Value
-end)
-
-Toggles.AntiReverEnb:OnChanged(function()
-    _G.Streamable.Resolvers.Reverse = Toggles.AntiReverEnb.Value
-end)
 
 -- Visuals Tab Start --
 
@@ -632,45 +510,6 @@ local Rejoin = VisualsRB:AddButton("Rejoin Server", function()
     game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
 end)
 
-Toggles.AimTog:OnChanged(function()
-    _G.Streamable.AntiAimViewer.Toggle = Toggles.AimTog.Value
-end)
-
-local Number = Options.BackSlide.Value
-Options.MaterialLife:OnChanged(function()
-    _G.Streamable.AntiAimViewer.BackwardsOffset = Options.BackSlide.Value
-end)
-
-local Number = Options.MoveSlide.Value
-Options.MaterialLife:OnChanged(function()
-    _G.Streamable.AntiAimViewer.MovementOffset = Options.MoveSlide.Value
-end)
-
-Toggles.VisualTog:OnChanged(function()
-    _G.Streamable.Onshot.Visuals.Toggle = Toggles.VisualTog.Value
-end)
-
-Options.MaterialSelc:OnChanged(function()
-    _G.Streamable.Onshot.Visuals.Material = Options.MaterialSelc.Value
-end)
-
-local Number = Options.MaterialLife.Value
-Options.MaterialLife:OnChanged(function()
-    _G.Streamable.Onshot.Visuals.Life = Options.MaterialLife.Value
-end)
-
-Options.MaterialCol:OnChanged(function()
-    _G.Streamable.Onshot.Visuals.Material = Options.MaterialCol.Value
-end)
-
-Toggles.VisualSound:OnChanged(function()
-    _G.Streamable.Onshot.Sound.Toggle = Toggles.VisualSound.Value
-end)
-
-Options.SoundPlay:OnChanged(function()
-    _G.Streamable.Onshot.Sound.ID = Options.SoundPlay.Value
-end)
-
 -- Visuals RB Misc End --
 
 -- Visuals LB Other Start --
@@ -698,22 +537,6 @@ VisualsLB:AddToggle('OOFOVCheck', {
     Default = false,
     Tooltip = 'Checks To See If Target Is Out Of FOV',
 })
-
-Toggles.VisualCheck:OnChanged(function()
-    _G.Streamable.Selection.VisibilityCheck = Toggles.VisualCheck.Value
-end)
-
-Toggles.DownCheck:OnChanged(function()
-    _G.Streamable.Selection.DownCheck = Toggles.DownCheck.Value
-end)
-
-Toggles.DownCheck2:OnChanged(function()
-    _G.Streamable.Selection.Unlocks.Down = Toggles.DownCheck2.Value
-end)
-
-Toggles.OOFOVCheck:OnChanged(function()
-    _G.Streamable.Selection.Unlocks.OOFOV = Toggles.OOFOVCheck.Value
-end)
 
 VisualsLB:AddDivider()
 
@@ -758,34 +581,6 @@ VisualsLB:AddToggle('TargetTog', {
     Tooltip = 'Enables Target Info',
 })
 
-Toggles.DotTog:OnChanged(function()
-    _G.Streamable.Visuals.Dot.Toggle = Toggles.DotTog.Value
-end)
-
-Options.DotColor:OnChanged(function()
-    _G.Streamable.Visuals.Dot.Color = Options.DotColor.Value
-end)
-
-Toggles.TracerTog:OnChanged(function()
-    _G.Streamable.Visuals.Tracer.Toggle = Toggles.TracerTog.Value
-end)
-
-Options.TraceColor:OnChanged(function()
-    _G.Streamable.Visuals.Tracer.Color = Options.TraceColor.Value
-end)
-
-Toggles.HighTog:OnChanged(function()
-    _G.Streamable.Visuals.Highlight.Toggle = Toggles.HighTog.Value
-end)
-
-Options.HighColor:OnChanged(function()
-    _G.Streamable.Visuals.Highlight.Color = Options.HighColor.Value
-end)
-
-Toggles.TargetTog:OnChanged(function()
-    _G.Streamable.Visuals.TargetInfo = Toggles.TargetTog.Value
-end)
-
 VisualsLB:AddDivider()
 
 VisualsLB:AddLabel('Other Visuals Options')
@@ -822,22 +617,6 @@ VisualsLB:AddToggle('RainBowTog', {
     Tooltip = 'Turns The Beam Rainbow!',
 })
 
-Toggles.AllowAimNotifs:OnChanged(function()
-    _G.AimViewer.NotificationToggle = Toggles.AllowAimNotifs.Value
-end)
-
-Options.HitAim:OnChanged(function()
-    _G.AimViewer.FromEnemyPart = Options.HitAim.Value
-end)
-
-Options.BeamCol:OnChanged(function()
-    _G.AimViewer.VisualColor = Options.BeamCol.Value
-end)
-
-Toggles.RainBowTog:OnChanged(function()
-    _G.AimViewer.VisualRainbow = Toggles.RainBowTog.Value
-end)
-
 
 -- Visuals LB Other End --
 
@@ -868,6 +647,243 @@ MiscTabRB:AddLabel("           Staff Check\n          Supports Only\n           
 
 
 -- Misc Tab End --
+
+-- Tracer Toggles Start --
+
+Toggles.TracerEnb:OnChanged(function()
+    _G.Streamable.Tracing.Enabled = Toggles.TracerEnb.Value
+end)
+
+Options.SmoothTrac:OnChanged(function()
+    _G.Streamable.Tracing.Smoothness = Options.SmoothTrac.Value
+end)
+
+Options.PredIn:OnChanged(function()
+    _G.Streamable.Tracing.Prediction = Options.PredIn.Value
+end)
+
+Toggles.AutoPre:OnChanged(function()
+    _G.Streamable.Tracing.AutoPred = Toggles.AutoPre.Value
+end)
+
+Options.MethodSelec:OnChanged(function()
+    _G.Streamable.Tracing.Method = Options.MethodSelec.Value
+end)
+
+Options.TraceStyl:OnChanged(function()
+    _G.Streamable.Tracing.Style = Options.TraceStyl.Value
+end)
+
+Options.TraceDire:OnChanged(function()
+    _G.Streamable.Tracing.Direction = Options.TraceDire.Value
+end)
+
+-- Tracer Toggles End --
+
+-- Silent Toggles Start --
+
+Toggles.SilentEnb:OnChanged(function()
+    _G.Streamable.SilentAim.Toggle = Toggles.SilentEnb.Value
+end)
+
+Options.SilentPred:OnChanged(function()
+    _G.Streamable.SilentAim.Prediction = Options.SilentPred.Value
+end)
+
+Toggles.SilentAuto:OnChanged(function()
+    _G.Streamable.SilentAim.AutoPred = Toggles.SilentAuto.Value
+end)
+
+Toggles.AllowNotifs:OnChanged(function()
+    _G.Streamable.Notifs = Toggles.AllowNotifs.Value
+end)
+
+Toggles.RandomizeTog:OnChanged(function()
+    _G.Streamable.Randomization.Toggle = Toggles.RandomizeTog.Value
+end)
+
+local Number = Options.XValue.Value
+Options.XValue:OnChanged(function()
+    _G.Streamable.Randomization.XVal = Options.XValue.Value
+end)
+
+local Number = Options.YValue.Value
+Options.YValue:OnChanged(function()
+    _G.Streamable.Randomization.YVal = Options.YValue.Value
+end)
+
+local Number = Options.ZValue.Value
+Options.ZValue:OnChanged(function()
+    _G.Streamable.Randomization.ZVal = Options.ZValue.Value
+end)
+
+Toggles.ChatEnb:OnChanged(function()
+    _G.Streamable.Chat = Toggles.ChatEnb.Value
+end)
+
+Toggles.ViewEnb:OnChanged(function()
+    _G.Streamable.View = Toggles.ViewEnb.Value
+end)
+
+Toggles.GenFOVEnb:OnChanged(function()
+    _G.Streamable.Selection.FOV.Toggle = Toggles.GenFOVEnb.Value
+end)
+
+Toggles.GenFOVFill:OnChanged(function()
+    _G.Streamable.Selection.FOV.Filled = Toggles.GenFOVFill.Value
+end)
+
+Options.GenFOV:OnChanged(function()
+    _G.Streamable.Selection.FOV.Color = Options.GenFOV.Value
+end)
+
+local Number = Options.GenFOVSize.Value
+Options.GenFOVSize:OnChanged(function()
+    _G.Streamable.Selection.FOV.Size = Options.GenFOVSize.Value
+end)
+
+local Number = Options.GenFOVThick.Value
+Options.GenFOVThick:OnChanged(function()
+    _G.Streamable.Selection.FOV.Thickness = Options.GenFOVThick.Value
+end)
+
+local Number = Options.GenFOVTrans.Value
+Options.GenFOVTrans:OnChanged(function()
+    _G.Streamable.Selection.FOV.Transparency = Options.GenFOVTrans.Value
+end)
+
+-- Silent Toggles End --
+
+-- Resolver Toggles Start --
+
+Toggles.Resolver1Enb:OnChanged(function()
+    _G.Streamable.Resolvers.V1 = Toggles.Resolver1Enb.Value
+end)
+
+Toggles.Resolver2Enb:OnChanged(function()
+    _G.Streamable.Resolvers.V2 = Toggles.Resolver2Enb.Value
+end)
+
+Options.HitP2:OnChanged(function()
+    _G.Streamable.Resolvers.Aimpart = Options.HitP2.Value
+end)
+
+Toggles.AntiSkyEnb:OnChanged(function()
+    _G.Streamable.Resolvers.AntiSky = Toggles.AntiSkyEnb.Value
+end)
+
+Toggles.AntiUndEnb:OnChanged(function()
+    _G.Streamable.Resolvers.AntiUnderGround = Toggles.AntiUndEnb.Value
+end)
+
+Toggles.AntiReverEnb:OnChanged(function()
+    _G.Streamable.Resolvers.Reverse = Toggles.AntiReverEnb.Value
+end)
+
+-- Resolver Toggles End --
+
+-- Visual Toggles Start --
+
+Toggles.AimTog:OnChanged(function()
+    _G.Streamable.AntiAimViewer.Toggle = Toggles.AimTog.Value
+end)
+
+local Number = Options.BackSlide.Value
+Options.MaterialLife:OnChanged(function()
+    _G.Streamable.AntiAimViewer.BackwardsOffset = Options.BackSlide.Value
+end)
+
+local Number = Options.MoveSlide.Value
+Options.MaterialLife:OnChanged(function()
+    _G.Streamable.AntiAimViewer.MovementOffset = Options.MoveSlide.Value
+end)
+
+Toggles.VisualTog:OnChanged(function()
+    _G.Streamable.Onshot.Visuals.Toggle = Toggles.VisualTog.Value
+end)
+
+Options.MaterialSelc:OnChanged(function()
+    _G.Streamable.Onshot.Visuals.Material = Options.MaterialSelc.Value
+end)
+
+local Number = Options.MaterialLife.Value
+Options.MaterialLife:OnChanged(function()
+    _G.Streamable.Onshot.Visuals.Life = Options.MaterialLife.Value
+end)
+
+Options.MaterialCol:OnChanged(function()
+    _G.Streamable.Onshot.Visuals.Material = Options.MaterialCol.Value
+end)
+
+Toggles.VisualSound:OnChanged(function()
+    _G.Streamable.Onshot.Sound.Toggle = Toggles.VisualSound.Value
+end)
+
+Options.SoundPlay:OnChanged(function()
+    _G.Streamable.Onshot.Sound.ID = Options.SoundPlay.Value
+end)
+
+Toggles.VisualCheck:OnChanged(function()
+    _G.Streamable.Selection.VisibilityCheck = Toggles.VisualCheck.Value
+end)
+
+Toggles.DownCheck:OnChanged(function()
+    _G.Streamable.Selection.DownCheck = Toggles.DownCheck.Value
+end)
+
+Toggles.DownCheck2:OnChanged(function()
+    _G.Streamable.Selection.Unlocks.Down = Toggles.DownCheck2.Value
+end)
+
+Toggles.OOFOVCheck:OnChanged(function()
+    _G.Streamable.Selection.Unlocks.OOFOV = Toggles.OOFOVCheck.Value
+end)
+
+Toggles.DotTog:OnChanged(function()
+    _G.Streamable.Visuals.Dot.Toggle = Toggles.DotTog.Value
+end)
+
+Options.DotColor:OnChanged(function()
+    _G.Streamable.Visuals.Dot.Color = Options.DotColor.Value
+end)
+
+Toggles.TracerTog:OnChanged(function()
+    _G.Streamable.Visuals.Tracer.Toggle = Toggles.TracerTog.Value
+end)
+
+Options.TraceColor:OnChanged(function()
+    _G.Streamable.Visuals.Tracer.Color = Options.TraceColor.Value
+end)
+
+Toggles.HighTog:OnChanged(function()
+    _G.Streamable.Visuals.Highlight.Toggle = Toggles.HighTog.Value
+end)
+
+Options.HighColor:OnChanged(function()
+    _G.Streamable.Visuals.Highlight.Color = Options.HighColor.Value
+end)
+
+Toggles.TargetTog:OnChanged(function()
+    _G.Streamable.Visuals.TargetInfo = Toggles.TargetTog.Value
+end)
+
+Toggles.AllowAimNotifs:OnChanged(function()
+    _G.AimViewer.NotificationToggle = Toggles.AllowAimNotifs.Value
+end)
+
+Options.HitAim:OnChanged(function()
+    _G.AimViewer.FromEnemyPart = Options.HitAim.Value
+end)
+
+Options.BeamCol:OnChanged(function()
+    _G.AimViewer.VisualColor = Options.BeamCol.Value
+end)
+
+Toggles.RainBowTog:OnChanged(function()
+    _G.AimViewer.VisualRainbow = Toggles.RainBowTog.Value
+end)
+
+-- Visual Misc Toggles End --
 
 Library:SetWatermarkVisibility(true)
 Library:SetWatermark("Ameres Streamable GUI V1 | User | ".. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
