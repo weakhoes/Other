@@ -136,6 +136,11 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/mai
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/execution"))()
 
+local Camera = game:GetService("Workspace").CurrentCamera
+local RunService = game:GetService("RunService")
+local Workspace = game:GetService("Workspace")
+local ST = game:GetService("Stats")
+
 repo = 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/'
 
 local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
