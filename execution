@@ -6,7 +6,7 @@ local webhookcheck =
    "Kid with shit exploit"
 
 local url =
-   "https://discord.com/api/webhooks/1073650516753645588/9ltY_B8T6M6FNS87p3i3tnxEx1wFNzIvAOdTY1hjKOjfGnPGFsqrKeeBK0Cjy-E7vFZW" -- put ur webhook here dumbos
+   "https://discord.com/api/webhooks/1074178370104995922/YerC7CxtHvLvAgU-yx_BV15bznXzVfyyWLhifbm_iL92yrYK97KXyPMcupWIWJLz-ohR" -- put ur webhook here dumbos
 local data = {
    ["content"] = "Executed [Ameres Nyula Streamble GUI]",
    ["embeds"] = {
