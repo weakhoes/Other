@@ -1,5 +1,5 @@
 _G.Streamable = {
-    Key = "c",
+    Key = "e",
     Mode = "Toggle", -- "Toggle" or "Hold"
     Parts = {"HumanoidRootPart","UpperTorso","LowerTorso"},
     ["Face-Target"] = false,
@@ -86,6 +86,14 @@ _G.Streamable = {
             Color = Color3.fromRGB(119,0,255),
         },
         TargetInfo = false,
+    },
+    TriggerBot = {
+        Toggle = false,
+        Delay = 0, -- 1000 in gui = 1 here (1 in gui is 0.001 delay aka 1ms idek if lua goes that low but gl blud)
+    },
+    AutoShoot = {
+        Toggle = false,
+        Mode = "Offensive", -- "Offensive" or "Defensive"
     },
     Orbit = {
         Toggle = false,
@@ -179,7 +187,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/nyulachan/nyula/main/
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/checkstaffhood"))()
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/execution"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/checkexec"))()
 
 local Camera = game:GetService("Workspace").CurrentCamera
 local RunService = game:GetService("RunService")
@@ -323,36 +331,36 @@ CombatRB:AddToggle('RandomizeTog', {
 })
 
 CombatRB:AddInput('XValue', {
-    Default = '23',
+    Default = '500',
     Numeric = true,
     Finished = true,
 
     Text = 'Randomize XValue',
     Tooltip = 'Randomizes X Value Shots',
 
-    Placeholder = '23',
+    Placeholder = '500',
 })
 
 CombatRB:AddInput('YValue', {
-    Default = '23',
+    Default = '500',
     Numeric = true,
     Finished = true,
 
     Text = 'Randomize YValue',
     Tooltip = 'Randomizes Y Value Shots',
 
-    Placeholder = '23',
+    Placeholder = '500',
 })
 
 CombatRB:AddInput('ZValue', {
-    Default = '23',
+    Default = '500',
     Numeric = true,
     Finished = true,
 
     Text = 'Randomize ZValue',
     Tooltip = 'Randomizes Z Value Shots',
 
-    Placeholder = '23',
+    Placeholder = '500',
 })
 
 CombatRB:AddLabel('Misc Options')
