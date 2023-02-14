@@ -48,7 +48,7 @@ function WhitelistCheck()
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
             )
             wait(5)
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/smdwd", true))();
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/smdwd"))()
     else if NonWhitelistbool == false then
             wait(3)
             Notification:Notify(
