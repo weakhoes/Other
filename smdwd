@@ -183,12 +183,6 @@ _G.AimViewer = {
     NotificationToggle = true,
 }
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/nyulachan/nyula/main/Standalones/Streamable", true))()
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/checkstaffhood"))()
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/checkexec"))()
-
 local Camera = game:GetService("Workspace").CurrentCamera
 local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
@@ -199,6 +193,24 @@ repo = 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/'
 local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
 local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
 local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
+
+Library:Notify("Loading Nyula...", 5)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/nyulachan/nyula/main/Standalones/Streamable", true))()
+wait(1)
+Library:Notify("Loaded", 5)
+wait(2)
+Library:Notify("Checking Executor", 5)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/checkexec"))()
+wait(1)
+Library:Notify("Check Finished!", 5)
+wait(2)
+Library:Notify("Loading All Checks", 5)
+wait(1)
+Library:Notify("All Checks Finished!", 5)
+
+Library:Notify("Loading GUI", 5)
+
+wait(5)
 
 local Window = Library:CreateWindow({
     Title = 'Ameres Nyula Streamable GUI',
@@ -223,6 +235,14 @@ local VisualsLB = Tabs.Visuals:AddLeftGroupbox('Visuals Other')
 local MiscTabLB = Tabs.Misc:AddLeftGroupbox('Anti-Lock')
 local MiscTabRB = Tabs.Misc:AddRightGroupbox('Misc Other')
 
+Library:Notify("GUI Loaded!", 10)
+Library:Notify("Build Date | 2/14/2023 | 10:19am", 10)
+Library:Notify("AutoPrediction Fixed Not Working!", 10)
+Library:Notify("Deleted Misc Options For Optimization", 10)
+Library:Notify("Added Fatalitys Anti GUI.", 10)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/checkstaffhood"))()
+
 -- Tracer-Lock Group Start --
 
 CombatLB:AddToggle('TracerEnb', {
@@ -243,14 +263,14 @@ CombatLB:AddInput('SmoothTrac', {
 })
 
 CombatLB:AddInput('PredIn', {
-    Default = '0.12643',
+    Default = '0.131',
     Numeric = true,
     Finished = true,
 
     Text = 'Prediction',
     Tooltip = 'Lock Prediction',
 
-    Placeholder = '0.12643',
+    Placeholder = '0.131',
 })
 
 CombatLB:AddToggle('AutoPre', {
@@ -308,14 +328,14 @@ CombatRB:AddToggle('SilentRage', {
 })
 
 CombatRB:AddInput('SilentPred', {
-    Default = '0.12643',
+    Default = '0.131',
     Numeric = true,
     Finished = true,
 
     Text = 'Prediction',
     Tooltip = 'Lock Prediction',
 
-    Placeholder = '0.12643',
+    Placeholder = '0.131',
 })
 
 CombatRB:AddToggle('SilentAuto', {
@@ -371,30 +391,12 @@ CombatRB:AddToggle('AllowNotifs', {
     Tooltip = 'Enables Notifcations',
 })
 
-CombatRB:AddToggle('ChatEnb', {
-    Text = 'Chat-Message',
-    Default = false,
-    Tooltip = 'Sends A Message In Chat Of Who Your Locked Onto!',
-})
-
-CombatRB:AddToggle('ViewEnb', {
-    Text = 'View-Toggle',
-    Default = false,
-    Tooltip = 'Spectates Player Who Your Locked Onto!',
-})
-
 CombatRB:AddLabel('FOV Options')
 
 CombatRB:AddToggle('GenFOVEnb', {
     Text = 'FOV',
     Default = false,
     Tooltip = 'Enables FOV',
-})
-
-CombatRB:AddToggle('GenFOVFill', {
-    Text = 'FOV Filled',
-    Default = false,
-    Tooltip = 'Fills FOV Circle (Ugly)',
 })
 
 CombatRB:AddSlider('GenFOVSize', {
@@ -692,14 +694,14 @@ VisualsLB:AddToggle('RainBowTog', {
 
 -- Misc Tab Start --
 
-MiscTabLB:AddLabel("Key To Toggle Anti Is T For Both", true)
+MiscTabLB:AddLabel("Warning : Both Drop Mad FPS", true)
 
-local LaunchAim = MiscTabLB:AddButton("Launch Legit-AntiLock", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/legitanti", true))()
+local Fatality = MiscTabLB:AddButton("Fatality Anti GUI", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/tailgater/Fatality/main/Main", true))()
 end)
 
-local LaunchAim = MiscTabLB:AddButton("Launch Blatant-AntiLock", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/blatantanti", true))()
+local FatalitySyn = MiscTabLB:AddButton("Fatality Synapse Anti GUI", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/tailgater/Fatality/main/Synapse", true))()
 end)
 
 MiscTabRB:AddDropdown('HitP', {
@@ -797,21 +799,8 @@ Options.ZValue:OnChanged(function()
     _G.SilentAim.ZRandomization = Options.ZValue.Value
 end)
 
-Toggles.ChatEnb:OnChanged(function()
-    _G.Streamable.Chat = Toggles.ChatEnb.Value
-end)
-
-Toggles.ViewEnb:OnChanged(function()
-    _G.Streamable.View = Toggles.ViewEnb.Value
-end)
-
 Toggles.GenFOVEnb:OnChanged(function()
     _G.Streamable.Selection.FOV.Toggle = Toggles.GenFOVEnb.Value
-end)
-
-Toggles.GenFOVFill:OnChanged(function()
-    _G.Streamable.Selection.FOV.Filled = Toggles.GenFOVFill.Value
-    _G.SilentAim.FOVFilled = Toggles.GenFOVFill.Value
 end)
 
 Options.GenFOV:OnChanged(function()
@@ -988,6 +977,10 @@ Library:SetWatermarkVisibility(true)
 Library:SetWatermark("Ameres Streamable GUI V1 | User | ".. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
 Library.KeybindFrame.Visible = false;
 Library:OnUnload(function()
+    Library:Notify("Unloading Please Wait...", 5)
+    wait(5)
+    Library:Notify("Unloaded!", 2)
+    wait(2)
     print('Unloaded!')
     Library.Unloaded = true
 end)
@@ -1007,7 +1000,9 @@ SaveManager:SetFolder('MyScriptHub/specific-game')
 SaveManager:BuildConfigSection(Tabs['UI Settings']) 
 ThemeManager:ApplyToTab(Tabs['UI Settings'])
 
-if game.PlaceId == 5100950559 then -- hoodlegends
+if game.PlaceId == 9469232811 then -- hoodlegends
+    Library:Notify("Game Detected | Hood Legends", 10)
+    Library:Notify("Changing Prediction Settings!", 10)
     Toggles.AutoPre:SetValue(false)
     Options.PredIn:SetValue("0")
     Toggles.SilentAuto:SetValue(false)
