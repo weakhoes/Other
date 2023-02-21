@@ -109,8 +109,8 @@ local mainLoop =
                         v.name.Position = Vector2new(BoxSize.X / 2 + BoxPos.X, BoxPos.Y - 16)
                         v.name.Outline = esp.settings.name.outline
                         v.name.Text = tostring(i)
-                        v.name.Color = (255, 255, 255)
-                        v.name.OutlineColor = (0, 0, 0)
+                        v.name.Color = Color3.fromRGB(255, 255, 255)
+                        v.name.OutlineColor = Color3.fromRGB(0, 0, 0)
                         v.name.Font = esp.font
                         v.name.Size = esp.fontsize
 
@@ -127,8 +127,8 @@ local mainLoop =
                         v.distance.Outline = esp.settings.distance.outline
                         v.distance.Text =
                             "[" .. mathfloor((hrp.Position - plr.Character.HumanoidRootPart.Position).Magnitude) .. "m]"
-                        v.distance.Color = (255, 255, 255)
-                        v.distance.OutlineColor = (0, 0, 0)
+                        v.distance.Color = Color3.fromRGB(255, 255, 255)
+                        v.distance.OutlineColor = Color3.fromRGB(0, 0, 0)
                         BottomOffset = BottomOffset + 15
 
                         v.distance.Font = esp.font
@@ -143,11 +143,11 @@ local mainLoop =
                         v.boxOutline.Size = BoxSize
                         v.boxOutline.Position = BoxPos
                         v.boxOutline.Visible = esp.settings.box.outline
-                        v.boxOutline.Color = (0, 0, 0)
+                        v.boxOutline.Color = Color3.fromRGB(0, 0, 0)
 
                         v.box.Size = BoxSize
                         v.box.Position = BoxPos
-                        v.box.Color = (255, 255, 255)
+                        v.box.Color = Color3.fromRGB(255, 255, 255)
                         v.box.Visible = true
                     else
                         v.boxOutline.Visible = false
@@ -161,12 +161,12 @@ local mainLoop =
                             v.healthBar.From.X,
                             v.healthBar.From.Y - (hum.Health / hum.MaxHealth) * BoxSize.Y
                         )
-                        v.healthBar.Color = (0, 255, 0)
+                        v.healthBar.Color = Color3.fromRGB(0, 255, 0)
                         v.healthBar.Visible = true
 
                         v.healthBarOutline.From = Vector2new(v.healthBar.From.X, BoxPos.Y + BoxSize.Y + 1)
                         v.healthBarOutline.To = Vector2new(v.healthBar.From.X, (v.healthBar.From.Y - 1 * BoxSize.Y) - 1)
-                        v.healthBarOutline.Color = (0, 0, 0)
+                        v.healthBarOutline.Color = Color3.fromRGB(0, 0, 0)
                         v.healthBarOutline.Visible = esp.settings.healthbar.outline
                     else
                         v.healthBarOutline.Visible = false
@@ -176,8 +176,8 @@ local mainLoop =
                     if esp.settings.healthtext.enabled then
                         v.healthText.Text = tostring(mathfloor((hum.Health / hum.MaxHealth) * 100 + 0.5))
                         v.healthText.Position = Vector2new((BoxPos.X - 20), (BoxPos.Y + BoxSize.Y - 1 * BoxSize.Y) - 1)
-                        v.healthText.Color = (255, 255, 255)
-                        v.healthText.OutlineColor = (0, 0, 0)
+                        v.healthText.Color = Color3.fromRGB(255, 255, 255)
+                        v.healthText.OutlineColor = Color3.fromRGB(0, 0, 0)
                         v.healthText.Outline = esp.settings.healthtext.outline
 
                         v.healthText.Font = esp.font
