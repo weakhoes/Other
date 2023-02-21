@@ -36,46 +36,6 @@ local mathceil = math.ceil
 
 -- esp.enabled
 
-local esp = {
-    players = {},
-    enabled = false,
-    teamcheck = false,
-    fontsize = 16,
-    font = 0,
-    settings = {
-        name = {
-            enabled = false,
-            outline = false,
-            color = Color3fromRGB(0, 0, 0),
-            outlineColor = Color3fromRGB(0, 0, 0)
-        },
-        box = {
-            enabled = false,
-            outline = false,
-            color = Color3fromRGB(0, 0, 0),
-            outlineColor = Color3fromRGB(0, 0, 0)
-        },
-        healthbar = {
-            enabled = false,
-            outline = false,
-            color = Color3fromRGB(0, 0, 0),
-            outlineColor = Color3fromRGB(0, 0, 0)
-        },
-        healthtext = {
-            enabled = false,
-            outline = false,
-            color = Color3fromRGB(0, 0, 0),
-            outlineColor = Color3fromRGB(0, 0, 0)
-        },
-        distance = {
-            enabled = false,
-            outline = false,
-            color = Color3fromRGB(0, 0, 0),
-            outlineColor = Color3fromRGB(0, 0, 0)
-        }
-    }
-}
-
 esp.NewDrawing = function(type, properties)
     local newDrawing = Drawingnew(type)
 
