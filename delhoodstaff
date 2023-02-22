@@ -9,7 +9,7 @@ local Modsbool = nil;
 local Devsbool = nil;
 
 local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://6281084801" --You can change the audio to whatever you want from here https://create.roblox.com/marketplace/soundeffects?source=library
+sound.SoundId = "rbxassetid://6281084801"
 sound.Parent = workspace
 
 -- 3 Stars
