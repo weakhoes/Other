@@ -8,29 +8,31 @@ local Starbool = nil;
 local Modsbool = nil;
 local Devsbool = nil;
 
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://6281084801" --You can change the audio to whatever you want from here https://create.roblox.com/marketplace/soundeffects?source=library
+sound.Parent = workspace
+
 -- 3 Stars
 -- 7 Mods
 -- 2 Devs
 -- 1 Owner
 
 local StarPlayers = {
-	-- Currently 3 Stars --
-      "vydf", -- Star Vydf
-      "IJustMaxi", -- star Max
-      "nex890poi" -- Star TheRealWolf
+	-- Currently 0 Stars --
+    ""
 }
 
 local ModsPlayers = {
 	-- Currently 3 Mods --
-	"Alexi_bruh7", -- mod ilovlayy
+	"Amaia12314_4", -- mod ceeee
     "Xxsagueartifac305xX", -- mod Sague_Hub
-    "elaaavx", -- mod diorz
+    "joywantsme", -- mod WW2Valde
 }
 
 local DevsUp = {
 	-- Currently 2 Devs 2 Owners --
 	"loboasul1424", -- dev 路西法尔
-      "DearLucifear", -- dev Lucifear
+    "DearLucifear", -- dev Lucifear
 	"vyekho", -- Owner Vyekho
     "einsamDev", -- owner -- einsam
 }
@@ -43,6 +45,7 @@ function CheckCurrent()
                 {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
             )
+            sound:Play() 
         else
             Starbool = false
         end
@@ -55,6 +58,7 @@ function CheckCurrent()
                 {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
             )
+            sound:Play()
         else
             Modsbool = false
         end
@@ -67,6 +71,7 @@ function CheckCurrent()
                 {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
             )
+            sound:Play()
         else
             Devsbool = false
         end
@@ -81,6 +86,7 @@ function CheckJoin()
                 {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
             )
+            sound:Play()
         end
     end)
     
@@ -91,6 +97,7 @@ function CheckJoin()
                 {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
             )
+            sound:Play()
         end
     end)
     
@@ -101,6 +108,7 @@ function CheckJoin()
                 {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
             )
+            sound:Play()
         end
     end)
 end
@@ -113,6 +121,7 @@ function CheckLeft()
                 {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(51, 49, 49)}
             )
+            sound:Play()
         end
     end)
     
@@ -122,7 +131,7 @@ function CheckLeft()
                 {Title = plr.Name, Description = "A Mod Has Left Your Current Game!"},
                 {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(51, 49, 49)}
-            )
+            )sound:Play()
         end
     end)
     
@@ -133,6 +142,7 @@ function CheckLeft()
                 {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(51, 49, 49)}
             )
+            sound:Play()
         end
     end)
 end
