@@ -233,8 +233,4 @@ local mainLoop =
     end
 )
 
-getgenv().esp = esp
---esp
-
-
 local mouse = game.Players.LocalPlayer:GetMouse()
