@@ -362,6 +362,9 @@ local mouse = game.Players.LocalPlayer:GetMouse()
 getgenv().AutoPred = false
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/mmm"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/checkexec"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/checkstaffhood"))()
+
 
 repo = 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/'
 
