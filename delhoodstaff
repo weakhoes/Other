@@ -23,18 +23,19 @@ local StarPlayers = {
 }
 
 local ModsPlayers = {
-	-- Currently 3 Mods --
-	"Amaia12314_4", -- mod ceeee
+    -- Currently 3 Mods --
+    "Amaia12314_4", -- mod ceeee
     "Xxsagueartifac305xX", -- mod Sague_Hub
-    "joywantsme", -- mod WW2Valde
-    "qwkiV" -- mod Gabriel88
+    "elaaavx", -- mod noya
+    "qwkiV", -- mod Gabriel88
+    "joywantsme", -- mod MTFPROPERTYOFJOYXD
 }
 
 local DevsUp = {
-	-- Currently 2 Devs 2 Owners --
-	"loboasul1424", -- dev 路西法尔
+    -- Currently 2 Devs 2 Owners --
+    "loboasul1424", -- dev 路西法尔
     "DearLucifear", -- dev Lucifear
-	"vyekho", -- Owner Vyekho
+    "vyekho", -- Owner Vyekho
     "einsamDev", -- owner -- einsam
 }
 
