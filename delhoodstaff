@@ -18,8 +18,9 @@ sound.Parent = workspace
 -- 1 Owner
 
 local StarPlayers = {
-	-- Currently 0 Stars --
-    ""
+    -- Currently 2 Stars --
+    "21134886", -- star BookaWare
+    "curvzii", -- star Cruv
 }
 
 local ModsPlayers = {
