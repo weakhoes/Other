@@ -29,3 +29,4 @@ oldreq = hookfunction(request, function(data)
     end
     return oldreq(data)
 end)
+print("deletedwebhook")
