@@ -1,7 +1,6 @@
 local hrp
 local resolver = game:GetService("RunService")
 
-if getgenv().SplittaW.Both.ResolverV1 == true then
 demiseuwu.Heartbeat:Connect(function()
     pcall(function()
         for i,v in pairs(game.Players:GetChildren()) do
@@ -11,5 +10,4 @@ demiseuwu.Heartbeat:Connect(function()
             end
         end
     end)
-            end
 end)
