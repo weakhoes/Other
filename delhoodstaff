@@ -23,13 +23,17 @@ local StarPlayers = {
     "curvzii", -- star Cruv
 }
 
+
 local ModsPlayers = {
-    -- Currently 3 Mods --
+    -- Currently 8 Mods --
     "Amaia12314_4", -- mod ceeee
     "Xxsagueartifac305xX", -- mod Sague_Hub
-    "elaaavx", -- mod noya
+    "elaaavx", -- mod ziix
     "qwkiV", -- mod Gabriel88
     "joywantsme", -- mod MTFPROPERTYOFJOYXD
+    "Amaia12314_4", -- mod spanish
+    "Omnicost", -- mod Omnicost
+    "joywantsme", -- mod 7967KMVALDE
 }
 
 local DevsUp = {
