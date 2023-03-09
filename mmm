@@ -456,3 +456,4 @@ local Script = {Functions = {}}
             getgenv().SplittaW.SilentFOV.Radius = getgenv().SplittaW.SilentFOV.Radius
         end
     end
+end)
