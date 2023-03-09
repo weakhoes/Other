@@ -316,11 +316,7 @@ RS.Heartbeat:Connect(function()
                 end)
             end
             if getgenv().SplittaW.Both.UnderGroundReolver == true then            
-                pcall(function()
-                    local TargetVelv2 = Prey.Character[getgenv().SplittaW.Silent.Part]
-                    TargetVelv2.Velocity = Vector3.new(TargetVelv2.Velocity.X, 0, TargetVelv2.Velocity.Z)
-                    TargetVelv2.AssemblyLinearVelocity = Vector3.new(TargetVelv2.Velocity.X, 0, TargetVelv2.Velocity.Z)
-                end)
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/lilresolver.lua"))()
             end
 	    end
 	end
