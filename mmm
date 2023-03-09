@@ -302,11 +302,7 @@ RS.Heartbeat:Connect(function()
 	if getgenv().SplittaW.Silent.Enabled then
 	    if Prey and Prey.Character and Prey.Character:WaitForChild(getgenv().SplittaW.Silent.Part) then
             if getgenv().SplittaW.Both.DetectDesync == true and Prey.Character:WaitForChild("HumanoidRootPart").Velocity.magnitude > getgenv().SplittaW.Both.DesyncDetection then            
-                pcall(function()
-                    local TargetVel = Prey.Character[getgenv().SplittaW.Silent.Part]
-                    TargetVel.Velocity = Vector3.new(0, 0, 0)
-                    TargetVel.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
-                end)
+                getgenv().SplittaW.Silent.PredictMovement = false
             end
             if getgenv().SplittaW.Silent.AntiGroundShots == true and Prey.Character:FindFirstChild("Humanoid") == Enum.HumanoidStateType.Freefall then
                 pcall(function()
@@ -317,27 +313,17 @@ RS.Heartbeat:Connect(function()
             end
             if getgenv().SplittaW.Both.UnderGroundReolver == true then            
                 pcall(function()
-                    local TargetVelv2 = Prey.Character[getgenv().SplittaW.Silent.Part]
-                    TargetVelv2.Velocity = Vector3.new(TargetVelv2.Velocity.X, 0, TargetVelv2.Velocity.Z)
-                    TargetVelv2.AssemblyLinearVelocity = Vector3.new(TargetVelv2.Velocity.X, 0, TargetVelv2.Velocity.Z)
+                    getgenv().SplittaW.Silent.PredictMovement = false
                 end)
             end
 	    end
 	end
     if getgenv().SplittaW.Tracer.Enabled == true then
         if getgenv().SplittaW.Both.DetectDesync == true and Plr and Plr.Character and Plr.Character:WaitForChild(getgenv().SplittaW.Tracer.Part) and Plr.Character:WaitForChild("HumanoidRootPart").Velocity.magnitude > getgenv().SplittaW.Both.DesyncDetection then
-            pcall(function()
-                local TargetVelv3 = Plr.Character[getgenv().SplittaW.Tracer.Part]
-                TargetVelv3.Velocity = Vector3.new(0, 0, 0)
-                TargetVelv3.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
-            end)
+            getgenv().SplittaW.Silent.PredictMovement = false
         end
         if getgenv().SplittaW.Both.UnderGroundReolver == true and Plr and Plr.Character and Plr.Character:WaitForChild(getgenv().SplittaW.Tracer.Part)then
-            pcall(function()
-                local TargetVelv4 = Plr.Character[getgenv().SplittaW.Tracer.Part]
-                TargetVelv4.Velocity = Vector3.new(TargetVelv4.Velocity.X, 0, TargetVelv4.Velocity.Z)
-                TargetVelv4.AssemblyLinearVelocity = Vector3.new(TargetVelv4.Velocity.X, 0, TargetVelv4.Velocity.Z)
-            end)
+            getgenv().SplittaW.Silent.PredictMovement = false
         end
     end
 end)
