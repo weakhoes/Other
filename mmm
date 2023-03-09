@@ -1,5 +1,7 @@
 local Prey = nil
 local Plr  = nil
+local hrp
+local resolver = game:GetService("RunService")
 
 local Players, Client, Mouse, RS, Camera =
     game:GetService("Players"),
@@ -318,11 +320,24 @@ RS.Heartbeat:Connect(function()
             if getgenv().SplittaW.Both.UnderGroundReolver == true then            
                 pcall(function()
                     local TargetVelv2 = Prey.Character[getgenv().SplittaW.Silent.Part]
-                    hrp.Velocity = Vector3.new(hrp.Velocity.X, 0, hrp.Velocity.Z)
+                    TargetVelv2.Velocity = Vector3.new(TargetVelv2.Velocity.X, 0, TargetVelv2.Velocity.Z)
+                    TargetVelv2.AssemblyLinearVelocity = Vector3.new(TargetVelv2.Velocity.X, 0, TargetVelv2.Velocity.Z)
                 end)
             end
 	    end
 	end
+    if getgenv().SplittaW.Both.ResolverV1 == true then
+        demiseuwu.Heartbeat:Connect(function()
+            pcall(function()
+                for i,v in pairs(game.Players:GetChildren()) do
+                    if v ~= game.Players.LocalPlayer  then
+                        hrp = v.Character.HumanoidRootPart
+                        hrp.Velocity = Vector3.new(hrp.Velocity.X, 0, hrp.Velocity.Z)
+                    end
+                end
+            end)
+        end)
+    end
     if getgenv().SplittaW.Tracer.Enabled == true then
         if getgenv().SplittaW.Both.DetectDesync == true and Plr and Plr.Character and Plr.Character:WaitForChild(getgenv().SplittaW.Tracer.Part) and Plr.Character:WaitForChild("HumanoidRootPart").Velocity.magnitude > getgenv().SplittaW.Both.DesyncDetection then
             pcall(function()
