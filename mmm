@@ -1,7 +1,5 @@
 local Prey = nil
 local Plr  = nil
-local hrp
-local resolver = game:GetService("RunService")
 
 local Players, Client, Mouse, RS, Camera =
     game:GetService("Players"),
@@ -318,7 +316,11 @@ RS.Heartbeat:Connect(function()
                 end)
             end
             if getgenv().SplittaW.Both.UnderGroundReolver == true then            
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/lilresolver.lua"))()
+                pcall(function()
+                    local TargetVelv2 = Prey.Character[getgenv().SplittaW.Silent.Part]
+                    hrp.Velocity = Vector3.new(hrp.Velocity.X, 0, hrp.Velocity.Z)
+                end)
+            end
 	    end
 	end
     if getgenv().SplittaW.Tracer.Enabled == true then
