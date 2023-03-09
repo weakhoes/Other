@@ -318,16 +318,16 @@ RS.Heartbeat:Connect(function()
                 end)
             end
             if getgenv().SplittaW.Both.UnderGroundReolver == true then            
-	    	demiseuwu.Heartbeat:Connect(function()
-        			pcall(function()
-		    		  for i,v in pairs(game.Players:GetChildren()) do
-                		  if v ~= game.Players.LocalPlayer  then
-                    		  hrp = v.Character.HumanoidRootPart
-                    		  hrp.Velocity = Vector3.new(hrp.Velocity.X, 0, hrp.Velocity.Z)
-           end
-        end
-    end)
-end)
+                demiseuwu.Heartbeat:Connect(function()
+                    pcall(function()
+                        for i,v in pairs(game.Players:GetChildren()) do
+                            if v ~= game.Players.LocalPlayer  then
+                                hrp = v.Character.HumanoidRootPart
+                                hrp.Velocity = Vector3.new(hrp.Velocity.X, 0, hrp.Velocity.Z)
+                            end
+                        end
+                    end)
+                end)
 	    end
 	end
     if getgenv().SplittaW.Tracer.Enabled == true then
