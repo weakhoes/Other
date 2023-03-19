@@ -19,22 +19,23 @@ sound.Parent = workspace
 
 local StarPlayers = {
     -- Currently 5 Stars --
-    "21134886", -- star BookaWare
-    "curvzii", -- star Cruv
+    "21134886", -- star 99c83DJSJDNCJDKD
+    "curvzii", -- star Curv
     "VNMPlRES", -- star pookie
 }
 
 
 local ModsPlayers = {
     -- Currently 8 Mods --
-    "Amaia12314_4", -- mod ceeee
-    "Xxsagueartifac305xX", -- mod Sague_Hub
-    "elaaavx", -- mod ziix
-    "qwkiV", -- mod Gabriel88
-    "joywantsme", -- mod MTFPROPERTYOFJOYXD
+    "Amaia12314_4", -- mod security
+    "Sague_Hub", -- mod Sague_Hub
+    "elaaavx", -- mod sick
+    "qwkiV", -- mod LiaJr
+    "joywantsme", -- mod 7967KMVALDE
     "Amaia12314_4", -- mod spanish
     "Omnicost", -- mod Omnicost
     "joywantsme", -- mod 7967KMVALDE
+    "Alexi_bruh7", -- mod Alexxiss
 }
 
 local DevsUp = {
