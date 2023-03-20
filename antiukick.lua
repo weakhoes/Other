@@ -1,4 +1,3 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/antiukick.lua"))()
 local hook = game:GetService("Players").LocalPlayer.Kick;
                 local mt = getrawmetatable(game:GetService("Players").LocalPlayer)
                 local psuedoEnv = {
