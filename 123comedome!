@@ -1,0 +1,11 @@
+    local IsA = game.IsA;
+    local newindex = nil
+     
+    -- main hook
+    newindex = hookmetamethod(game, "__newindex", function(self, Index, Value)
+       if not checkcaller() and IsA(self, "Humanoid") and Index == "JumpPower" and _G.nocooldown == true then
+           return
+       end
+       
+       return newindex(self, Index, Value);
+    end)
