@@ -200,6 +200,6 @@ CheckLeft()
 
 if game.PlaceId == 9369376609 or 9633073067 or 9469232811 then
     if Starbool == false and Modsbool == false and Devsbool == false then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-494.440185546875, 178.88392639160156, 393.95916748046875)
+        --game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-494.440185546875, 178.88392639160156, 393.95916748046875)
     end
 end
