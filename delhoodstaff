@@ -23,28 +23,35 @@ local StarPlayers = {
     "curvzii", -- star Curv
     "VNMPlRES", -- star pookie
     "vsync_aa", -- star vsync_aa
+    "IivingForFame", -- star IndianWarriorRezzai
+    "danicrackghxd", -- star 1criminalz
+    "Gael_1211XD", -- star 6c2pro
+    "You_WheezeLOL", -- star GodsentWheeze
+    "Jbrdan", -- star ElJordis
+    "casurence", -- star wristled
+    "x23xyii" -- star iamprxmise
 }
 
 
 local ModsPlayers = {
     -- Currently 8 Mods --
-    "Amaia12314_4", -- mod security
+    "Amaia12314_4", -- mod spanish
     "Sague_Hub", -- mod Sague_Hub
     "elaaavx", -- mod sick
-    "qwkiV", -- mod LiaJr
-    "joywantsme", -- mod 7967KMVALDE
+    "qwkiV", -- mod KartellGabriel
     "Amaia12314_4", -- mod spanish
     "Omnicost", -- mod Omnicost
-    "joywantsme", -- mod 7967KMVALDE
-    "Alexi_bruh7", -- mod Alexxiss
+    "joywantsme", -- mod 206VALDE
+    "Alexi_bruh7" -- mod Alexxiss
 }
 
 local DevsUp = {
-    -- Currently 2 Devs 2 Owners --
+    -- Currently 2 Devs 3 Owners --
     "loboasul1424", -- dev 路西法尔
     "DearLucifear", -- dev Lucifear
     "vyekho", -- Owner Vyekho
     "einsamDev", -- owner -- einsam
+    "awitademelonowo" -- owner awitademelonowo
 }
 
 function CheckCurrent()
@@ -191,7 +198,7 @@ CheckJoin()
 
 CheckLeft()
 
-if game.PlaceId == 9469232811 then
+if game.PlaceId == 9369376609 or 9633073067 or 9469232811 then
     if Starbool == false and Modsbool == false and Devsbool == false then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-494.440185546875, 178.88392639160156, 393.95916748046875)
     end
