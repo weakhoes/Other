@@ -12,10 +12,10 @@ local sound = Instance.new("Sound")
 sound.SoundId = "rbxassetid://6281084801"
 sound.Parent = workspace
 
--- 3 Stars
--- 7 Mods
+-- 19 Stars
+-- 8 Mods
 -- 2 Devs
--- 1 Owner
+-- 3 Owners
 
 local StarPlayers = {
     -- Currently 19 Stars --
