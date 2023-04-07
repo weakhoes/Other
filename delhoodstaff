@@ -18,7 +18,7 @@ sound.Parent = workspace
 -- 1 Owner
 
 local StarPlayers = {
-    -- Currently 5 Stars --
+    -- Currently 19 Stars --
     "21134886", -- star 99c83DJSJDNCJDKD
     "curvzii", -- star Curv
     "VNMPlRES", -- star pookie
@@ -27,9 +27,17 @@ local StarPlayers = {
     "danicrackghxd", -- star 1criminalz
     "Gael_1211XD", -- star 6c2pro
     "You_WheezeLOL", -- star GodsentWheeze
-    "Jbrdan", -- star ElJordis
+    "Jbrdan", -- star KodasProPlayerLOL
     "casurence", -- star wristled
-    "x23xyii" -- star iamprxmise
+    "x23xyii", -- star iamprxmise
+    "BGTonio", -- star kizzyxc
+    "maskedupglouk", -- star poloW
+    "imafu12", -- star EgoKillerExo
+    "e2s_LostSoul", -- star Zur
+    "xowenny", -- checkmark wennyW 
+    "wristled", -- star wristled
+    "Dangor_Legend", -- star legend DigitalzW
+    "AlohaxConnorr" -- star legend AlohaxConnorr
 }
 
 
