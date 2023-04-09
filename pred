@@ -1,0 +1,59 @@
+getgenv().VelocityChanger = false
+getgenv().Velocity = Vector3.new(200, 0, 200)
+
+local Keybind = "v"
+
+local Players     = game:GetService("Players")
+local RunService  = game:GetService("RunService")
+
+local LocalPlayer = Players.LocalPlayer
+local Character   = LocalPlayer.Character
+local RootPart    = Character:FindFirstChild("HumanoidRootPart")
+
+local Heartbeat, RStepped, Stepped = RunService.Heartbeat, RunService.RenderStepped, RunService.Stepped
+
+LocalPlayer.CharacterAdded:Connect(function(NewCharacter)
+   Character = NewCharacter
+end)
+
+local RVelocity, YVelocity = nil, 0.1
+
+function AntiRun()
+   if VelocityChanger then
+       if (not RootPart) or (not RootPart.Parent) or (not RootPart.Parent.Parent) then
+           print("died")
+           RootPart = Character:FindFirstChild("HumanoidRootPart")
+       else
+           RVelocity = RootPart.Velocity
+   
+           RootPart.Velocity = type(Velocity) == "vector" and Velocity or Velocity(RVelocity)
+       
+           RStepped:wait()
+       
+           RootPart.Velocity = RVelocity
+       end
+   end
+   
+   Heartbeat:wait()
+end
+
+game:GetService('UserInputService').InputBegan:Connect(function(Key)
+    if Key.KeyCode == Enum.KeyCode[Keybind:upper()] then
+        if VelocityChanger then
+            VelocityChanger = false
+            game:GetService("StarterGui"):SetCore("SendNotification",{
+                Title = "Disabled Pred Breaker!", -- Required
+                Text = "Disabled.", -- Required
+            })
+        elseif not VelocityChanger then
+            VelocityChanger = true
+            game:GetService("StarterGui"):SetCore("SendNotification",{
+                Title = "Enabled Pred Breaker!", -- Required
+                Text = "Enabled.", -- Required
+            })
+            while VelocityChanger do
+                AntiRun()
+            end
+        end
+    end
+end)
