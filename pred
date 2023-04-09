@@ -57,3 +57,8 @@ game:GetService('UserInputService').InputBegan:Connect(function(Key)
         end
     end
 end)
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+   Title = "Loaded Pred Breaker!", -- Required
+   Text = "Loaded.", -- Required
+})
