@@ -12,13 +12,13 @@ local sound = Instance.new("Sound")
 sound.SoundId = "rbxassetid://6281084801"
 sound.Parent = workspace
 
--- 19 Stars
+-- 23 Stars
 -- 8 Mods
 -- 2 Devs
 -- 3 Owners
 
 local StarPlayers = {
-    -- Currently 19 Stars --
+    -- Currently 23 Stars --
     "21134886", -- star 99c83DJSJDNCJDKD
     "curvzii", -- star Curv
     "VNMPlRES", -- star pookie
@@ -37,7 +37,11 @@ local StarPlayers = {
     "xowenny", -- checkmark wennyW 
     "wristled", -- star wristled
     "Dangor_Legend", -- star legend DigitalzW
-    "AlohaxConnorr" -- star legend AlohaxConnorr
+    "TheBeautyConnor", -- star legend TheBeautyConnor
+    "5zoh", -- star player labs
+    "Youdeadudd", -- star player MWMWMWMWMWMWMWMWMWMW
+    "F6vamps", -- checkmark Only4Angy
+    "miipolla" -- star manager miipolla
 }
 
 
