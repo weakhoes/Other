@@ -75,7 +75,7 @@ function CheckCurrent()
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
             )
             sound:Play() 
-            print("Star Found", v.Name)
+            warn("Star Found", v.Name)
         else
             Starbool = false
         end
@@ -89,7 +89,7 @@ function CheckCurrent()
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
             )
             sound:Play()
-            print("Mod Found", v.Name)
+            warn("Mod Found", v.Name)
         else
             Modsbool = false
         end
@@ -103,7 +103,7 @@ function CheckCurrent()
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
             )
             sound:Play()
-            print("Dev/Owner Found", v.Name)
+            warn("Dev/Owner Found", v.Name)
         else
             Devsbool = false
         end
@@ -119,7 +119,7 @@ function CheckJoin()
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
             )
             sound:Play()
-            print("Star Joined", v.Name)
+            warn("Star Joined", v.Name)
         end
     end)
     
@@ -131,7 +131,7 @@ function CheckJoin()
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
             )
             sound:Play()
-            print("Mod Joined", v.Name)
+            warn("Mod Joined", v.Name)
         end
     end)
     
@@ -143,7 +143,7 @@ function CheckJoin()
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
             )
             sound:Play()
-            print("Dev/Owner Joined", v.Name)
+            warn("Dev/Owner Joined", v.Name)
         end
     end)
 end
@@ -157,7 +157,7 @@ function CheckLeft()
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(51, 49, 49)}
             )
             sound:Play()
-            print("Star Left", v.Name)
+            warn("Star Left", v.Name)
         end
     end)
     
@@ -169,7 +169,7 @@ function CheckLeft()
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(51, 49, 49)}
             )
             sound:Play()
-            print("Mod Left", v.Name)
+            warn("Mod Left", v.Name)
         end
     end)
     
@@ -181,7 +181,7 @@ function CheckLeft()
                 {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(51, 49, 49)}
             )
             sound:Play()
-            print("Dev/Owner Left", v.Name)
+            warn("Dev/Owner Left", v.Name)
         end
     end)
 end
