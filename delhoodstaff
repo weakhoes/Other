@@ -41,7 +41,6 @@ local StarPlayers = {
     "5zoh", -- star player labs
     "Youdeadudd", -- star player MWMWMWMWMWMWMWMWMWMW
     "F6vamps", -- checkmark Only4Angy
-    "miipolla" -- star manager miipolla
 }
 
 
@@ -55,6 +54,7 @@ local ModsPlayers = {
     "Omnicost", -- mod Omnicost
     "joywantsme", -- mod 206VALDE
     "Alexi_bruh7" -- mod Alexxiss
+    "miipolla" -- mod / star manager miipolla
 }
 
 local DevsUp = {
