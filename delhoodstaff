@@ -41,18 +41,19 @@ local StarPlayers = {
     "5zoh", -- star player labs
     "Youdeadudd", -- star player MWMWMWMWMWMWMWMWMWMW
     "F6vamps", -- checkmark Only4Angy
+    
 }
 
 
 local ModsPlayers = {
     -- Currently 8 Mods --
-    "Amaia12314_4", -- mod spanish
+    "Amaia12314_4", -- mod xxxxxxxxxx
     "Sague_Hub", -- mod Sague_Hub
-    "elaaavx", -- mod sick
-    "qwkiV", -- mod KartellGabriel
+    "elaaavx", -- mod iggy
+    "KartellGabriel", -- mod Humanabled
     "Amaia12314_4", -- mod spanish
     "Omnicost", -- mod Omnicost
-    "joywantsme", -- mod 206VALDE
+    "joywantsme", -- mod jjv
     "Alexi_bruh7" -- mod Alexxiss
     "miipolla" -- mod / star manager miipolla
 }
