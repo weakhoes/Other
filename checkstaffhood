@@ -2,10 +2,13 @@ if game.PlaceId == 9369376609 or 9633073067 or 9469232811 then -- delhood
     loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/delhoodstaff"))()
 else if game.PlaceId == 10433018628 then -- hoodlegends
     loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/hoodlegendscheckstaff"))()
+else if game.PlaceId == 12295490362 or 13051460029 then -- dahhood games
+    loadstring(game:HttpGet("https://github.com/drillygzzly/Other/blob/main/dahhoodstaff"))()
 else if game.PlaceId == 5100950559 then -- testing place
     loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/testing%20place"))()
 else
     loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/notsupported"))()
+end
 end
 end
 end
