@@ -33,17 +33,17 @@ local ModsPlayers = {
     -- Currently 4 Mods --
     "X0_Jxxdy", -- mod rxCXXVI
     "mmsplit", -- mod nate
-    "G4VlNN", mod ValJr
-    "vr1upqZ" mod vr1upqZ
+    "G4VlNN", -- mod ValJr
+    "vr1upqZ" -- mod vr1upqZ
 }
 
 local DevsUp = {
     -- Currently 5 Owners --
     "Slumxpz", -- ? Slumxpz
-    "SheLovesPrana", Owner SheLovesPrana
-    "Phronty", Owner Phronty
-    "BatesFirstBorn", Owner beta
-    "Groupholder608", Owner jonathanthe3rd
+    "SheLovesPrana", -- Owner SheLovesPrana
+    "Phronty", -- Owner Phronty
+    "BatesFirstBorn", -- Owner beta
+    "Groupholder608", -- Owner jonathanthe3rd
 }
 
 function CheckCurrent()
