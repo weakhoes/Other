@@ -54,8 +54,9 @@ local ModsPlayers = {
     "Amaia12314_4", -- mod spanish
     "Omnicost", -- mod Omnicost
     "joywantsme", -- mod jjv
-    "Alexi_bruh7" -- mod Alexxiss
-    "miipolla" -- mod / star manager miipolla
+    "Alexi_bruh7", -- mod Alexxiss
+    "miipolla", -- mod / star manager miipolla
+    "findwillow" -- mod / star manager willow
 }
 
 local DevsUp = {
