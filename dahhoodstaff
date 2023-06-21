@@ -34,7 +34,8 @@ local ModsPlayers = {
     "X0_Jxxdy", -- mod rxCXXVI
     "mmsplit", -- mod nate
     "G4VlNN", -- mod ValJr
-    "vr1upqZ" -- mod vr1upqZ
+    "vr1upqZ", -- mod vr1upqZ
+    "findwillow", star manager willow
 }
 
 local DevsUp = {
