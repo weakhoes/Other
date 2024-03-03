@@ -1,0 +1,164 @@
+local Players, Client, Mouse, RS, Camera, GuiS, Uis, Tween = game:GetService("Players"), game:GetService("Players").LocalPlayer, game:GetService("Players").LocalPlayer:GetMouse(), game:GetService("RunService"), game:GetService("Workspace").CurrentCamera, game:GetService("GuiService"), game:GetService("UserInputService"), game:GetService("TweenService")
+
+local PhotonLogo, GetTime = game:HttpGet("https://i.ibb.co/7zCf4TZ/XDD.png"), os.clock()
+
+local Script = {Functions = {}, Drawing = {}, NotifyNote = {}}
+
+-- // Drawing Function With Property Attached
+Script.Functions.NewDrawing = function(Type, Properties)
+    local NewDrawing = Drawing.new(Type)
+    for i, v in next, Properties or {} do
+        NewDrawing[i] = v
+    end
+    return NewDrawing
+end
+
+-- // The Notification Ui Function
+Script.Functions.CreateNotification = function(Text, CustomColor)
+	local Gap = 25
+	local Width = 18
+	local Alpha = 255
+	local Time = 0
+	local EStep = 0
+	local EEStep = 0.02
+	local InSety = 0
+
+	local Note = {
+		Enabled = true,
+		TargetPos = Vector2.new(50, 33),
+		Size = Vector2.new(200, Width),
+		
+		Drawings = {
+		    Outline = Script.Functions.NewDrawing("Square", {Size = Vector2.new(202, Width + 2), Filled = false, Visible = true, Thickness = 1, Position = Vector2.new(), Color = Color3.new(0, 0, 0)}),
+			Fade = Script.Functions.NewDrawing("Square", {Size = Vector2.new(202, Width + 2), Filled = false, Visible = true, Thickness = 1, Position = Vector2.new(), Color = Color3.new(0, 0, 0)}),
+		},
+        
+		Remove = function(self, Part)
+			if Part.Position.x < Part.Size.x then
+				for _, v in pairs(self.Drawings) do
+					v:Remove()
+					v = false
+				end
+				self.Enabled = false
+			end
+		end,
+
+		Update = function(self, Number, ListLength, Dt)
+			local Pos = self.TargetPos
+			local indexOffset = (ListLength - Number) * Gap
+            
+			if InSety < indexOffset then
+				InSety = InSety - (InSety - indexOffset) * 0.2
+			else
+				InSety = indexOffset
+			end
+
+			local Size = self.Size
+			local LastPos = Vector2.new(Pos.x - Size.x / Time - (Alpha / 255 * -Size.x + Size.x), Pos.y + InSety)
+			self.Pos = LastPos
+			
+			local CurrentPos = {
+				X = math.ceil(LastPos.x),
+				Y = math.ceil(LastPos.y),
+				W = math.floor(Size.x - (255 - Alpha) / (255 * 70)),
+				H = Size.y,
+			}
+			
+			local Fade = math.min(Time * 12, Alpha)
+			Fade = Fade > 255 and 255 or Fade < 0 and 0 or Fade
+
+			if self.Enabled then
+				local LineRepeat = 1
+				for i, v in pairs(self.Drawings) do
+					v.Transparency = Fade / 255
+					if type(i) == ("number") then
+						v.Position = Vector2.new(CurrentPos.X + 1, CurrentPos.Y + i)
+						v.Size = Vector2.new(CurrentPos.W - 2, 1)
+					elseif i == ("Image") then
+					    v.Position = LastPos + Vector2.new(6, 2)
+					elseif i == ("Text") then
+						v.Position = LastPos + Vector2.new(25, 2)
+					elseif i == ("Outline") then
+						v.Position = Vector2.new(CurrentPos.X, CurrentPos.Y)
+						v.Size = Vector2.new(CurrentPos.W, CurrentPos.H)
+					elseif i == ("Fade") then
+						v.Position = Vector2.new(CurrentPos.X - 1, CurrentPos.Y - 1)
+						v.Size = Vector2.new(CurrentPos.W + 2, CurrentPos.H + 2)
+						local T = (200 - Fade) / 255 / 3
+						v.Transparency = T < 0.4 and 0.4 or T
+					elseif i:find("line") then
+						v.Position = Vector2.new(CurrentPos.X + LineRepeat, CurrentPos.Y + 1)
+						LineRepeat = LineRepeat + 1
+					end
+				end
+
+				Time = Time + EStep * Dt * 128 
+				EStep = EStep + EEStep * Dt * 64
+			end
+		end,
+
+		Fade = function(self, Number, Len, Dt)
+			if self.Pos.x > self.TargetPos.x - 0.2 * Len or self.Fading then
+				if not self.Fading then
+					EStep = 0
+				end
+				self.Fading = true
+				Alpha = Alpha - EStep / 4 * Len * Dt * 50
+				EEStep = EEStep + 0.01 * Dt * 100
+			end
+			
+            if Alpha <= 0 then
+				self:Remove(self.Drawings[1])
+			end
+		end,
+	}
+
+    for i = 1, Note.Size.y - 2 do
+    	local X = 0.28 - i / 80
+    	Note.Drawings[i] = Script.Functions.NewDrawing("Square", {Size = Vector2.new(200, 1), Filled = true, Visible = true, Thickness = 1, Position = Vector2.new(), Color = Color3.new(X, X, X)})
+    end
+    
+    local C = CustomColor or Color3.fromRGB(206, 67, 67)
+    Note.Drawings.Text = Script.Functions.NewDrawing("Text", {Size = 13,Text = Text , Visible = true, Center = false, Outline = true, Font = 2, Position = Vector2.new(), Color = Color3.new(1, 1, 1)})
+    Note.Drawings.Image = Script.Functions.NewDrawing("Image", {Size = Vector2.new(15,15), Visible = true, Position = Vector2.new(), Data = PhotonLogo})
+
+    if Note.Drawings.Text.TextBounds.x + 7 > Note.Size.x then
+    	Note.Size = Vector2.new(Note.Drawings.Text.TextBounds.x + 27, Note.Size.y)
+    end
+    
+    Note.Drawings.line = Script.Functions.NewDrawing("Square", {Size = Vector2.new(1, Note.Size.y - 2), Filled = true, Visible = true, Thickness = 1, Position = Vector2.new(), Color = C})
+    Note.Drawings.line1 = Script.Functions.NewDrawing("Square", {Size = Vector2.new(1, Note.Size.y - 2), Filled = true, Visible = true, Thickness = 1, Position = Vector2.new(), Color = C})
+    Script.NotifyNote[#Script.NotifyNote + 1] = Note
+end
+
+-- // Fires Every Frame After The Physics Simulation Has Completed.
+RS.RenderStepped:Connect(function(DeltaTime)
+    local Succes, Error = pcall(function()
+        -- // Notification Fade Function And Position Change
+    	local Smallest = math.huge
+    	for i = 1, #Script.NotifyNote do
+    		local v = Script.NotifyNote[i]
+    		if v and v.Enabled then
+    			Smallest = i < Smallest and i or Smallest
+    		else
+    			table.remove(Script.NotifyNote, i)
+    		end
+    	end
+    	local Length = #Script.NotifyNote
+    	for i = 1, #Script.NotifyNote do
+    		local Note = Script.NotifyNote[i]
+    		Note:Update(i, Length, DeltaTime)
+    		if i <= math.ceil(Length / 10) or Note.Fading then
+    			Note:Fade(i, Length, DeltaTime)
+    		end
+    	end
+    end)
+    if not Succes then
+        if SavedError2 ~= Error then
+            SavedError2 = Error
+            Script.Functions.CreateNotification("SomeThing Went Wrong! We Have Sent The Error Code To The Devs!", Color3.fromRGB(206, 67, 67))
+            wait(0.5)
+            Script.Functions.CreateNotification(Error, Color3.fromRGB(206, 67, 67))
+        end
+    end
+end)
