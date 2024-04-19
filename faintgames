@@ -13,7 +13,7 @@ sound.SoundId = "rbxassetid://6281084801"
 sound.Parent = workspace
 
 local StarPlayers = {
-    ""
+    "juggedu"
 }
 local ModsPlayers = {
     "evilsgfx", -- mod evil
