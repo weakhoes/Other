@@ -1,14 +1,24 @@
-if game.PlaceId == 9369376609 or 9633073067 or 9469232811 then -- delhood
+if game.PlaceId == 16709051631 or -- Da Uphill          -- WORKING -- VTE GROUP / DA STRIKE / BEGASU KINGDOM ENTERTAINMENT GROUP
+   game.PlaceId == 16689815257 or -- Da Bank            -- WORKING -- VTE GROUP / DA STRIKE / BEGASU KINGDOM ENTERTAINMENT GROUP
+   game.PlaceId == 15186202290 or -- Da Strike          -- WORKING -- VTE GROUP / DA STRIKE / BEGASU KINGDOM ENTERTAINMENT GROUP
+   game.PlaceId == 16709048641 or -- Da Downhill        -- WORKING -- VTE GROUP / DA STRIKE / BEGASU KINGDOM ENTERTAINMENT GROUP
+   game.PlaceId == 16158576873    -- Da Bot Aim Trainer -- WORKING -- VTE GROUP / DA STRIKE / BEGASU KINGDOM ENTERTAINMENT GROUP
+then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/voidgroup"))()
+elseif game.PlaceId == 16144724314 or    -- Da Hills    -- WORKING -- FAINT GROUP
+       game.PlaceId == 16060928953 or    -- Da Center   -- WORKING -- FAINT GROUP
+       game.PlaceId == 15749498419 or    -- Da Duels    -- WORKING -- FAINT GROUP
+       game.PlaceId == 15326775981 or    -- Da Military -- WORKING -- FAINT GROUP
+       game.PlaceId == 15153541465       -- Da Casino   -- WORKING -- FAINT GROUP
+then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/faintgames"))()
+elseif == 16469595315 -- Del Hood -- WORKING -- LUA C+ GROUP
     loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/delhoodstaff"))()
-else if game.PlaceId == 10433018628 then -- hoodlegends
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/hoodlegendscheckstaff"))()
-else if game.PlaceId == 12295490362 or 13051460029 then -- dahhood games
-    loadstring(game:HttpGet("https://github.com/drillygzzly/Other/blob/main/dahhoodstaff"))()
-else if game.PlaceId == 5100950559 then -- testing place
+then
+elseif game.PlaceId == 5100950559 -- TESTING PLACE 
+then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/testing%20place"))()
 else
     loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Other/main/notsupported"))()
-end
-end
 end
 end
