@@ -1,0 +1,1161 @@
+-- perplex ui
+-- made by Portal (give credit nigger)
+-- do not publish or take credit
+
+LPH_NO_VIRTUALIZE = function(...) return (...) end;
+LPH_ENCSTR = function(...) return (...) end; 
+LPH_CRASH = function(...) return (...) end; 
+
+__newindex = function() 
+	LPH_CRASH() 
+end 
+
+hookfunction = function() 
+	LPH_CRASH() 
+end
+
+clonefunction = function()
+	LPH_CRASH() 
+end 
+
+__metatable = function()
+	LPH_CRASH() 
+end 
+
+getupvalue = function()
+	LPH_CRASH()
+end 
+
+clonefunction = function()
+	LPH_CRASH()
+end 
+
+local font = Enum.Font.Ubuntu;
+local Library = loadstring(LPH_ENCSTR(game:HttpGet("https://pastebin.com/raw/GmkajDET")))();
+local InputService = game:GetService("UserInputService");
+local TeleportService = game:GetService("TeleportService");
+local RunService = game:GetService("RunService");
+local Workspace = game:GetService("Workspace");
+local Lighting = game:GetService("Lighting");
+local Players = game:GetService("Players");
+local HttpService = game:GetService("HttpService");
+local StarterGui = game:GetService("StarterGui");
+local ReplicatedStorage = game:GetService("ReplicatedStorage");
+local TweenService = game:GetService("TweenService");
+local VirtualUser = game:GetService("VirtualUser");
+local PathFindingService = game:GetService("PathfindingService");
+local utility = {Circle = nil, bodyParts = {}, target = nil, angle = 0, drawings = {}, folders = {}}
+local framework = {connections = {}}
+local flags = Library.Flags
+local ESP = {}
+local IgnoreList = {} 
+local misc_flags = {resolver = false, cframe = false, target = false, speed = false, fly = false}
+local HitReg = {}
+local Visuals = {   
+    ["Drawings"] = {},
+	["Bases"] = {},
+	["Base"] = {},
+	["Settings"] = { 
+		["Line"] = {
+		    Thickness = 1,
+		    Color = Color3.fromRGB(0, 255, 0)
+	    },
+		["Text"] = {
+			Size = 13,
+			Center = true,
+			Outline = true,
+			Font = Drawing.Fonts.Plex,
+			Color = Color3.fromRGB(255, 255, 255)
+		},
+		["Square"] = {
+			Thickness = 1,
+			Color = Color3.fromRGB(255, 255, 255),
+			Filled = false,
+		},
+		["Triangle"] = {
+			Color = Color3.fromRGB(255, 255, 255),
+			Filled = true,
+			Visible = false,
+			Thickness = 1,
+		},
+		["Image"] = {
+			Transparency = 1,
+			Data = game:HttpGet("https://raw.githubusercontent.com/portallol/luna/main/Gradient.png")
+		}
+	},
+}
+local NovaPart = game:GetObjects("rbxassetid://14745759584")[1]; NovaPart.Parent = ReplicatedStorage;
+local Nova = NovaPart.Attachment 
+local sfx = {["Bameware"] = "3124331820",["Skeet"] = "4753603610",["Bonk"] = "3765689841",["Lazer Beam"] = "130791043",["Windows XP Error"] = "160715357",["TF2 Hitsound"] = "3455144981",["TF2 Critical"] = "296102734",["TF2 Bat"] = "3333907347",['Bow Hit'] = "1053296915",['Bow'] = "3442683707",['OSU'] = "7147454322",['Minecraft Hit'] = "4018616850",['Steve'] = "5869422451",['1nn'] = "7349055654",['Rust'] = "3744371091",["TF2 Pan"] = "3431749479",["Neverlose"] = "8679627751",["Mario"] = "5709456554",}
+local sfx_names = {"Bameware", "Skeet", "Bonk", "Lazer Beam", "Windows XP Error", "TF2 Hitsound", "TF2 Critical", "TF2 Bat", "Bow Hit", "Bow", "OSU", "Minecraft Hit", "Steve", "1nn", "Rust", "TF2 Pan", "Neverlose", "Mario"}
+local LocalPlayer = Players.LocalPlayer; 
+local Mouse, Camera = LocalPlayer:GetMouse(), Workspace.Camera
+local viewportSize = Camera.ViewportSize
+local hitmodule = game:GetObjects("rbxassetid://7255773215")[1]; hitmodule.Parent = ReplicatedStorage
+local Math = loadstring(game:HttpGet("https://raw.githubusercontent.com/f1nobe7650/Lynx/main/Math.lua"))(); 
+local NewVector2, NewVector3 = Vector2.new, Vector3.new
+local Floor = math.floor 
+local Find = table.find
+local Round = math.round
+local Cos = math.cos
+local Sin = math.sin
+local Pi = math.pi 
+local Sqrt = math.sqrt
+local Lighting_Save = {["ColorShift_Bottom"] = Lighting.ColorShift_Bottom, ["Ambient"]=Lighting.Ambient, ["OutdoorAmbient"]=Lighting.OutdoorAmbient, ["ColorShift_Top"]=Lighting.ColorShift_Top, ["FogColor"]=Lighting.FogColor, ["FogEnd"]=Lighting.FogEnd, ["FogStart"]=Lighting.FogStart, ["ClockTime"]=Lighting.ClockTime, ["Brightness"]=Lighting.Brightness}
+local IgnoreList = {}
+local Tween = {};
+local crosshair_Lines = {}; 
+local crosshair_Outlines = {}; 
+local crosshair_LineAmount = 4;
+local crosshair_SpinAngle = 0; 
+local Offset = game:GetService("GuiService"):GetGuiInset().Y
+local connections = {} 
+local highlights = {} 
+-- 
+do 
+    -- utility functions
+    do 
+        function utility:ValidateClient(Player)
+            return Player and Player.Character and Player.Character:FindFirstChild("Humanoid") and true or false 
+        end 
+		--
+		function utility:CreateBeam(Origin, End, Color1)
+			local BeamPart = Instance.new("Part", Workspace)
+			BeamPart.Name = "BeamPart"
+			BeamPart.Transparency = 1
+			--
+			local Part = Instance.new("Part", BeamPart)
+			Part.Size = NewVector3(1, 1, 1)
+			Part.Transparency = 1
+			Part.CanCollide = false
+			Part.CFrame = typeof(Origin) == "CFrame" and Origin or CFrame.new(Origin)
+			Part.Anchored = true
+			local Attachment = Instance.new("Attachment", Part)
+			local Part2 = Instance.new("Part", BeamPart)
+			Part2.Size = NewVector3(1, 1, 1)
+			Part2.Transparency = 1
+			Part2.CanCollide = false
+			Part2.CFrame = typeof(End) == "CFrame" and End or CFrame.new(End)
+			Part2.Anchored = true
+			Part2.Color = Color3.fromRGB(255, 255, 255)
+			local Attachment2 = Instance.new("Attachment", Part2)
+			local Beam = Instance.new("Beam", Part)
+			Beam.FaceCamera = true
+			Beam.Color = ColorSequence.new{
+				ColorSequenceKeypoint.new(0.00, Color1),
+				ColorSequenceKeypoint.new(1, Color1),
+			}
+			Beam.Attachment0 = Attachment
+			Beam.Attachment1 = Attachment2
+			Beam.LightEmission = 6
+			Beam.LightInfluence = 1
+			Beam.Width0 = 1
+			Beam.Width1 = 0.6
+			Beam.Texture = "rbxassetid://7151778302"
+			Beam.LightEmission = 1
+			Beam.LightInfluence = 1
+			Beam.TextureMode = Enum.TextureMode.Wrap 
+			Beam.TextureLength = 3 
+			Beam.TextureSpeed = 3
+			delay(flags["Tracers Life Time"], function()
+				Part:Destroy()
+				Part2:Destroy()
+				BeamPart:Destroy()
+			end)
+		end  
+		-- 
+		function utility:generateAngles(numLines)
+			local angles = {}
+			local angleIncrement = 2 * math.pi / numLines
+			
+			for i = 1, numLines do
+				local angle = (i - 1) * angleIncrement
+				table.insert(angles, angle)
+			end
+			
+			return angles
+		end
+		-- 
+		function utility:Shift(Number)
+			return math.acos(math.cos(Number * math.pi)) / math.pi
+		end
+        -- 
+        function utility:calculateAimViewerEndPoint()
+            if utility.target and utility.target.Character and flags["Aim Viewer Bypass"] then 
+                local part = (flags["Jump Prediction"] and utility.target.Character.Humanoid.FloorMaterial == Enum.Material.Air and "RightFoot") or (flags["Nearest Part"] and partClosest) or flags["Single Hit Part"]
+                local yOffset = utility.target.Character.Humanoid.FloorMaterial == Enum.Material.Air and flags["Manual Offset Value"] or 0 
+                print(part, yOffset, checks) -- ENDED HERE
+                --
+                if (checks == true) then 
+                    if flags["Resolver"] then  
+                        local endpoint = utility.target.Character[tostring(part)].Position + offset + NewVector3(0, yOffset, 0)
+                        Remote:FireServer("UpdateMousePos", endpoint) 
+                    else 
+                        local endpoint = utility.target.Character[tostring(part)].Position + (utility.target.Character.HumanoidRootPart.Velocity * prediction) + NewVector3(0, yOffset, 0)
+                        Remote:FireServer("UpdateMousePos", endpoint) 
+                    end   
+                end   
+            end 
+        end     
+        -- 
+        function utility:getHeld() 
+            if LocalPlayer.Character and LocalPlayer.Character:FindFirstChildWhichIsA("Tool") and LocalPlayer.Character then 
+				return LocalPlayer.Character:FindFirstChildWhichIsA("Tool") or nil; 
+			end
+        end 
+        --
+        function utility:GetComponents(Player)
+            if utility:ValidateClient(Player) then 
+                return Player.Character, Player.Character:FindFirstChild("HumanoidRootPart"), Player.Character:FindFirstChild("Humanoid")
+            end 
+        end 
+        --
+        function utility:getClosestPlayerToCursor(Radius)
+            local shortestDistance = Radius or math.huge
+
+            local closestPlayer
+            for i, v in pairs(Players:GetPlayers()) do
+                if v ~= LocalPlayer and utility:ValidateClient(v) then
+                    local pos, OnScreen = Camera:WorldToViewportPoint(v.Character.HumanoidRootPart.Position)
+                    local magnitude = (Vector2.new(pos.X, pos.Y) - Vector2.new(Mouse.X, Mouse.Y)).magnitude
+                        if magnitude < shortestDistance and OnScreen then
+                            closestPlayer = v
+                            shortestDistance = magnitude
+                        end
+                    end
+                end 
+            return closestPlayer
+        end
+        --
+        function utility:RecalculateVelocity(Player)
+            if utility:ValidateClient(Player) then
+                local Character, RootPart, Humanoid = utility:GetComponents(Player)
+
+                local currentPosition = RootPart.Position
+                local currentTime = tick() 
+                
+                task.wait()
+    
+                local newPosition = RootPart.Position
+                local newTime = tick()
+                
+                local distanceTraveled = (newPosition - currentPosition) 
+    
+                local timeInterval = newTime - currentTime
+                local velocity = distanceTraveled / timeInterval
+                currentPosition = newPosition
+                currentTime = newTime
+                return velocity
+            end
+        end
+        -- 
+        function utility:Highlight(Player, fillColor, fillTransparency, outlineColor, outlineTransparency) 
+            highlights[Player] = Instance.new("Highlight")
+            highlights[Player].Enabled = true
+            highlights[Player].DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+            highlights[Player].FillColor = fillColor or Color3.fromRGB(255,0,255)
+            highlights[Player].OutlineColor = outlineColor or Color3.fromRGB(255,0,255)
+            highlights[Player].Adornee = Player.Character
+            highlights[Player].OutlineTransparency = outlineTransparency or 0.5
+            highlights[Player].FillTransparency = fillTransparency or 0
+            highlights[Player].Parent = game.CoreGui
+             
+            connections[Player] = Player.CharacterAdded:Connect(function()
+                highlights[Player].Adornee = Player.Character
+            end)
+
+            return highlights[Player] 
+        end 
+        --
+        function utility:drawObject(type, prop)
+            local obj = Drawing.new(type)
+            --
+            if prop then
+                for i,v in next, prop do
+                    obj[i] = v;
+                end
+            end
+            return obj  
+        end
+        --
+        utility.folders["Part Chams"] = Instance.new("Folder", Workspace) 
+        -- 
+        function utility:characterClone(Player, Color, Material, Transparency, Parent)
+            for i,v in pairs(Player.Character:GetChildren()) do 
+				if table.find(utility.bodyParts, v.Name) and v:IsA("MeshPart") and v.Name ~= "HumanoidRootPart" then 
+					if v.Name == "UpperTorso" or v.Name == "LowerTorso" then 
+						local ClonedPart = Instance.new("Part")
+						ClonedPart.Anchored = true 
+						ClonedPart.CanCollide = false 
+						ClonedPart.Position = v.Position
+						ClonedPart.Parent = Parent
+						ClonedPart.Material = Enum.Material[Material]
+						ClonedPart.Transparency = Transparency 
+						ClonedPart.Color = Color
+						ClonedPart.Size = v.Size + Vector3.new(0.01,0.01,0.01)
+						ClonedPart.Name = v.Name
+						ClonedPart.Rotation = v.Rotation
+						ClonedPart.Shape = "Block"
+					else 
+						local ClonedPart = Instance.new("MeshPart")
+						ClonedPart.Anchored = true 
+						ClonedPart.CanCollide = false 
+						ClonedPart.Position = v.Position
+						ClonedPart.Parent = Parent
+						ClonedPart.Material = Enum.Material[Material]
+						ClonedPart.Transparency = Transparency 
+						ClonedPart.Color = Color
+						ClonedPart.Size = v.Size + Vector3.new(0.01,0.01,0.01)
+						ClonedPart.Name = v.Name
+						ClonedPart.Rotation = v.Rotation
+						ClonedPart.MeshId = v.MeshId
+					end 
+				end 
+            end
+        end 
+        -- 
+        function utility:Remove(Player)
+            if connections[Player] then 
+                connections[Player]:Disconnect();
+            end 
+            -- 
+            if highlights[Player] then 
+                highlights[Player].Parent = nil;
+            end 
+        end 
+        --
+        function utility:AngleToEdge(angle, inset) -- credits to whoever made this Im just porting over my old arrows 😭
+            local pos
+            local ox = Cos(angle)
+            local oy = Sin(angle)
+            local slope = oy / ox
+            -- 
+            local h_edge = viewportSize.x - inset
+            local v_edge = viewportSize.y - inset
+            if oy < 0 then
+                v_edge = inset
+            end
+            if ox < 0 then
+                h_edge = inset
+            end
+            local y = (slope * h_edge) + (viewportSize.y / 2) - slope * (viewportSize.x / 2)
+            if y > 0 and y < viewportSize.y - inset then
+                pos = Vector2.new(h_edge, y)
+            else
+                pos = Vector2.new(
+                    (v_edge - viewportSize.y / 2 + slope * (viewportSize.x / 2)) / slope,
+                    v_edge
+                )
+            end
+            return pos
+        end
+        --
+        function utility:Map(N, OldMin, OldMax, Min, Max) -- I love my 1 line funcs I use once ♥😻
+            return (N - OldMin) / (OldMax - OldMin) * (Max - Min) + Min
+        end
+        --
+        function utility:getRotate(Vec, Rads) -- I didnt make this math credits to whoever can code cool maths!
+            local vec = Vec.Unit
+            local sin = math.sin(Rads)
+            local cos = math.cos(Rads)
+            local x = (cos * vec.x) - (sin * vec.y)
+            local y = (sin * vec.x) + (cos * vec.y)
+            --
+            return Vector2.new(x, y).Unit * Vec.Magnitude
+        end
+        --
+        function utility:BoxCalculation(torso)
+            local VTop = torso.Position + (torso.CFrame.UpVector * 1.8) + Camera.CFrame.UpVector;
+            local VBottom = torso.Position - (torso.CFrame.UpVector * 2.5) - Camera.CFrame.UpVector;
+        
+            local Top, TopIsRendered = Camera:WorldToViewportPoint(VTop);
+            local Bottom, BottomIsRendered = Camera:WorldToViewportPoint(VBottom);
+        
+            local Width = math.max(math.floor(math.abs(Top.x - Bottom.x)), 3);
+            local Height = math.max(math.floor(math.max(math.abs(Bottom.y - Top.y), Width / 2)), 3);
+            local BoxSize = NewVector2(math.floor(math.max(Height / 1.5, Width)), Height);
+            local BoxPosition = NewVector2(math.floor(Top.x * 0.5 + Bottom.x * 0.5 - BoxSize.x * 0.5), math.floor(math.min(Top.y, Bottom.y)));
+        
+            return BoxSize, BoxPosition;
+        end
+        --
+        local LastRayIgnoreUpdate, RayIgnoreList = 0, {}
+		-- 
+		function utility:checkRay(Instance, Distance, Position, Unit)
+			local Pass = true;
+			local Model = Instance;
+
+			if Distance > 999 then return false; end
+
+			if Instance.ClassName == 'Player' then
+				Model = GetCharacter(Instance);
+			end
+
+			if not Model then
+				Model = Instance.Parent;
+
+				if Model.Parent == workspace then
+					Model = Instance;
+				end
+			end
+
+			if not Model then return false end
+
+			local _Ray = Ray.new(Position, Unit * Distance)
+
+			if tick() - LastRayIgnoreUpdate > 3 then
+				LastRayIgnoreUpdate = tick()
+
+				table.clear(RayIgnoreList)
+
+				table.insert(RayIgnoreList, LocalPlayer.Character)
+				table.insert(RayIgnoreList, Camera)
+				
+				if Mouse.TargetFilter then table.insert(RayIgnoreList, Mouse.TargetFilter) end
+
+				if #IgnoreList > 64 then
+					while #IgnoreList > 64 do
+						table.remove(IgnoreList, 1)
+					end
+				end
+
+				for i, v in pairs(IgnoreList) do table.insert(RayIgnoreList, v) end
+			end
+
+			local Hit = workspace:FindPartOnRayWithIgnoreList(_Ray, RayIgnoreList)
+
+			if Hit and not Hit:IsDescendantOf(Model) then
+				Pass = false;
+				if Hit.Transparency >= .3 or not Hit.CanCollide and Hit.ClassName ~= Terrain then
+					table.insert(IgnoreList, Hit)
+				end
+			end
+
+			return Pass;
+		end
+        --
+        function utility:GetOrigin()
+            local Tool = utility:getHeld()
+            -- 
+            return (Tool ~= "None" and Tool.Handle.Position) or Camera.CFrame.Position
+        end
+        --
+        function utility:Lerp(Value, MinColor, MaxColor)
+            if Value <= 0 then return MaxColor end
+            if Value >= 100 then return MinColor end
+            --
+            return Color3.new(
+                MaxColor.R + (MinColor.R - MaxColor.R) * Value,
+                MaxColor.G + (MinColor.G - MaxColor.G) * Value,
+                MaxColor.B + (MinColor.B - MaxColor.B) * Value
+            )
+        end
+    end 
+	
+    -- framework functions 
+    do 
+        function framework:selectTarget() 
+			local deathLoop; 
+			local deathLoopRestore; 
+			-- 	
+            if flags["Silent Enabled"] then 
+                if misc_flags["target"] then 
+                    utility.target = utility:getClosestPlayerToCursor(math.huge); 
+                    -- 
+                    if flags["Highlight Enabled"] then 
+                        utility:Highlight(utility.target, flags["Highlight Fill Color"],  0.5, flags["Highlight Outline Color"], 0.5);
+                    end 
+                    -- 
+                    if flags["Notify"] then 
+                        Notification:Notify({Title = "tonka", Description = "Locked onto: " .. utility.target.Name .. ""}, {OutlineColor = Library.Theme.Accent, Time = 2, Type = "default"});
+                    end 
+                    -- 
+                    if flags["Back Track Enabled"] and flags["Back Track Method"] == "Follow" then 
+                        utility:characterClone(utility.target, flags["Back Track Settings"], flags["Back Track Material"], 0.5, utility.folders["Part Chams"])
+                    end 
+                    --
+                    if flags["Spectate"] or not framework:checkForKillBot() then 
+                        Camera.CameraSubject = utility.target.Character.Humanoid
+                    end 
+
+					--[[if not framework:checkForKillBot() and table.find(flags["Kill Bot Settings"], "Stomp on knock") then 
+						deathLoop = utility.target.Character:WaitForChild("Humanoid").HealthChanged:Connect(function(newHealth)
+							if not framework:checkForKillBot() then 
+								LocalPlayer.Character.HumanoidRootPart.CFrame = utility.target.Character.UpperTorso.CFrame
+							end 
+						end) 
+						-- 
+						deathLoopRestore = utility.target.CharacterAdded:Connect(function(char)
+							deathLoop = utility.target.Character:WaitForChild("Humanoid").HealthChanged:Connect(function(newHealth)
+								if not framework:checkForKillBot() and Player.Character.BodyEffects["K.O"].Value then 
+									LocalPlayer.Character.HumanoidRootPart.CFrame = utility.target.Character.UpperTorso.CFrame
+								end 
+							end)
+						end) 
+					end ]]
+                else 
+                    --NYAHHHHH :3
+                    LocalPlayer.Character.Humanoid.AutoRotate = true;
+                    Camera.CameraSubject = LocalPlayer.Character.Humanoid;
+                    utility.folders["Part Chams"]:ClearAllChildren();
+                    if utility.target then 
+                        utility:Remove(utility.target);
+                    end 
+                    utility.target = nil;
+                end 
+            end 
+        end  
+		--
+		function framework:detectHit()
+			pcall(function()
+				framework["connections"]["On-Hit-Raycast"] = Workspace.Ignored.Siren.Radius.DescendantAdded:Once(function(Beam)
+					delay(0.05, function()
+						if Beam.Name == "BULLET_RAYS" then 
+							local Ray = Ray.new(Beam.Position, Beam.CFrame.LookVector * 200)
+							local IgnoreList = {LocalPlayer.Character}
+							local Hit, HitPosition = Workspace:FindPartOnRayWithIgnoreList(Ray, IgnoreList);
+							-- 
+							if Hit then
+								local InstanceHit = Hit:FindFirstAncestorOfClass('Model')
+								if not InstanceHit then return end 
+								
+								if InstanceHit:FindFirstChild("Humanoid") and InstanceHit:FindFirstChild("HumanoidRootPart") then 
+									if flags["Hit Sounds"] then 
+										HitReg:HitSound(sfx[flags["Hit Sounds Sound"]], flags["Hit Sounds Volume"], flags["Hit Sounds Pitch"])
+									end 
+									-- 
+									if flags["Hit Chams"] then 
+										local Folder = Instance.new("Folder", Workspace) 
+										utility:characterClone(Players[InstanceHit.Name], flags["Hit Chams Settings"], flags["Hit Chams Material"], flags["Hit Chams Settings"].Transparency, Folder);
+										delay(flags["Hit Chams Fading Time"], function()
+											Folder:Destroy()
+										end)
+									end
+									-- 
+									if flags["Hit Marker"] then 
+										HitReg:HitMarker(4, flags["Hit Marker Settings"], flags["Hit Markers Time"])
+									end 
+									-- 
+									if flags["3D Hit Marker"] then 
+										HitReg:HitMarker3D(4, flags["3D Hit Markers Settings"], flags["Hit Markers Time"], HitPosition) 
+									end 
+									-- 
+									if flags["Hit Effects"] then 
+										HitReg:HitEffect(flags["Hit Effects Option"], Players[InstanceHit.Name].Character)
+									end 
+								end 
+							end 	
+						end 
+					end) 
+				end)
+			end)	
+		end 
+		-- 
+		function framework:worldVisuals() 
+			if flags["Master Switch"] then 
+				if flags["Clock Time Enabled"] and Lighting.ClockTime ~= flags["Clock Time"] then 
+					Lighting.ClockTime = flags["Clock Time"]
+				end 
+				-- 
+				if flags["Color Shift Bottom"] and Lighting.ColorShift_Bottom ~= flags["Color Shift Bottom Color"] then 
+					Lighting.ColorShift_Bottom = flags["Color Shift Bottom Color"]
+				end 
+
+				if flags["Ambient"] and Lighting.Ambient ~= flags["Ambience Color"] then 
+					Lighting.Ambient = flags["Ambience Color"]
+				end 
+				-- 
+				if flags["Outdoor Ambience"] and Lighting.OutdoorAmbient ~= flags["Outdoor Ambience color"] then 
+					Lighting.OutdoorAmbient = flags["Outdoor Ambience color"]
+				end 
+				-- 
+				if flags["Brightness Enabled"] and Lighting.Brightness ~= flags["Brightness"] then 
+					Lighting.Brightness = flags["Brightness"]
+				end 
+				-- 
+				if flags["Color Shift Top"] and Lighting.ColorShift_Top ~= flags["Color Shift Top Color"]  then 
+					Lighting.ColorShift_Top = flags["Color Shift Top Color"]
+				end 
+				-- 
+				if flags["Fog"] and Lighting.FogColor ~= flags["Fog Color"] then 
+					Lighting.FogColor = flags["Fog Color"]
+				end 
+			end 
+		end 
+		--
+		function framework:cframeSpeed()
+			if flags["Speed Enabled"] and misc_flags["speed"] then 
+				local Character = LocalPlayer.Character 
+				local Move_Direction = Character.Humanoid.MoveDirection
+				-- 
+				Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame + (Move_Direction * (flags["Speed"] / 25))
+			end 
+		end 
+		-- 
+		function framework:fly() 
+			if flags["Fly Enabled"] and misc_flags["fly"] then 
+				local FlyPosition = Vector3.new(0, 0, 0)
+				local CCV = Camera.CFrame.lookVector
+				-- 
+				if InputService:IsKeyDown(Enum.KeyCode.W) then
+					FlyPosition = FlyPosition + CCV
+				end
+				-- 
+				if InputService:IsKeyDown(Enum.KeyCode.S) then
+					FlyPosition = FlyPosition - CCV
+				end
+				-- 
+				if InputService:IsKeyDown(Enum.KeyCode.D) then
+					FlyPosition = FlyPosition + Vector3.new(-CCV.Z, 0, CCV.X)
+				end
+				-- 
+				if InputService:IsKeyDown(Enum.KeyCode.A) then
+					FlyPosition = FlyPosition + Vector3.new(CCV.Z, 0, -CCV.x)
+				end
+				-- 
+				if InputService:IsKeyDown(Enum.KeyCode.Space) then
+					FlyPosition = FlyPosition + Vector3.new(0, 1, 0)
+				end
+				-- 
+				if InputService:IsKeyDown(Enum.KeyCode.LeftShift) then
+					FlyPosition = FlyPosition - Vector3.new(0, 1, 0)
+				end
+				-- 
+				if FlyPosition.Unit.y == FlyPosition.Unit.y then
+					LocalPlayer.Character.HumanoidRootPart.Anchored = false 
+					LocalPlayer.Character.HumanoidRootPart.Velocity = FlyPosition.Unit * flags["Fly Speed"]
+				else 
+					LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+					LocalPlayer.Character.HumanoidRootPart.Anchored = true
+				end 
+			end 
+		end 
+		--
+		function framework:translateBeam(Beam)
+			local Part = Beam
+			if Part ~= nil then 
+				local Attachments = Part:GetChildren()
+				if Attachments ~= nil and Attachments[1] ~= nil and Attachments[2] ~= nil then
+					local Origin = Attachments[1].WorldCFrame
+					local End = Attachments[2].WorldCFrame
+					-- 
+					utility:CreateBeam(Origin, End, flags["Bullet Tracers Color"])
+					Part.Parent = nil 
+				end 
+			end 
+		end
+        --
+        function framework:selectPrediction()
+            local Prediction; 
+            
+            local Predictions = {
+                0.113,
+                0.115,
+                0.117,
+                0.11923283912031938191231281632312637123821763333312731833,
+                0.121316378910319876472890149871624,
+                0.124521314351673817351423414,
+                0.131314253678192031927365421456789331,
+                0.1355991245213413214231231123121,
+                0.138312341526738912,
+                0.146432786576847627781237813281381382038198391293,
+                0.1512783311111111111111111111111111111111111,
+                0.15132132132132132555555555555555,
+            }
+
+            if flags["Auto Prediction"] then 
+                for i = 1, #Predictions do 
+                    if game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue() <= i * 10 then 
+                        Prediction = Predictions[i]
+                    end 
+                end                 
+            end 
+
+            return Prediction or tonumber(flags["Manual Prediction Value"]) or 0.1413
+        end 
+        --
+        function framework:calculateResolverOffset() 
+            local Offset; 
+            local Prediction = framework:selectPrediction() 
+            -- 
+            if flags["Resolver"] then 
+                if flags["Resolver Method"] == "Recalculate Velocity" then 
+                    Offset = utility:RecalculateVelocity(utility.target) * Prediction
+                elseif flags["Resolver Method"] == "Suppress Velocity" then 
+                    Offset = Vector3.new(utility.target.Character.HumanoidRootPart.Velocity.X, 0, utility.target.Character.HumanoidRootPart.Velocity.Z) * Prediction
+                elseif flags["Resolver Method"] == "Move Direction" then 
+                    Offset = utility.target.Character.Humanoid.MoveDirection * 19.64285714289 * Prediction
+                end 
+            end 
+            --  
+            return Offset 
+        end 
+        -- 
+        function framework:calculateNearestPart(Player, List)
+            local shortestDistance = math.huge
+            local closestPart
+            if Player.Character and Player.Character:FindFirstChild("Humanoid") and Player.Character:FindFirstChild("Head") and Player.Character.Humanoid.Health ~= 0 and Player.Character:FindFirstChild("HumanoidRootPart") then
+                for i, v in pairs(Player.Character:GetChildren()) do
+                    if v:IsA("BasePart") then 
+                        local pos = Camera:WorldToViewportPoint(v.Position)
+                        local magnitude = (Vector2.new(pos.X, pos.Y) - Vector2.new(Mouse.X, Mouse.Y+36)).magnitude
+                            if magnitude < shortestDistance and table.find(List, v.Name) then
+                                closestPart = v
+                                shortestDistance = magnitude
+                            end
+                        end
+                    end 
+                return closestPart
+            end
+        end 
+        -- 
+        function framework:getChecks(Player, Friend, Wall, Knocked, Grabbed)
+            local Checks = true 
+            --  
+            if Friend and LocalPlayer:IsFriendsWith(Player.UserId) then Checks = false end 
+            if Wall then Checks = utility:checkRay(Player.Character.Head, (Camera.CFrame.Position - Player.Character.Head.Position).Magnitude, Camera.CFrame.Position, (Player.Character.Head.Position - Camera.CFrame.Position).unit) end 
+            if Knocked and Player.Character.BodyEffects["K.O"].Value == true then Checks = false end 
+            if Grabbed and Player.Character:FindFirstChild("GRABBING_CONSTRAINT") then Checks = false end 
+            --
+            return Checks
+        end 
+		-- 
+		function framework:checkForKillBot()
+			if misc_flags["target"] then  
+				local Killbot = flags["Kill Bot"]; 
+				-- 
+				return (table.find(flags["Kill Bot Settings"], "Disable on knock") and utility.target.Character.BodyEffects and utility.target.Character.BodyEffects["K.O"].Value) or not Killbot 
+			end 
+		end 
+    end 
+
+    -- drawings 
+    do 
+        utility.drawings["Tracer"] = utility:drawObject("Line", {})
+		
+		-- drawing lines for crosshair
+		do 
+			for Index = 1, 4 do
+				local line = utility:drawObject("Line",{
+					Visible = false,
+					Color = Color3.fromRGB(255,255,255),
+					Thickness = 1,
+					ZIndex = 2,
+					Transparency = 1
+				})
+				--
+				crosshair_Lines[Index] = line
+				-- 
+				local line_1 = utility:drawObject("Line",{
+					Visible = false,
+					Color = Color3.fromRGB(0, 0, 0),
+					Thickness = 2.5,
+					ZIndex = 1,
+					Transparency = 1
+				})
+				--
+				crosshair_Outlines[Index] = line_1
+			end
+		end 
+
+        -- functions for drawing the mf esp :money_face: 
+        function ESP:PlayerDraw(Type, Outline, Name, Filled)
+            local drawing = Drawing.new(Type)
+            for i, v in pairs(Visuals["Settings"][Type]) do
+                drawing[i] = v
+            end
+            --
+            if Outline then
+                drawing.Color = Color3.new(0,0,0)
+                drawing.Thickness = 3
+            end
+            --
+            if Filled then 
+                drawing.Filled = true 
+            end 
+            --
+            return drawing
+        end
+        -- 
+        function ESP:Add(Player)
+            if not Visuals["Drawings"][Player] then
+                Visuals["Drawings"][Player] = {
+                    Name = ESP:PlayerDraw("Text", nil, "Name", false),
+                    Tool = ESP:PlayerDraw("Text", nil, "Tool", false),
+                    BoxOutline = ESP:PlayerDraw("Square", true, "BoxOutline", false),
+                    Box = ESP:PlayerDraw("Square", nil, "Box",false),
+                    HealthOutline = ESP:PlayerDraw("Square", false, "HealthOutline", false),
+                    Health = ESP:PlayerDraw("Square", nil, "Health", false),
+                    HealthText = ESP:PlayerDraw("Text",nil, "HealthText", false),
+                    HealthBarGradient = ESP:PlayerDraw("Image", nil, "HealthBarGradient", false), 
+                    BoxFill = ESP:PlayerDraw("Square", nil, "BoxFill", true),
+                    ArmorBar = ESP:PlayerDraw("Square", nil, "ArmorBar", false),
+                    ArmorBarOutline = ESP:PlayerDraw("Square", nil, "ArmorBarOutline", false),
+                    ArrowOutline = ESP:PlayerDraw("Triangle", false, "ArrowOutline", false),
+                    Arrow = ESP:PlayerDraw("Triangle", nil, "Arrow", false),
+                    Flag = ESP:PlayerDraw("Text",nil, "Flag", false)
+                }
+                -- 
+                Visuals["Drawings"][Player]["Corners"] = {}
+                -- 
+                for Index = 9, 16 do
+                    Visuals["Drawings"][Player]["Corners"][Index] = ESP:PlayerDraw("Line", nil, "Corners", false)
+                    Visuals["Drawings"][Player]["Corners"][Index].Thickness = 3
+                end
+                --
+                for Index = 1, 8 do
+                    Visuals["Drawings"][Player]["Corners"][Index] = ESP:PlayerDraw("Line", nil, "Corners", false)
+                    Visuals["Drawings"][Player]["Corners"][Index].Thickness = 0 
+                end
+            end
+        end
+		--
+		for _, Player in pairs(Players:GetPlayers()) do
+			if Player ~= LocalPlayer then
+				ESP:Add(Player)
+			end
+		end
+    end 
+
+	-- hitreg 
+	do 
+		function HitReg:HitMarker(Gap, Color, Time) 
+			local Lines = {} 
+			-- 
+			for i = 1, 4 do 
+				Lines[i] = utility:drawObject("Line", {Color = Color, Visible = true, Transparency = 1, Thickness = 1})
+			end 
+			-- 
+			Lines[1].From = Vector2.new(Mouse.X + Gap, (Mouse.Y + 36) + Gap)
+			Lines[1].To = Vector2.new(Mouse.X + (Gap * 2.5), (Mouse.Y + 36) + (Gap * 2.5))
+			--
+			Lines[2].From = Vector2.new(Mouse.X + Gap, (Mouse.Y + 36) - Gap)
+			Lines[2].To = Vector2.new(Mouse.X + (Gap * 2.5), (Mouse.Y + 36) - (Gap * 2.5))
+			--
+			Lines[3].From = Vector2.new(Mouse.X - Gap, (Mouse.Y + 36) + Gap)
+			Lines[3].To = Vector2.new(Mouse.X - (Gap * 2.5), (Mouse.Y + 36) + (Gap * 2.5))
+			--
+			Lines[4].From = Vector2.new(Mouse.X - Gap, (Mouse.Y + 36) - Gap)
+			Lines[4].To = Vector2.new(Mouse.X - (Gap * 2.5), (Mouse.Y + 36) - (Gap * 2.5))
+			-- 
+			delay(Time, function()
+				for i = Time, 0, -0.1 do
+					task.wait()
+					for _, Value in next, Lines do
+						Value.Transparency = i
+					end
+				end
+				-- 
+				for _, Value in next, Lines do
+					Value:Remove()
+				end
+			end)
+		end 
+		-- 
+		function HitReg:HitMarker3D(Gap, Color, Time, Hit) 
+			local Lines = {} 
+			-- 
+			for i = 1, 4 do 
+				Lines[i] = utility:drawObject("Line", {Color = Color, Visible = true, Transparency = 1, Thickness = 1})
+			end     
+			-- 
+			local Loop = RunService.RenderStepped:Connect(function()
+				local Position3D, OnScreen = Camera:WorldToViewportPoint(Hit)
+				-- 
+				Lines[1].From = Vector2.new(Position3D.X + Gap, Position3D.Y + Gap)
+				Lines[1].To = Vector2.new(Position3D.X + (Gap * 2.5), Position3D.Y + (Gap * 2.5))
+				--
+				Lines[2].From = Vector2.new(Position3D.X + Gap, Position3D.Y - Gap)
+				Lines[2].To = Vector2.new(Position3D.X + (Gap * 2.5), Position3D.Y - (Gap * 2.5))
+				--
+				Lines[3].From = Vector2.new(Position3D.X - Gap, Position3D.Y + Gap)
+				Lines[3].To = Vector2.new(Position3D.X - (Gap * 2.5), Position3D.Y + (Gap * 2.5))
+				--
+				Lines[4].From = Vector2.new(Position3D.X - Gap, Position3D.Y - Gap)
+				Lines[4].To = Vector2.new(Position3D.X - (Gap * 2.5), Position3D.Y - (Gap * 2.5))
+				-- 
+				for _, Value in next, Lines do
+					Value.Visible = OnScreen
+				end
+			end)
+			-- 
+			delay(Time, function()
+				for i = Time, 0, -0.1 do
+					task.wait()
+					for _, Value in next, Lines do
+						Value.Transparency = i
+					end
+				end
+				-- 
+				for _, Value in next, Lines do
+					Value:Remove()
+				end
+				Loop:Disconnect()
+			end)
+		end 
+		--
+		function HitReg:HitEffect(Type, Character)
+			local function convert(color)
+				return color.r/5, color.g/5, color.b/5
+			end 
+			-- 
+			local function Weld(x,y)
+				local W = Instance.new("Weld")
+				W.Part0 = x
+				W.Part1 = y
+				local CJ = CFrame.new(x.Position)
+				local C0 = x.CFrame:inverse()*CJ
+				local C1 = y.CFrame:inverse()*CJ
+				W.C0 = C0
+				W.C1 = C1
+				W.Parent = x
+			end
+			-- 
+			if Type == "Confetti" then 
+				task.spawn(function()
+					local Confetti_Amount = 20000
+					local RootPart = Character.HumanoidRootPart
+					local ConfettiClone = hitmodule:Clone()
+					ConfettiClone.RainbowParticles.Rate = Confetti_Amount
+					ConfettiClone.Parent = workspace
+					ConfettiClone.CanCollide = false
+					ConfettiClone.CFrame = RootPart.CFrame
+					-- 
+					for i = Confetti_Amount, 0 , -(Confetti_Amount/50) do 
+						task.wait()
+						ConfettiClone.RainbowParticles.Rate = i
+					end 
+					-- 
+					delay(5, function()
+						ConfettiClone:Destroy()
+					end)
+				end)
+			else 
+				local Effect = Nova:Clone() 
+				Effect.Parent = Character.HumanoidRootPart
+				--	
+				for i,v in pairs(Effect:GetChildren()) do 
+					v.Rate = 0
+					v.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0, 0, 0)), ColorSequenceKeypoint.new(0.5, Color3.new(convert(flags["Hit Effect Settings"]))),ColorSequenceKeypoint.new(1, Color3.new(0, 0, 0)),})
+					v:Emit()
+				end 
+				-- 	
+				delay(2, function()
+					Effect:Destroy()
+				end)
+			end 
+		end 
+		-- 
+		function HitReg:HitSound(Id, Volume, Pitch)
+			local Sound = Instance.new("Sound", Workspace); local PitchSound = Instance.new("PitchShiftSoundEffect", Sound)
+			-- 
+			Sound.SoundId = "rbxassetid://".. Id ..""
+			Sound.Volume = Volume
+			PitchSound.Octave = Pitch
+			Sound:Play()
+			Sound.Ended:Connect(function()
+				Sound:Destroy()
+				PitchSound:Destroy()
+			end)	
+		end 
+	end 
+
+    for i,v in pairs(LocalPlayer.Character:GetChildren()) do 
+        if v:IsA("BasePart") then 
+            table.insert(utility.bodyParts, v.Name)
+        end 
+    end 
+
+	-- tweens 
+	do
+		Tween.EasingStyles = {
+			[Enum.EasingStyle.Linear] = {
+				[Enum.EasingDirection.In] = function(Delta)
+					return Delta
+				end,
+				[Enum.EasingDirection.Out] = function(Delta)
+					return Delta
+				end,
+				[Enum.EasingDirection.InOut] = function(Delta)
+					return Delta
+				end
+			},
+			[Enum.EasingStyle.Cubic] = {
+				[Enum.EasingDirection.In] = function(Delta)
+					return Delta ^ 3
+				end,
+				[Enum.EasingDirection.Out] = function(Delta)
+					return ((Delta - 1) ^ 3) + 1
+				end,
+				[Enum.EasingDirection.InOut] = function(Delta)
+					if 0 <= Delta and Delta <= 0.5 then
+						return (4 * Delta ^ 3)
+					elseif 0.5 <= Delta and Delta <= 1 then
+						return (4 * (Delta - 1) ^ 3) + 1
+					end
+				end
+			},
+			[Enum.EasingStyle.Quad] = {
+				[Enum.EasingDirection.In] = function(Delta)
+					return Delta ^ 2
+				end,
+				[Enum.EasingDirection.Out] = function(Delta)
+					return (-(Delta - 1) ^ 2) + 1
+				end,
+				[Enum.EasingDirection.InOut] = function(Delta)
+					if 0 <= Delta and Delta <= 0.5 then
+						return (2 * Delta ^ 2)
+					elseif 0.5 <= Delta and Delta <= 1 then
+						return -(2 * (Delta - 1) ^ 2) + 1
+					end
+				end
+			},
+			[Enum.EasingStyle.Quart] = {
+				[Enum.EasingDirection.In] = function(Delta)
+					return Delta ^ 4
+				end,
+				[Enum.EasingDirection.Out] = function(Delta)
+					return (-(Delta - 1) ^ 4) + 1
+				end,
+				[Enum.EasingDirection.InOut] = function(Delta)
+					if 0 <= Delta and Delta <= 0.5 then
+						return (8 * Delta ^ 4)
+					elseif 0.5 <= Delta and Delta <= 1 then
+						return -(8 * (Delta - 1) ^ 4) + 1
+					end
+				end
+			},
+			[Enum.EasingStyle.Quint] = {
+				[Enum.EasingDirection.In] = function(Delta)
+					return Delta ^ 5
+				end,
+				[Enum.EasingDirection.Out] = function(Delta)
+					return ((Delta - 1) ^ 5) + 1
+				end,
+				[Enum.EasingDirection.InOut] = function(Delta)
+					if 0 <= Delta and Delta <= 0.5 then
+						return (16 * Delta ^ 5)
+					elseif 0.5 <= Delta and Delta <= 1 then
+						return (16 * (Delta - 1) ^ 5) + 1
+					end
+				end
+			},
+			[Enum.EasingStyle.Sine] = {
+				[Enum.EasingDirection.In] = function(Delta)
+					return Sin(((Pi / 2) * Delta) - (Pi / 2)) + 1
+				end,
+				[Enum.EasingDirection.Out] = function(Delta)
+					return Sin((Pi / 2) * Delta)
+				end,
+				[Enum.EasingDirection.InOut] = function(Delta)
+					return (0.5 * Sin((Pi * Delta) - (Pi / 2))) + 0.5
+				end
+			},
+			[Enum.EasingStyle.Exponential] = {
+				[Enum.EasingDirection.In] = function(Delta)
+					return (2 ^ ((10 * Delta) - 10)) - 0.001
+				end,
+				[Enum.EasingDirection.Out] = function(Delta)
+					return 1.001 * (-2 ^ -(10 * Delta)) + 1
+				end,
+				[Enum.EasingDirection.InOut] = function(Delta)
+					if 0 <= Delta and Delta <= 0.5 then
+						return 0.5 * (2 ^ ((20 * Delta) - 10)) - 0.0005
+					elseif 0.5 <= Delta and Delta <= 1 then
+						return 0.50025 * (-2 ^ (-(20 * Delta) + 10)) + 1
+					end
+				end
+			},
+			[Enum.EasingStyle.Back] = {
+				[Enum.EasingDirection.In] = function(Delta)
+					return (Delta * Delta) * (Delta * (1.70158 + 1) - 1.70158)
+				end,
+				[Enum.EasingDirection.Out] = function(Delta)
+					return ((Delta - 1) ^ 2) * ((Delta - 1) * (1.70158 + 1) + 1.70158) + 1
+				end,
+				[Enum.EasingDirection.InOut] = function(Delta)
+					if 0 <= Delta and Delta <= 0.5 then
+						return (2 * (Delta * Delta)) * ((2 * Delta) * (2.5949095 + 1) - 2.5949095)
+					elseif 0.5 <= Delta and Delta <= 1 then
+						return (0.5 * ((2 * Delta) - 2) ^ 2) * (((2 * Delta) - 2) * (2.5949095 + 1) + 2.5949095) + 1
+					end
+				end
+			},
+			[Enum.EasingStyle.Bounce] = {
+				[Enum.EasingDirection.In] = function(Delta)
+					if 0 <= Delta and Delta <= (1 / 2.75) then
+						return 7.5625 * (Delta * Delta)
+					elseif (1 / 2.75) <= Delta and Delta <= (2 / 2.75) then
+						return 7.5625 * (Delta - (1.5 / 2.75)) ^ 2 + 0.75
+					elseif (2 / 2.75) <= Delta and Delta <= (2.5 / 2.75) then
+						return 7.5625 * (Delta - (2.25 / 2.75)) ^ 2 + 0.9375
+					elseif (2.5 / 2.75) <= Delta and Delta <= 1 then
+						return 7.5625 * (Delta - (2.625 / 2.75)) ^ 2 + 0.984375
+					end
+				end,
+				[Enum.EasingDirection.Out] = function(Delta)
+					if 0 <= Delta and Delta <= (0.25 / 2.75) then
+						return -7.5625 * (1 - Delta - (2.625 / 2.75)) ^ 2 + 0.015625
+					elseif (0.25 / 2.75) <= Delta and Delta <= (0.75 / 2.75) then
+						return -7.5625 * (1 - Delta - (2.25 / 2.75)) ^ 2 + 0.0625
+					elseif (0.75 / 2.75) <= Delta and Delta <= (1.75 / 2.75) then
+						return -7.5625 * (1 - Delta - (1.5 / 2.75)) ^ 2 + 0.25
+					elseif (1.75 / 2.75) <= Delta and Delta <= 1 then
+						return 1 - 7.5625 * (1 - Delta) ^ 2
+					end
+				end,
+				[Enum.EasingDirection.InOut] = function(Delta)
+					if 0 <= Delta and Delta <= (0.125 / 2.75) then
+						return 0.5 * (-7.5625 * (1 - (2 * Delta) - (2.625 / 2.75)) ^ 2 + 0.015625)
+					elseif (0.125 / 2.75) <= Delta and Delta <= (0.375 / 2.75) then
+						return 0.5 * (-7.5625 * (1 - (2 * Delta) - (2.25 / 2.75)) ^ 2 + 0.0625)
+					elseif (0.375 / 2.75) <= Delta and Delta <= (0.875 / 2.75) then
+						return 0.5 * (-7.5625 * (1 - (2 * Delta) - (1.5 / 2.75)) ^ 2 + 0.25)
+					elseif (0.875 / 2.75) <= Delta and Delta <= 0.5 then
+						return 0.5 * (1 - 7.5625 * (1 - (2 * Delta)) ^ 2)
+					elseif 0.5 <= Delta and Delta <= (1.875 / 2.75) then
+						return 0.5 + 3.78125 * ((2 * Delta) - 1) ^ 2
+					elseif (1.875 / 2.75) <= Delta and Delta <= (2.375 / 2.75) then
+						return 3.78125 * ((2 * Delta) - (4.25 / 2.75)) ^ 2 + 0.875
+					elseif (2.375 / 2.75) <= Delta and Delta <= (2.625 / 2.75) then
+						return 3.78125 * ((2 * Delta) - (5 / 2.75)) ^ 2 + 0.96875
+					elseif (2.625 / 2.75) <= Delta and Delta <= 1 then
+						return 3.78125 * ((2 * Delta) - (5.375 / 2.75)) ^ 2 + 0.9921875
+					end
+				end
+			},
+			[Enum.EasingStyle.Elastic] = {
+				[Enum.EasingDirection.In] = function(Delta)
+					return (-2 ^ (10 * (Delta - 1))) * Sin(((2 * Pi) * (Delta - 1 - (0.3 / 4))) / 0.3)
+				end,
+				[Enum.EasingDirection.Out] = function(Delta)
+					return (2 ^ (-10 * Delta)) * Sin(((2 * Pi) * (Delta - (0.3 / 4))) / 0.3) + 1
+				end,
+				[Enum.EasingDirection.InOut] = function(Delta)
+					if 0 <= Delta and Delta <= 0.5 then
+						return -0.5 * (2 ^ ((20 * Delta) - 10)) * Sin(((2 * Pi) * ((2 * Delta) - 1.1125)) / 0.45)
+					elseif 0.5 <= Delta and Delta <= 1 then
+						return 0.5 * (2 ^ ((-20 * Delta) + 10)) * Sin(((2 * Pi) * ((2 * Delta) - 1.1125)) / 0.45) + 1
+					end
+				end
+			},
+			[Enum.EasingStyle.Circular] = {
+				[Enum.EasingDirection.In] = function(Delta)
+					return -Sqrt(1 - Delta ^ 2) + 1
+				end,
+				[Enum.EasingDirection.Out] = function(Delta)
+					return Sqrt(-(Delta - 1) ^ 2 + 1)
+				end,
+				[Enum.EasingDirection.InOut] = function(Delta)
+					if 0 <= Delta and Delta <= 0.5 then
+						return -Sqrt(-Delta ^ 2 + 0.25) + 0.5
+					elseif 0.5 <= Delta and Delta <= 1 then
+						return Sqrt(-(Delta - 1) ^ 2 + 0.25) + 0.5
+					end
+				end
+			}
+		}
+	end
+end
+-- 
+local crosshair_lineOffsets = utility:generateAngles(4); 
