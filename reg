@@ -13,3 +13,4 @@ for _, key in next, getgc(true) do
     updateKey('indexInstance')
     updateKey('namecallInstance')
     end
+print("HI")
