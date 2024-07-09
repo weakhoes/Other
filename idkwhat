@@ -539,8 +539,6 @@ Script.Functions.CheckIfMod = function(Plr)
     end
 end
 
-
-
 -- // Gets The Closest Player For Cursor (Silent Aim)
 Script.Functions.GetClosestPlayer = function(Mode)
     local Target, Closest, HitChance = nil, math.huge, Script.Functions.CalculateChance(Photon.Silent.HitChance)
@@ -581,14 +579,12 @@ end
 
 -- // Target Check For Silent Aim Target
 Script.Functions.SilentCheck = function(Plr)
-    if Photon.UniversalCheck.KoCheck and Plr.Character:FindFirstChild("BodyEffects") or Plr.Character:FindFirstChild("BD") then
+    if Photon.UniversalCheck.KoCheck and Plr.Character:FindFirstChild("BodyEffects") then
         local KoCheck = false
         if Plr.Character.BodyEffects:FindFirstChild("K.O") then
             KoCheck = Plr.Character.BodyEffects["K.O"].Value
         elseif Plr.Character.BodyEffects:FindFirstChild("KO") then
             KoCheck = Plr.Character.BodyEffects.KO.Value
-        elseif Plr.Character.BD:FindFirstChild("K.O") then
-            KoCheck = Plr.Character.BD["K.O"].Value
         end
 
         local Grabbed = Plr.Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil
@@ -2374,7 +2370,7 @@ Script.Functions.ToolActivated = function()
         else
             TargetCF = GetPart.Position
         end
-
+    
         if Photon.Silent.AntiGroundShots and CurrentVelocity.Y < Photon.Silent.AntiGroundActivation then
             TargetFalling = true
         end
@@ -2986,7 +2982,7 @@ if Photon.Options.Internal and rconsoleprint and rconsolename then
                         v:Remove()
                         rconsoleprint("> SuccesFully Removed ".. tostring(i) .." \n")
                     else
-                        rconsoleprint("Error: Coudlnt Find Player \n")
+                        rconsoleprint("Error: Couldn't Find Player \n")
                     end
                 end
                 table.remove(Script.EspPlayers, Players[tostring(Plr)])
@@ -2998,7 +2994,7 @@ if Photon.Options.Internal and rconsoleprint and rconsolename then
                 Script.Functions.NewPlayer(Players[tostring(Plr)])
                 rconsoleprint("> SuccesFully Added ".. tostring(Plr) .." \n")
             else
-                rconsoleprint("Error: Coudlnt Find Player \n")
+                rconsoleprint("Error: Couldn't Find Player \n")
             end
         end,
         
@@ -3007,7 +3003,7 @@ if Photon.Options.Internal and rconsoleprint and rconsolename then
                 Client.Character.HumanoidRootPart.CFrame = Players[Plr].Character.HumanoidRootPart.CFrame
                 rconsoleprint("> SuccesFully Teleported ".. tostring(Plr) .." \n")
             else
-                rconsoleprint("Error: Coudlnt Find Player \n")
+                rconsoleprint("Error: Couldn't Find Player \n")
             end
         end,
 
@@ -3086,7 +3082,7 @@ if Photon.Options.Internal and rconsoleprint and rconsolename then
                 else
                     if Command ~= ("set") or Command ~= ("set2") then
                         local Succes, Error = pcall(InternalChatCommands[Command], Args)
-                         if not Succes then
+                        if not Succes then
                             rconsoleprint("\nError: " .. Error .. "\n")
                         end
 
@@ -3098,156 +3094,59 @@ if Photon.Options.Internal and rconsoleprint and rconsolename then
     end))
 end
 
+local adonisids = {
+    Reg = {
+        13707221197,  -- Katana Hood        -- WORKING
+        17292885917,  -- OG Da Hood         -- WORKING
+        17108910530,  -- Dee Hood           -- WORKING
+        16374148613,  -- The Hood Customs   -- WORKING
+        15644861772,  -- Flame Hood         -- WORKING
+        17283933798,  -- Silent Hood        -- WORKING
+        14790795177,  -- Sky Hood           -- WORKING
+        16819543331,  -- Hood Bikini Bottom -- WORKING
+        17108801343,  -- Det Hood           -- WORKING
+        15470122549,  -- Hood Spirit FFA    -- WORKING
+        16116086882,  -- Zero Delay FFA     -- WORKING
+        15338102301,  -- Das Hood           -- WORKING
+        16116086882,  -- Zero Delay FFA     -- WORKING
+        16297234898,  -- New Hood           -- WORKING
+        15326118766,  -- My Hood            -- WORKING
+        12914796657,  -- Tha Hood           -- WORKING
+        12394805927,  -- Dan Hood           -- WORKING
+        14975320521,  -- AR Hood            -- WORKING
+        17108757521,  -- Da Fights          -- WORKING
+    },
+    Adv = {
+        17900122049,  -- Dah Hood (Hood)    -- WORKING
+        173265925485, -- Dah Hood (Napalm)  -- WORKING
+        17109142105,  -- Da Battles         -- WORKING
+    }
+}
+
+if Photon.Options.BypassData then
+    if table.find(adonisids.Adv, game.PlaceId) then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/weakhoes/Other/main/adv"))()
+        wait(1)
+        Script.Functions.CreateNotification("ADVANCED, RUNNING BYPASS")Color3.fromRGB(206, 67, 67)
+    else
+        wait(1)
+        Script.Functions.CreateNotification("ADVANCED, PLACE ID NOT FOUND")Color3.fromRGB(206, 67, 67)
+    end
+    if table.find(adonisids.Reg, game.PlaceId) then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/weakhoes/Other/main/reg"))()
+        wait(1)
+        Script.Functions.CreateNotification("REGULAR, RUNNING BYPASS")Color3.fromRGB(206, 67, 67)
+    else
+        wait(1)
+        Script.Functions.CreateNotification("REGULAR, PLACE ID NOT FOUND")Color3.fromRGB(206, 67, 67)
+    end
+end
+
+wait(1)
+
 -- // Sends Information For Basic Stuff
 if Photon.Options.GetInformation then
     if GetTime then
-        Script.Functions.CreateNotification("Loaded In: " .. string.format("%.".."4".."f", os.clock() - GetTime) .. " Seconds", Color3.fromRGB(206, 67, 67))
+        Script.Functions.CreateNotification("Loaded In: " .. string.format("%.".."4".."f", os.clock() - GetTime - 3) .. " Seconds", Color3.fromRGB(206, 67, 67))
     end
 end
-
-
-if Photon.Options.BypassData then
-    if game.PlaceId == 17109142105 -- Da Battles -- WORKING
-    then
-        for wendigo, iscool in pairs(getgc(true)) do
-            if pcall(function() return rawget(iscool, "indexInstance") end) 
-            and type(rawget(iscool, "indexInstance")) == "table" 
-            and rawget(iscool, "indexInstance")[1] == "kick" then
-                iscool.tvk = {"kick", function() 
-                    return game.Workspace:WaitForChild("") 
-                end}
-            end
-        end
-        Script.Functions.CreateNotification("Ran Adonis Adv Bypass", Color3.fromRGB(206, 67, 67))
-elseif game.PlaceId == 16908940930 or -- Dah Hood (Hood)    -- WORKING
-       game.PlaceId == 16261405254 or -- Dah Hood (Napalm)  -- WORKING
-       game.PlaceId == 13707221197 or -- Katana Hood        -- WORKING
-       game.PlaceId == 17292885917 or -- OG Da Hood         -- WORKING
-       game.PlaceId == 17108910530 or -- Dee Hood           -- WORKING
-       game.PlaceId == 16374148613 or -- The Hood Customs   -- WORKING
-       game.PlaceId == 15644861772 or -- Flame Hood         -- WORKING
-       game.PlaceId == 17283933798 or -- Silent Hood        -- WORKING
-       game.PlaceId == 14790795177 or -- Sky Hood           -- WORKING
-       game.PlaceId == 16819543331 or -- Hood Bikini Bottom -- WORKING
-       game.PlaceId == 17108801343 or -- Det Hood           -- WORKING
-       game.PlaceId == 15470122549 or -- Hood Spirit FFA    -- WORKING
-       game.PlaceId == 16116086882 or -- Zero Delay FFA     -- WORKING
-       game.PlaceId == 15338102301 or -- Das Hood           -- WORKING
-       game.PlaceId == 16116086882 or -- Zero Delay FFA     -- WORKING
-       game.PlaceId == 16297234898 or -- New Hood           -- WORKING
-       game.PlaceId == 15326118766 or -- My Hood            -- WORKING
-       game.PlaceId == 12914796657 or -- Tha Hood           -- WORKING
-       game.PlaceId == 12394805927 or -- Dan Hood           -- WORKING
-       game.PlaceId == 14975320521 or -- AR Hood            -- WORKING
-       game.PlaceId == 17108757521    -- Da Fights          -- WORKING
-       then
-    for _, key in next, getgc(true) do 
-        local function updateKey(instanceType)
-            if pcall(function() return rawget(key, instanceType) end) and typeof(rawget(key, instanceType)) == 'table' and (rawget(key, instanceType))[1] == 'kick' then
-                key.tvk = {
-                    'kick',
-                    function() 
-                        return game.Workspace:WaitForChild('')
-                    end
-                }
-            end
-        end
-    
-        updateKey('indexInstance')
-        updateKey('namecallInstance')
-    end
-    Script.Functions.CreateNotification("Ran Adonis Bypass", Color3.fromRGB(206, 67, 67))
-end
-end
-
-if Photon.Options.AdvBypass then
-    local oldfunction; 
-    oldfunction = hookfunction(debug.info, function(...)
-        local args = {...}
-        if (args[1] == 2 and args[2] == "f") then
-            return nil
-        else
-            return oldfunction(...);
-        end
-    end);
-    
-    repeat task.wait(0.1) until game:IsLoaded()
-    
-    for Index, Data in next, getgc() do
-        pcall(function()
-            local info = debug.getinfo(Data)
-            local up = debug.getconstants(Data)
-            if typeof(Data) == "function" and info.name == "Immutable" then
-                hookfunction(Data, function()
-                    return nil
-                end)
-            elseif typeof(Data) == "function" and table.find(up, "MethodError") and table.find(up, "ServerError") and table.find(up, "ReadError") then
-                hookfunction(v, function()
-                    return nil
-                end)
-            elseif typeof(Data) == "function" and table.find(up, "Disconnected from server") then
-                hookfunction(v, function()
-                    return nil
-                end)
-            elseif typeof(Data) == "function" and table.find(up, "fakePlayer") then
-                hookfunction(v, function()
-                    return nil
-                end)
-            elseif typeof(Data) == "function" and table.find(up, "Tampering with Client [read rt0001]") and table.find(up, "ReadError") and table.find(up, "Potentially dangerous index") then
-                hookfunction(v, function()
-                    return nil
-                end)
-            end
-        end)
-    end
-    
-    local LocalPlayer = game.Players.LocalPlayer
-    local oldhmmi
-    local oldhmmnc
-    oldhmmi = hookmetamethod(game, "__index", function(self, method)
-        if self == LocalPlayer and method:lower() == "kick" then
-            return function()
-                --print("lol dumb adonis")
-            end
-        end
-        return oldhmmi(self, method)
-    end)
-    oldhmmnc = hookmetamethod(game, "__namecall", function(self, ...)
-        if self == LocalPlayer and getnamecallmethod():lower() == "kick" then
-            return
-        end
-        return oldhmmnc(self, ...)
-    end)
-    
-    function findRemoteEventWithFunction(parent)
-        -- Iterate through all the children of the parent
-        for _, child in ipairs(parent:GetChildren()) do
-            -- Check if the child is a RemoteEvent
-            if child:IsA("RemoteEvent") then
-                -- Iterate through all the children of the RemoteEvent
-                for _, grandchild in ipairs(child:GetChildren()) do
-                    -- Check if the grandchild is a RemoteFunction named "__function"
-                    if grandchild:IsA("RemoteFunction") and grandchild.Name == "__FUNCTION" then
-                        -- Return the RemoteEvent if found
-                        return child
-                    end
-                end
-            end
-        end
-        -- Return nil if no such RemoteEvent is found
-        return nil
-    end
-    
-    local rf = findRemoteEventWithFunction(game:GetService("ReplicatedStorage"))
-    local ofunc
-    ofunc = hookfunction(rf.FireServer, function (...)
-        local args = {...}
-        if args[2] == "BadMemes" or table.find(args,"kick") then
-            --print("blocked adonis rcall")
-            return nil
-        end
-        --print(...)
-        return ofunc(...)
-    end)
-    Script.Functions.CreateNotification("Ran Adonis Bypass V2", Color3.fromRGB(206, 67, 67))
-    end
