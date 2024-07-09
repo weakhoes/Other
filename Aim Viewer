@@ -1,1 +1,135 @@
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/4ff4544ebf91461b2e3fe03e2d389da5.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/fear0004/UILIB/main/UI"))()
+
+local Window = Library:CreateWindow("Aimviewer GUI", Vector2.new(400, 500), Enum.KeyCode.RightControl)
+
+local AimViewer = Window:CreateTab("Aimviewer")
+
+local AimViewerSection = AimViewer:CreateSector("Aimviewer", "Left")
+
+_G.AimView = false
+_G.Beam = false
+_G.View = false
+_G.Color = Color3.fromRGB(255, 0, 0)
+_G.Switch = 'c'
+_G.Method = "MousePos"
+_G.Folder = "BodyEffects"
+
+--[[
+if game.PlaceId == 2788229376 then
+    _G.Method = "MousePos"
+end 
+--]] 
+
+AimViewerSection:AddToggle("Aim Viewer", false,
+function(AimViewerState)
+    _G.AimView = AimViewerState
+end)
+
+AimViewerSection:AddToggle("Beam", false,
+function(BeamState)
+    _G.Beam = BeamState
+end)
+
+AimViewerSection:AddToggle("View", false,
+function(POVState)
+    _G.View = POVState
+end)
+
+local BeamColor = AimViewerSection:AddColorpicker("Beam Color", Color3.fromRGB(255, 0, 0),
+function(BeamColorState)
+    _G.Color = BeamColorState
+end) 
+
+local AimViewerKeybind = AimViewerSection:AddDropdown("Keybind",{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"},"v",false,function(SwitchKeyState)
+    _G.Switch = SwitchKeyState
+end)
+
+local AimViewerEvent = AimViewerSection:AddDropdown("Remote",
+    {"MousePos", "UpdateMousePos"},
+    "MousePos",
+    false,
+function(MethodState)
+    _G.Method = MethodState
+end)
+
+local AimViewerFolder = AimViewerSection:AddDropdown("Folder",
+    {"BodyEffects","BD"},
+    "BodyEffects",
+    false,
+function(FolderState)
+    _G.Folder = FolderState
+end)
+
+local rs = game:GetService("RunService")
+local localPlayer = game.Players.LocalPlayer
+local mouse = localPlayer:GetMouse()
+local target;
+
+function getgun()
+    for i,v in pairs(target.Character:GetChildren()) do
+        if v and (v:FindFirstChild('Default') or v:FindFirstChild('Handle') )then
+            return v
+        end
+    end
+end
+
+function get_closet()
+local a = math.huge
+local b;
+
+for i, v in pairs(game.Players:GetPlayers()) do
+    if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Head") and  v.Character:FindFirstChild("HumanoidRootPart")  then
+        local c = game.Workspace.CurrentCamera:WorldToViewportPoint(v.Character.PrimaryPart.Position)
+        local d = (Vector2.new(mouse.X, mouse.Y) - Vector2.new(c.X, c.Y)).Magnitude
+
+        if a > d then
+            b = v
+            a = d
+        end
+    end
+end
+    return b
+end
+
+mouse.KeyDown:Connect(function(z)
+    if z == _G.Switch then
+        target = get_closet()
+    end
+end)
+
+local a = Instance.new("Beam")
+a.Segments = 1;
+a.Width0 = 0.2;
+a.Width1 = 0.2;
+a.Color = ColorSequence.new(_G.Color)
+a.FaceCamera = true;
+local b = Instance.new("Attachment")
+local c = Instance.new("Attachment")
+a.Attachment0 = b;
+a.Attachment1 = c;
+a.Parent = workspace.Terrain;
+b.Parent = workspace.Terrain;
+c.Parent = workspace.Terrain
+
+task.spawn(function()
+rs.RenderStepped:Connect(function()
+local character = localPlayer.Character
+    if not character then
+        a.Enabled = false
+        return
+    end
+    
+    if _G.AimView and _G.Beam and getgun() and target.Character:FindFirstChild(_G.Folder) and target.Character:FindFirstChild("Head") then
+        a.Enabled = true
+        b.Position =  target.Character:FindFirstChild("Head").Position
+        c.Position = target.Character.BodyEffects[_G.Method].Value
+    else
+        a.Enabled = false
+    end
+    if _G.AimView and _G.View then
+        workspace.CurrentCamera.CameraSubject = target.Character:FindFirstChild("Humanoid")
+    else
+        workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
+    end
+    end)
+end)
