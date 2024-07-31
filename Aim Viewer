@@ -1,64 +1,62 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/fear0004/UILIB/main/UI"))()
-
-local Window = Library:CreateWindow("Aimviewer GUI", Vector2.new(400, 500), Enum.KeyCode.RightControl)
-
-local AimViewer = Window:CreateTab("Aimviewer")
-
-local AimViewerSection = AimViewer:CreateSector("Aimviewer", "Left")
+local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/weakhoes/Other/main/1414141515125'))()
 
 _G.AimView = false
-_G.Beam = false
+_G.Tracer = false
 _G.View = false
 _G.Color = Color3.fromRGB(255, 0, 0)
 _G.Switch = 'c'
 _G.Method = "MousePos"
 _G.Folder = "BodyEffects"
 
---[[
-if game.PlaceId == 2788229376 then
-    _G.Method = "MousePos"
-end 
---]] 
+local Window = Library:AddWindow("AimViewer", {
+    main_color = Color3.fromRGB(69,0,0),
+    min_size = Vector2.new(200, 300),
+    toggle_key = Enum.KeyCode.Insert,
+    can_resize = false,
+})
 
-AimViewerSection:AddToggle("Aim Viewer", false,
+local AimViewer = Window:AddTab("AimViewer")
+
+local AimViewerEnable = AimViewer:AddSwitch("Enable", 
 function(AimViewerState)
     _G.AimView = AimViewerState
 end)
 
-AimViewerSection:AddToggle("Beam", false,
-function(BeamState)
-    _G.Beam = BeamState
+local AimViewerTracer = AimViewer:AddSwitch("Tracer",
+function(TracerState)
+    _G.Tracer = TracerState
 end)
 
-AimViewerSection:AddToggle("View", false,
+local AimViewerKey = AimViewer:AddKeybind("Keybind", function(key)
+    print(key)
+end)
+
+local AimViewerView = AimViewer:AddSwitch("View",
 function(POVState)
     _G.View = POVState
+    getgenv().esp.settings.name.enabled = POVState
 end)
 
-local BeamColor = AimViewerSection:AddColorpicker("Beam Color", Color3.fromRGB(255, 0, 0),
-function(BeamColorState)
-    _G.Color = BeamColorState
-end) 
-
-local AimViewerKeybind = AimViewerSection:AddDropdown("Keybind",{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"},"v",false,function(SwitchKeyState)
-    _G.Switch = SwitchKeyState
+local AimViewerKey = AimViewer:AddSwitch("Use Display Names",
+function(NamesState)
+    getgenv().esp.settings.name.useDisplayName = NamesState
 end)
 
-local AimViewerEvent = AimViewerSection:AddDropdown("Remote",
-    {"MousePos", "UpdateMousePos"},
-    "MousePos",
-    false,
-function(MethodState)
-    _G.Method = MethodState
+local AimViewerEvent = AimViewer:AddDropdown("Remote", function(AimViewerEvent)
+    _G.Method = AimViewerEvent
 end)
+AimViewerEvent:Add("UpdateMousePosI")
+AimViewerEvent:Add("UpdateMousePos")
+AimViewerEvent:Add("MousePos")
 
-local AimViewerFolder = AimViewerSection:AddDropdown("Folder",
-    {"BodyEffects","BD"},
-    "BodyEffects",
-    false,
-function(FolderState)
-    _G.Folder = FolderState
+local AimViewerFolder = AimViewer:AddDropdown("Folder", function(AimViewerFolder)
+    _G.Folder = AimViewerFolder
 end)
+AimViewerFolder:Add("BodyEffects")
+AimViewerFolder:Add("BD")
+
+AimViewer:Show()
+Library:FormatWindows()
 
 local rs = game:GetService("RunService")
 local localPlayer = game.Players.LocalPlayer
@@ -119,7 +117,7 @@ local character = localPlayer.Character
         return
     end
     
-    if _G.AimView and _G.Beam and getgun() and target.Character:FindFirstChild(_G.Folder) and target.Character:FindFirstChild("Head") then
+    if _G.AimView and _G.Tracer and getgun() and target.Character:FindFirstChild(_G.Folder) and target.Character:FindFirstChild("Head") then
         a.Enabled = true
         b.Position =  target.Character:FindFirstChild("Head").Position
         c.Position = target.Character.BodyEffects[_G.Method].Value
@@ -132,4 +130,112 @@ local character = localPlayer.Character
         workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
     end
     end)
+end)
+
+--[Main Variables]
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+
+local LocalPlayer = Players.LocalPlayer
+local CurrentCamera = workspace.CurrentCamera
+
+local Drawingnew = Drawing.new
+local Color3fromRGB = Color3.fromRGB
+local Vector3new = Vector3.new
+local Vector2new = Vector2.new
+local mathfloor = math.floor
+
+--[Setup Table]
+getgenv().esp = {
+    players = {},
+    enabled = true,
+    fontsize = 16,
+    font = 0,
+    settings = {
+        name = {
+            enabled = false,
+            useDisplayName = false,
+            outline = true,
+            color = Color3fromRGB(255, 255, 255),
+            outlineColor = Color3fromRGB(0, 0, 0)
+        }
+    }
+}
+
+esp.NewDrawing = function(type, properties)
+    local newDrawing = Drawingnew(type)
+
+    for i, v in next, properties or {} do
+        newDrawing[i] = v
+    end
+
+    return newDrawing
+end
+
+esp.NewPlayer = function(player)
+    esp.players[player] = {
+        name = esp.NewDrawing(
+            "Text",
+            {Color = Color3fromRGB(94, 0, 255), Outline = true, Center = true, Size = 13, Font = 0}
+        )
+    }
+end
+
+for _, player in ipairs(Players:GetPlayers()) do
+    esp.NewPlayer(player)
+end
+
+Players.PlayerAdded:Connect(function(player)
+    esp.NewPlayer(player)
+end)
+
+Players.PlayerRemoving:Connect(function(player)
+    if esp.players[player] then
+        for _, drawing in pairs(esp.players[player]) do
+            drawing:Remove()
+        end
+        esp.players[player] = nil
+    end
+end)
+
+local mainLoop = RunService.Heartbeat:Connect(function()
+    for player, drawings in pairs(esp.players) do
+        if
+            player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("Humanoid") and
+                player.Character:FindFirstChild("HumanoidRootPart") and
+                player.Character:FindFirstChild("Head")
+        then
+            local humanoid = player.Character.Humanoid
+            local hrp = player.Character.HumanoidRootPart
+            local head = player.Character.Head
+
+            local vector, onScreen = CurrentCamera:WorldToViewportPoint(hrp.Position)
+
+            local size = (CurrentCamera:WorldToViewportPoint(hrp.Position - Vector3new(0, 3, 0)).Y -
+                            CurrentCamera:WorldToViewportPoint(hrp.Position + Vector3new(0, 2.6, 0)).Y) / 2
+            local boxSize = Vector2new(mathfloor(size * 1.5), mathfloor(size * 1.9))
+            local boxPos = Vector2new(mathfloor(vector.X - size * 1.5 / 2), mathfloor(vector.Y - size * 1.6 / 2))
+
+            if onScreen and esp.enabled then
+                if esp.settings.name.enabled and _G.AimView then
+                    drawings.name.Position = Vector2new(boxSize.X / 2 + boxPos.X, boxPos.Y - 16)
+                    drawings.name.Outline = esp.settings.name.outline
+                    drawings.name.Text = esp.settings.name.useDisplayName and player.DisplayName or player.Name
+                    drawings.name.Color = esp.settings.name.color
+                    drawings.name.OutlineColor = esp.settings.name.outlineColor
+                    drawings.name.Font = esp.font
+                    drawings.name.Size = esp.fontsize
+
+                    drawings.name.Visible = true
+                else
+                    drawings.name.Visible = false
+                end
+            else
+                drawings.name.Visible = false
+            end
+        else
+            drawings.name.Visible = false
+        end
+    end
 end)
