@@ -1,0 +1,34 @@
+            local DTC
+            local Killed
+            for Index, Value in next, getgc(true) do 
+                if type(Value) == "table" then 
+                    local Detected = rawget(Value, "Detected") 
+                    local Kill = rawget(Value, "Kill") 
+            
+            
+                    if type(Detected) == "function" and not DTC then 
+                        DTC = Detected 
+            
+                        local Old; Old = hookfunction(Detected, function(...) 
+                            return true
+                        end)
+                    end
+            
+                    if rawget(Value, "Variables") and rawget(Value, "Process") and typeof(Kill) == "function" then 
+                        Killed = Kill 
+            
+                        local Old; Old = hookfunction(Kill, function(...) 
+                        
+                        end)
+                    end 
+                end
+            end
+            
+            local Old; Old = hookfunction(getrenv().debug.info, newcclosure(function(...) 
+                local LevelOrFunc, Info = ... 
+                if DTC and LevelOrFunc == DTC then 
+            
+                    return coroutine.yield(coroutine.running())
+                end
+                return Old(...)
+            end))
